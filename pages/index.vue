@@ -24,8 +24,9 @@ export default {
   name: "index-page",
   methods: {
     async start() {
+      this.$nuxt.$emit("loading-on");
       const res = await this.$repositories.sessions.get();
-      sessionStorage.setItem('sessionId', res.data);
+      sessionStorage.setItem("sessionId", res.data);
       this.$router.push({ name: "survey" });
     },
   },

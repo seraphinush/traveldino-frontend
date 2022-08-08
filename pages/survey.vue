@@ -83,6 +83,7 @@ export default {
       this.question = question;
     },
     async evaluate() {
+      this.$nuxt.$emit("loading-on");
       this.answers.id = sessionStorage.getItem("sessionId");
       const res = await this.$repositories.results.get(this.answers);
       this.$router.push({ name: "results", params: res.data });
