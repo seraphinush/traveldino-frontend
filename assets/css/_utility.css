@@ -1,0 +1,15 @@
+.text-center {
+  text-align: center;
+}
+
+.text-highlight {
+  color: var(--clr-secondary);
+}
+
+.text-highlight-light {
+  color: var(--clr-secondary-light);
+}
+
+.font-face-highlight {
+  font-family: var(--font-face-highlight);
+}

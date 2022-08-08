@@ -1,0 +1,70 @@
+@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+@import "@/assets/css/_default.css";
+@import "@/assets/css/_variables.css";
+@import "@/assets/css/_utility.css";
+@import "@/assets/css/_responsive.css";
+
+@font-face {
+  font-family: "Bazzi";
+  src: url("~assets/fonts/Bazzi.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BMJUA";
+  src: url("~assets/fonts/BMJUA.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SeoulNamsan";
+  src: url("~assets/fonts/SeoulNamsanM.ttf") format("truetype");
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--clr-background);
+}
+
+#wrapper {
+  position: relative;
+  width: min(560px, 100%);
+  height: min(900px, 100%);
+  background: transparent;
+}
+
+@media screen and (min-width: 560px) {
+  #wrapper {
+    border-radius: 25px;
+    box-shadow: 12px 8px 0 0 var(--clr-background-dark);
+  }
+}
+
+#content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  background: var(--clr-white);
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#content:-webkit-scrollbar {
+  display: none;
+}
+
+#content.noscroll {
+  overflow: hidden;
+}
+
+@media screen and (min-width: 560px) {
+  #content {
+    border-radius: 25px;
+    box-shadow: 12px 8px 0 0 var(--clr-background-dark);
+  }
+}
