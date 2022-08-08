@@ -12,15 +12,21 @@
 
 <style scoped>
 #loading-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  width: inherit;
+  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--clr-loading-background);
   backdrop-filter: blur(2px);
   z-index: 1001;
+}
+
+@media screen and (min-width: 560px) {
+  #loading-container {
+    border-radius: 25px;
+  }
 }
 
 .loading {

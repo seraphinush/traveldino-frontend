@@ -1,8 +1,8 @@
 <template>
   <div id="container">
     <div id="wrapper">
+      <Loading />
       <div id="content">
-        <Loading />
         <Header />
         <Nuxt />
         <Footer />
