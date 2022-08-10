@@ -4,7 +4,7 @@ export default {
   target: "static",
 
   head: {
-    title: "traveldino-frontend",
+    title: "TravelDino",
     htmlAttrs: {
       lang: "en",
     },

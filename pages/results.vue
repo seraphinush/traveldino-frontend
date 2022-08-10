@@ -16,13 +16,13 @@
 
     <!-- checklist -->
     <div id="checklist">
-      <img v-if="data.type_id_a == 'A'" src="@/assets/checklist/1-A.png" />
-      <img v-if="data.type_id_a == 'C'" src="@/assets/checklist/1-C.png" />
-      <img v-if="data.type_id_a == 'R'" src="@/assets/checklist/1-R.png" />
       <img v-if="data.type_id_b == 'F'" src="@/assets/checklist/2-F.png" />
       <img v-if="data.type_id_b == 'H'" src="@/assets/checklist/2-H.png" />
       <img v-if="data.type_id_c == 'D'" src="@/assets/checklist/3-D.png" />
       <img v-if="data.type_id_c == 'U'" src="@/assets/checklist/3-U.png" />
+      <img v-if="data.type_id_a == 'A'" src="@/assets/checklist/1-A.png" />
+      <img v-if="data.type_id_a == 'C'" src="@/assets/checklist/1-C.png" />
+      <img v-if="data.type_id_a == 'R'" src="@/assets/checklist/1-R.png" />
       <img v-if="data.is_cost_effective" src="@/assets/checklist/4-cheap.png" />
       <img v-if="data.is_walk" src="@/assets/checklist/5-transport.png" />
       <img v-if="data.is_soloable" src="@/assets/checklist/6-alone.png" />
@@ -41,8 +41,8 @@
         {{
           `${data.name}${hasBatchim(data.name) ? "은" : "는"} ${
             data.region_phrase
-          }에 있어요. ${data.type_id_a}${
-            hasBatchim(data.type_id_a) ? "을" : "를"
+          }에 있어요. ${data.type_id_a_text}${
+            hasBatchim(data.type_id_a_text) ? "을" : "를"
           } 원하신다면 100점짜리 여행지랍니다.`
         }}
       </p>
@@ -69,8 +69,8 @@
         {{
           `${data.name}${hasBatchim(data.name) ? "은" : "는"} ${
             data.region_phrase
-          }에 있어요. ${data.type_id_a}${
-            hasBatchim(data.type_id_a) ? "을" : "를"
+          }에 있어요. ${data.type_id_a_text}${
+            hasBatchim(data.type_id_a_text) ? "을" : "를"
           } 원하는 당신에게 잊지 못할 추억을 만들어줄 거예요.`
         }}
       </p>
@@ -115,20 +115,24 @@
     </div>
 
     <!--  -->
-    <div class="results-post">
-      <p class="text-center">
+    <div class="results-post text-center">
+      <div class="like-container">
+        <p class="text-center text-highlight font-face-highlight">
+          결과가 마음에 들어요!
+        </p>
+        <div class="popup-container">
+          <!-- <span class="popup-message popup-message-like">좋아요!</span> -->
+          <button class="heart text-center" @click="handleLike()">
+            <img class="img-heart" src="@/assets/heart.svg" />
+          </button>
+        </div>
+      </div>
+
+      <p class="text-center font-face-highlight">
         당신과 같은 여행지를 추천받은 사람은
         <span class="text-highlight">{{ stats.toLocaleString() }}</span
         >명이에요
       </p>
-      <p>추천 받은 여행지가 마음에 들었다면 하트를 꾸욱 눌러주세요!</p>
-      <div class="popup-container">
-        <!-- <span class="popup-message popup-message-like">좋아요!</span> -->
-        <button class="heart text-center" @click="handleLike()">
-          <img class="img-heart" src="@/assets/heart.svg" />
-        </button>
-      </div>
-
       <div class="actions">
         <div class="popup-container">
           <span class="popup-message popup-message-share">링크 복사!</span>
@@ -180,15 +184,15 @@ h2 {
 }
 
 #img-dino {
-  width: min(14.5vw, 70px);
+  width: 6rem;
   position: absolute;
-  top: -1.5rem;
-  left: 0;
-  z-index: 10;
+  top: -2.8rem;
+  left: 2rem;
+  z-index: 0;
 }
 
 #img-marker {
-  width: min(17.5vw, 75px);
+  width: 4.5rem;
   position: absolute;
   bottom: -1.5rem;
   right: 0;
@@ -212,13 +216,31 @@ h2 {
   padding: 0 2rem;
 }
 
+.results-post {
+  align-items: center;
+}
+
 .results-desc > *:not(:last-child),
 .results-post > *:not(:last-child) {
   margin-bottom: 0.75rem;
 }
 
+.like-container {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--clr-secondary);
+  border-radius: 10px;
+  margin: 0 0 2rem 0 !important;
+  padding: 0.75rem 1rem;
+  width: fit-content;
+}
+
+.like-container > *:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
 button.heart {
-  width: 10%;
+  width: 2rem;
   transition: transform 100ms linear;
 }
 
