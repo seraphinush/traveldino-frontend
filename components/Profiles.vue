@@ -3,19 +3,19 @@
     <Profile
       label="Hendrick Jin"
       social="jinsoobingsoo"
-      desc="취한 탐험자"
+      desc="세계 맥주 뿌수는 알파고"
       imgSrc="dino_drink.png"
     />
     <Profile
       label="Skyy"
       social="daye.sky.lee"
-      desc="세계일주를 꿈꾸는 로직 및 디자인 담당자"
+      desc="전세계 감튀를 먹어보러 여행다니는 마케터"
       imgSrc="dino_food.png"
     />
     <Profile
       label="Jellyjayy"
       social="jellyjayy__"
-      desc="운동에 중독될랑말랑한 기획자"
+      desc="세계 명산 정복을 꿈꾸는 기획자"
       imgSrc="dino_gym.png"
     />
     <Profile
