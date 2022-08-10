@@ -12,6 +12,7 @@
       <img id="img-location" :src="getImage()" />
       <img id="img-dino" src="@/assets/dino_hand.png" />
       <img id="img-marker" src="@/assets/location_marker.png" />
+      <p id="img-info">{{ data.image_location }}</p>
     </div>
 
     <!-- checklist -->
@@ -141,6 +142,7 @@
         <Button @click="handleClick('goto-main')" text="메인으로" />
       </div>
     </div>
+    <p class="text-subscript">이미지 출처 : Pixabay, Unsplash, Pexels</p>
   </section>
 </template>
 
@@ -155,14 +157,16 @@ section > *:not(:last-child) {
 }
 
 h1 {
+  margin-bottom: 3.5rem !important;
   font-family: var(--font-face-highlight);
-  font-size: 3rem;
-  color: var(--clr-primary-dark);
+  font-size: 2.8rem;
+  color: var(--clr-secondary);
 }
 
 h2 {
-  margin: 2rem 0 0 0;
+  margin: 2rem 0 0.5rem 0 !important;
   font-family: var(--font-face-highlight);
+  font-weight: 400;
   font-size: 2rem;
 }
 
@@ -184,10 +188,10 @@ h2 {
 }
 
 #img-dino {
-  width: 6rem;
+  width: 8rem;
   position: absolute;
-  top: -2.8rem;
-  left: 2rem;
+  top: -3.9rem;
+  left: 2.5rem;
   z-index: 0;
 }
 
@@ -197,6 +201,14 @@ h2 {
   bottom: -1.5rem;
   right: 0;
   z-index: 10;
+}
+
+#img-info {
+  position: absolute;
+  bottom: -1.5rem;
+  right: 4.5rem;
+  text-align: right;
+  font-size: 0.75rem;
 }
 
 #checklist {
@@ -228,7 +240,7 @@ h2 {
 .like-container {
   display: flex;
   flex-direction: column;
-  border: 3px solid var(--clr-secondary);
+  border: 0.1875rem solid var(--clr-secondary);
   border-radius: 10px;
   margin: 0 0 2rem 0 !important;
   padding: 0.75rem 1rem;
@@ -331,6 +343,10 @@ button.heart:hover {
   opacity: 1;
   z-index: 1;
 }
+
+.text-subscript {
+  font-size: 0.6rem;
+}
 </style>
 
 <script>
@@ -373,6 +389,7 @@ export default {
       if (navigator.clipboard) {
         const LINK = this.$config.APP_URL || this.$config.FAKE_APP_URL || "";
         navigator.clipboard.writeText(LINK);
+        console.log("Copied link : " + LINK);
       }
       this.timeout[key] = setTimeout(() => {
         el.classList.remove("active");

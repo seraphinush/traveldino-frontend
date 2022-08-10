@@ -3,7 +3,7 @@
     <img class="profile-image" :src="getSrc(imgSrc)" />
     <div class="text-center">
       <p class="font-face-highlight">{{ label }}</p>
-      <p class="font-face-highlight">{{ desc }}</p>
+      <p class="">{{ desc }}</p>
     </div>
     <a :href="`https://www.instagram.com/${social}`">
       <img class="icon" src="@/assets/instagram.svg" />
@@ -23,11 +23,9 @@
 }
 
 img.profile-image {
-  height: 80%;
   width: 80%;
-
   border: 2px solid #000;
-  border-radius: 9999px;
+  border-radius: 100%;
 }
 
 p {
