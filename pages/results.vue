@@ -208,7 +208,8 @@ h2 {
   bottom: -1.5rem;
   right: 4.5rem;
   text-align: right;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
+  font-weight: 300;
 }
 
 #checklist {
