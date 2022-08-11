@@ -411,18 +411,20 @@ export default {
     else if (data.type_id_a == "R") data.type_id_a_text = "휴양";
     this.data = data;
 
-    const res = await this.$repositories.stats.get();
+    const res = await this.$repositories.stats.get(data.code);
     if (res.data < 1000) {
-      if (sessionStorage.getItem("sessioncount")) {
-        this.stats = Number(sessionStorage.getItem("sessioncount"));
+      if (sessionStorage.getItem(`traveldino-stats-${data.code}`)) {
+        this.stats = Number(
+          sessionStorage.getItem(`traveldino-stats-${data.code}`)
+        );
         this.stats++;
       } else {
         this.stats = Math.round(Math.random() * 1000 + Math.random() * 1000);
       }
     } else {
-      this.stats = res.data;
+      this.stats = res.data - 1;
     }
-    sessionStorage.setItem("sessioncount", this.stats);
+    sessionStorage.setItem(`traveldino-stats-${data.code}`, this.stats);
     await sleep(400);
     this.$nuxt.$emit("loading-off");
   },
