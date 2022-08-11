@@ -45,6 +45,7 @@ export default {
   components: { Progress },
   data() {
     return {
+      loading: false,
       questions: [],
       questionsTotal: 8,
       question: null,
@@ -64,7 +65,9 @@ export default {
       }
     },
     async handleAnswer(val) {
+      if (this.loading) return;
       if (this.answered == this.questionsTotal) return;
+      this.loading = true;
       this.answered++;
       this.answers[this.question.type] = val;
       if (this.answered < this.questionsTotal) {
@@ -81,11 +84,13 @@ export default {
         question.options = res.data;
       }
       this.question = question;
+      this.loading = false;
     },
     async evaluate() {
       this.$nuxt.$emit("loading-on");
       this.answers.id = sessionStorage.getItem("sessionId");
       const res = await this.$repositories.results.get(this.answers);
+      this.loading = false;
       this.$router.push({ name: "results", params: res.data });
     },
   },
@@ -94,7 +99,6 @@ export default {
     const res = await this.$repositories.questions.get();
     this.questions = res.data;
     this.updateQuestion();
-    await sleep(400);
     this.$nuxt.$emit("loading-off");
   },
 };
