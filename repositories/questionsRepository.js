@@ -1,9 +1,9 @@
 const resource = "questions";
 
 export default ($axios) => ({
-  get(id = null) {
-    if (!!id && !isNaN(id)) {
-      return $axios.get(`/${resource}`/id)
+  get(payload = null) {
+    if (!!payload && !isNaN(payload)) {
+      return $axios.get(`/${resource}`/payload)
     } else {
       return $axios.get(`/${resource}`);
     }
