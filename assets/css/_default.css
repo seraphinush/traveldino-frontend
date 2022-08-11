@@ -5,6 +5,11 @@ html {
   box-sizing: border-box;
 }
 
+html,
+body {
+  overscroll-behavior-y: contain;
+}
+
 *,
 *::before,
 *::after {
@@ -32,13 +37,15 @@ a:visited:active {
   text-decoration: none;
 }
 
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 ul {
