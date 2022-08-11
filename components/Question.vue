@@ -31,10 +31,7 @@ ul {
   margin: 0 5%;
   display: grid;
   word-break: keep-all;
-}
-
-ul > *:not(:last-child) {
-  margin-bottom: 1.5rem;
+  gap: 1.5rem;
 }
 
 ul[data-columns="1"] {
