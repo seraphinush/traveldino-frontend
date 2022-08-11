@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   width: inherit;
-  height: inherit;
+  min-height: 100%;
   background: var(--clr-white);
   overflow-y: scroll;
   -ms-overflow-style: none;

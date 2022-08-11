@@ -30,7 +30,10 @@ div {
   display: flex;
   flex-direction: row;
   font-size: inherit;
-  gap: .2rem;
+}
+
+div > *:not(:last-child) {
+  margin-right: 0.2rem;
 }
 
 a {

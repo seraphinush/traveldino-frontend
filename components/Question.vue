@@ -30,8 +30,11 @@ p {
 ul {
   margin: 0 5%;
   display: grid;
-  gap: 1.5rem;
   word-break: keep-all;
+}
+
+ul > *:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 
 ul[data-columns="1"] {

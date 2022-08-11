@@ -31,7 +31,7 @@
 #profiles {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   font-family: var(--font-face-default);
 }
 </style>

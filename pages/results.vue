@@ -303,7 +303,10 @@ button.heart:hover {
   position: relative;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+}
+
+.actions > *:not(:last-child) {
+  margin-right: 1rem;
 }
 
 .popup-container {

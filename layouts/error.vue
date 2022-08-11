@@ -11,6 +11,7 @@
 
 <style scoped>
 section {
+  flex-grow: 1;
   font-family: var(--font-face-highlight);
 }
 
