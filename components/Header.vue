@@ -12,6 +12,7 @@ header {
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
+  height: var(--header-height);
   background-color: var(--clr-primary);
   box-shadow: 0 0 4px 4px hsla(0, 1%, 0%, 0.1);
   z-index: 1000;

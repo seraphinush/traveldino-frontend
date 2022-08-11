@@ -32,6 +32,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 2rem 1rem;
+  height: var(--profiles-height);
   font-family: var(--font-face-default);
 }
 </style>

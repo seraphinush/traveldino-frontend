@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div>
+    <div class="footer-info">
       <span>문의</span>
       <a :href="`mailto:${email}`">
         {{ email }}
@@ -19,6 +19,7 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 0.75rem 0;
+  height: var(--footer-height);
   background-color: var(--clr-primary-light);
   font-family: var(--font-face-default);
   font-size: 0.75rem;
@@ -26,13 +27,13 @@ footer {
   z-index: 1000;
 }
 
-div {
+.footer-info {
   display: flex;
   flex-direction: row;
   font-size: inherit;
 }
 
-div > *:not(:last-child) {
+.footer-info > *:not(:last-child) {
   margin-right: 0.2rem;
 }
 
