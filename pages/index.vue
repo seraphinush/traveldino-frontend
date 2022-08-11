@@ -10,11 +10,12 @@ section {
   align-items: center;
 }
 
-section > *:not(:last-child) {
-  margin-bottom: 1.5rem;
+section > * {
+  margin-bottom: 2.5rem;
 }
 
 img {
+  margin-top: 2.5rem;
   width: 100%;
 }
 </style>

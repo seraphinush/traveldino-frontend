@@ -2,8 +2,8 @@
   <div class="profile">
     <img class="profile-image" :src="getSrc(imgSrc)" />
     <div class="text-center">
-      <p class="font-face-highlight">{{ label }}</p>
-      <p class="">{{ desc }}</p>
+      <p class="profile-name font-face-highlight">{{ label }}</p>
+      <p v-for="(d, index) in desc" :key="index">{{ d }}</p>
     </div>
     <a :href="`https://www.instagram.com/${social}`">
       <img class="icon" src="@/assets/instagram.svg" />
@@ -23,9 +23,13 @@
 }
 
 img.profile-image {
-  width: 80%;
+  width: var(--profile-img-width);
   border: 2px solid #000;
   border-radius: 100%;
+}
+
+.profile-name {
+  margin-bottom: 0.4rem;
 }
 
 p {
