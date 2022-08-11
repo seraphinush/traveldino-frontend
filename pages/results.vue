@@ -142,7 +142,7 @@
         <Button @click="handleClick('goto-main')" text="메인으로" />
       </div>
     </div>
-    <p class="text-subscript">이미지 출처 : Pixabay, Unsplash, Pexels</p>
+    <p class="text-subscript">사진 출처 : Pixabay, Unsplash, Pexels</p>
   </section>
 </template>
 
