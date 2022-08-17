@@ -78,14 +78,14 @@ export default {
       enabled: false,
     };
   },
-  mounted() {
+  mounted: function () {
     this.$nuxt.$on("loading-on", () => {
       const el = document.querySelector("#content");
       if (!el) return;
       this.enabled = true;
       el.classList.add("noscroll");
     });
-    
+
     this.$nuxt.$on("loading-off", () => {
       const el = document.querySelector("#content");
       if (!el) return;
