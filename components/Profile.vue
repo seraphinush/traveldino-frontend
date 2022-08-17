@@ -64,7 +64,7 @@ export default {
       required: true,
     },
     desc: {
-      type: String,
+      type: Array,
       required: true,
     },
     social: {
