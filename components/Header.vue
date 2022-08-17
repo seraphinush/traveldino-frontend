@@ -1,6 +1,6 @@
 <template>
   <header>
-    <span>TravelDino</span>
+    <NuxtLink to="/"><span>TravelDino</span></NuxtLink>
   </header>
 </template>
 
@@ -19,7 +19,6 @@ header {
   font-family: var(--font-face-default);
   font-weight: 700;
   color: var(--clr-black);
-  /* responsive in main.css */
 }
 
 span {

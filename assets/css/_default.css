@@ -35,6 +35,7 @@ a:active,
 a:link:active,
 a:visited:active {
   text-decoration: none;
+  color: inherit;
 }
 
 button,
