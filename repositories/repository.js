@@ -3,6 +3,7 @@ import likeRepository from "./likeRepository";
 import questionsRepository from "./questionsRepository";
 import resultsRepository from "./resultsRepository";
 import sessionsRepository from "./sessionsRepository";
+import serverRepository from "./serverRepository";
 import statsRepository from "./statsRepository";
 
 export default ($axios) => ({
@@ -11,5 +12,6 @@ export default ($axios) => ({
   questions: questionsRepository($axios),
   results: resultsRepository($axios),
   sessions: sessionsRepository($axios),
+  server: serverRepository($axios),
   stats: statsRepository($axios),
 });

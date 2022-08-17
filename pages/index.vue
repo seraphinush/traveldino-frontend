@@ -31,5 +31,8 @@ export default {
       this.$router.push({ name: "survey" });
     },
   },
+  async mounted() {
+    await this.$repositories.server.ping();
+  }
 };
 </script>
