@@ -402,7 +402,7 @@ export default {
       if (!el) return;
       el.classList.add("active");
       if (navigator.clipboard) {
-        const LINK = `${window.location.origin}/results?type=${this.data.type_id}&id=${this.data.id}`;
+        const LINK = `${window.location.origin}/results?&id=${this.data.id}`;
         navigator.clipboard.writeText(LINK);
         console.log("Copied link : " + LINK);
       }
