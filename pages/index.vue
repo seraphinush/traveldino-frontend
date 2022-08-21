@@ -37,6 +37,7 @@ export default {
         // client mode
         if (this.query.mode == "test") {
           route.query.mode = "test";
+          sessionStorage.removeItem("traveldino-session-id");
           console.log("Running survey in test mode");
         } else {
           const res = await this.$repositories.sessions.get();
