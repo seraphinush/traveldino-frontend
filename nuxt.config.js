@@ -36,7 +36,6 @@ export default {
     baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
   },
   publicRuntimeConfig: {
-    APP_URL: process.env.APP_URL || null,
-    FAKE_APP_URL: process.env.FAKE_APP_URL || null,
+    APP_BASE_URL: process.env.APP_BASE_URL || "http://localhost:3000/",
   },
 };

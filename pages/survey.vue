@@ -37,7 +37,7 @@ nav {
 </style>
 
 <script>
-import { sleep, getQuestionType } from "@/assets/utils";
+import { getQuestionType } from "@/assets/utils";
 import Progress from "../components/Progress";
 export default {
   name: "survey-page",
@@ -46,6 +46,7 @@ export default {
   data() {
     return {
       loading: false,
+      query: {},
       questions: [],
       questionsTotal: 8,
       question: null,
@@ -55,8 +56,13 @@ export default {
   },
   methods: {
     handleNavClick(action) {
+      const route = { name: "index", query: {} };
+      if (this.query.mode === "test") {
+        route.query.mode = "test";
+      }
+
       if (action == "goto-main") {
-        this.$router.push({ name: "index" });
+        this.$router.push(route);
       }
       if (action == "goto-prev") {
         delete this.answers[this.question.type];
@@ -77,29 +83,57 @@ export default {
       }
     },
     async updateQuestion() {
-      const type = getQuestionType(this.answered, this.answers["type_id_a"]);
-      const question = this.questions.find((x) => x.type == type);
-      if (type == "keyword") {
-        const res = await this.$repositories.keywords.get(this.answers);
-        question.options = res.data;
+      try {
+        const type = getQuestionType(this.answered, this.answers["type_id_a"]);
+        const question = this.questions.find((x) => x.type == type);
+        if (type == "keyword") {
+          const res = await this.$repositories.keywords.get(this.answers);
+          question.options = res.data;
+        }
+        this.question = question;
+        this.loading = false;
+      } catch (err) {
+        console.error(err);
       }
-      this.question = question;
-      this.loading = false;
     },
     async evaluate() {
       this.$nuxt.$emit("loading-on");
-      this.answers.id = sessionStorage.getItem("sessionId");
-      const res = await this.$repositories.results.get(this.answers);
-      this.loading = false;
-      this.$router.push({ name: "results", params: res.data });
+      const route = { name: "results", query: {} };
+      const sessionId = sessionStorage.getItem("traveldino-session-id");
+
+      // client mode
+      if (this.query.mode == "test") {
+        route.query.mode = "test";
+        this.answers.id = "test";
+      } else {
+        this.answers.id = sessionId;
+      }
+
+      try {
+        const res = await this.$repositories.results.get(this.answers);
+        route.params = res.data;
+        route.query.id = res.data.id;
+        sessionStorage.setItem(`traveldino-results-fetched`, "true");
+        this.loading = false;
+        this.$router.push(route);
+      } catch (err) {
+        console.error(err);
+        this.$nuxt.$emit("loading-off");
+      }
     },
   },
-  async mounted() {
+  mounted: async function () {
     this.$nuxt.$emit("loading-on");
-    const res = await this.$repositories.questions.get();
-    this.questions = res.data;
-    this.updateQuestion();
-    this.$nuxt.$emit("loading-off");
+    try {
+      this.query = this.$route.query || {};
+      const res = await this.$repositories.questions.get();
+      this.questions = res.data;
+      this.updateQuestion();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.$nuxt.$emit("loading-off");
+    }
   },
 };
 </script>

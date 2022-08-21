@@ -23,16 +23,35 @@ img {
 <script>
 export default {
   name: "index-page",
+  data() {
+    return {
+      query: {},
+    };
+  },
   methods: {
     async start() {
-      this.$nuxt.$emit("loading-on");
-      const res = await this.$repositories.sessions.get();
-      sessionStorage.setItem("sessionId", res.data);
-      this.$router.push({ name: "survey" });
+      try {
+        this.$nuxt.$emit("loading-on");
+        const route = { name: "survey", query: {} };
+
+        // client mode
+        if (this.query.mode == "test") {
+          route.query.mode = "test";
+          console.log("Running survey in test mode");
+        } else {
+          const res = await this.$repositories.sessions.get();
+          sessionStorage.setItem("traveldino-session-id", res.data);
+        }
+
+        this.$router.push(route);
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
-  async mounted() {
+  mounted: async function () {
+    this.query = this.$route.query || {};
     await this.$repositories.server.ping();
-  }
+  },
 };
 </script>

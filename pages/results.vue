@@ -359,6 +359,7 @@ export default {
   name: "results-page",
   data() {
     return {
+      query: {},
       data: null,
       stats: 0,
       liked: false,
@@ -367,23 +368,33 @@ export default {
   },
   methods: {
     handleClick: function (action) {
+      const route = { name: "index", query: {} };
+      if (this.query.mode === "test") {
+        route.query.mode = "test";
+      }
+
       if (action == "goto-main") {
-        this.$router.push({ name: "index" });
+        this.$router.push(route);
       }
     },
     handleLike: async function () {
-      const el = document.querySelector(".img-heart");
-      if (!el) return;
-      el.classList.add("active");
-      el.classList.remove("bounce");
-      setTimeout(() => {
-        el.classList.add("bounce");
-      }, 1);
-      if (!this.liked) {
-        this.liked = true;
-        this.$repositories.like.set(sessionStorage.getItem("sessionId"));
+      try {
+        const el = document.querySelector(".img-heart");
+        if (!el) return;
+        el.classList.add("active");
+        el.classList.remove("bounce");
+        setTimeout(() => {
+          el.classList.add("bounce");
+        }, 1);
+        if (!this.liked) {
+          this.liked = true;
+          const sessionId = sessionStorage.getItem("traveldino-session-id");
+          if (sessionId) this.$repositories.like.set(sessionId);
+        }
+        this.handlePopup("like");
+      } catch (err) {
+        console.error(err);
       }
-      this.handlePopup("like");
     },
     handlePopup: async function (key) {
       if (this.timeout[key]) clearTimeout(this.timeout[key]);
@@ -391,7 +402,7 @@ export default {
       if (!el) return;
       el.classList.add("active");
       if (navigator.clipboard) {
-        const LINK = this.$config.APP_URL || this.$config.FAKE_APP_URL || "";
+        const LINK = `${this.$config.APP_BASE_URL}/results?type=${this.data.type_id}&id=${this.data.id}`;
         navigator.clipboard.writeText(LINK);
         console.log("Copied link : " + LINK);
       }
@@ -406,28 +417,43 @@ export default {
   },
   mounted: async function () {
     this.$nuxt.$emit("loading-on");
-    const data = this.$route.params;
-    if (data.type_id_a == "A") data.type_id_a_text = "모험";
-    else if (data.type_id_a == "C") data.type_id_a_text = "도시문화";
-    else if (data.type_id_a == "R") data.type_id_a_text = "휴양";
-    this.data = data;
-
-    const res = await this.$repositories.stats.get(data.code);
-    if (res.data < 1000) {
-      if (sessionStorage.getItem(`traveldino-stats-${data.code}`)) {
-        this.stats = Number(
-          sessionStorage.getItem(`traveldino-stats-${data.code}`)
-        );
-        this.stats++;
+    this.query = this.$route.query || {};
+    try {
+      let data = null;
+      const fetched = sessionStorage.getItem(`traveldino-results-fetched`);
+      if (fetched == "true") {
+        data = this.$route.params;
+        sessionStorage.removeItem("traveldino-results-fetched");
       } else {
-        this.stats = Math.round(Math.random() * 1000 + Math.random() * 1000);
+        const query = this.$route.query;
+        const res = await this.$repositories.countries.get(query);
+        data = res.data;
       }
-    } else {
-      this.stats = res.data - 1;
+      if (data.type_id_a == "A") data.type_id_a_text = "모험";
+      else if (data.type_id_a == "C") data.type_id_a_text = "도시문화";
+      else if (data.type_id_a == "R") data.type_id_a_text = "휴양";
+      this.data = data;
+
+      const resStats = await this.$repositories.stats.get(data.code);
+      if (resStats.data < 1000) {
+        if (sessionStorage.getItem(`traveldino-stats-${data.code}`)) {
+          this.stats = Number(
+            sessionStorage.getItem(`traveldino-stats-${data.code}`)
+          );
+          this.stats++;
+        } else {
+          this.stats = Math.round(Math.random() * 1000 + Math.random() * 1000);
+        }
+      } else {
+        this.stats = resStats.data - 1;
+      }
+      sessionStorage.setItem(`traveldino-stats-${data.code}`, this.stats);
+      await sleep(400);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.$nuxt.$emit("loading-off");
     }
-    sessionStorage.setItem(`traveldino-stats-${data.code}`, this.stats);
-    await sleep(400);
-    this.$nuxt.$emit("loading-off");
   },
 };
 </script>
