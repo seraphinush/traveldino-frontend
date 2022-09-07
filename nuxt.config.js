@@ -16,6 +16,12 @@ export default {
       },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      // open graph
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "TravelDino" },
+      { property: "og:description", content: "당신에게 딱 맞는 여행지를 찾자!" },
+      // { property: "og:image", content: "" },
+      // { property: "og:url", content: "" },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   },
