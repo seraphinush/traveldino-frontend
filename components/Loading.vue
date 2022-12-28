@@ -1,11 +1,17 @@
 <template>
   <div v-show="enabled" id="loading-container">
     <div class="loading">
-      <span :style="`background-color: ${this.color};--i:0;`"></span>
-      <span :style="`background-color: ${this.color};--i:1;`"></span>
-      <span :style="`background-color: ${this.color};--i:2;`"></span>
-      <span :style="`background-color: ${this.color};--i:3;`"></span>
-      <span :style="`background-color: ${this.color};--i:4;`"></span>
+      <span>...LOADING...</span>
+      <div class="loading-anim">
+        <span :style="`--i:0;`">두</span>
+        <span :style="`--i:1;`">구</span>
+        <span :style="`--i:0;`">두</span>
+        <span :style="`--i:1;`">구</span>
+        <span :style="`--i:0;`">두</span>
+        <span :style="`--i:1;`">구</span>
+        <span :style="`--i:0;`">두</span>
+        <span :style="`--i:1;`">구</span>
+      </div>
     </div>
   </div>
 </template>
@@ -31,35 +37,40 @@
 
 .loading {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
   z-index: 9999;
+  font-family: var(--font-face-highlight);
+  color: var(--clr-secondary);
 }
 
-.loading span {
+.loading > *:nth-child(1) {
+  font-size: 2.5rem;
+}
+
+.loading > *:nth-child(2) {
+  font-size: 0.75rem;
+}
+
+.loading-anim {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.loading-anim span {
   display: block;
-  margin-right: 5px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  animation: animate 1200ms linear infinite;
-  animation-delay: calc(100ms * var(--i));
-  z-index: inherit;
-  opacity: 0;
-}
-
-.loading span:last-child {
-  margin-right: 0;
+  animation: animate 150ms alternate infinite;
+  animation-delay: calc(150ms * var(--i));
+  transform: translateY(0);
 }
 
 @keyframes animate {
-  0% {
-    opacity: 1;
+  from {
+    transform: translateY(0);
   }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
+  to {
+    transform: translateY(.20rem);
   }
 }
 </style>

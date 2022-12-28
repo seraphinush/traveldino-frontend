@@ -6,7 +6,7 @@
       :question="question"
       @on-answer="handleAnswer"
     />
-    <nav>
+    <nav v-if="question != null">
       <button v-if="answered > 0" @click="handleNavClick('goto-prev')">
         <span>이전으로</span>
       </button>
@@ -37,7 +37,7 @@ nav {
 </style>
 
 <script>
-import { getQuestionType } from "@/assets/utils";
+import { sleep, getQuestionType } from "@/assets/utils";
 import Progress from "../components/Progress";
 export default {
   name: "survey-page",
@@ -98,6 +98,7 @@ export default {
     },
     async evaluate() {
       this.$nuxt.$emit("loading-on");
+      this.question = null;
       const route = { name: "results", query: {} };
       const sessionId = sessionStorage.getItem("traveldino-session-id");
 
@@ -109,12 +110,21 @@ export default {
         this.answers.id = sessionId;
       }
 
+      // simulate loading time..
+      let t = Date.now();
+      const s = 3 * 1000; // 3 seconds
+
       try {
         const res = await this.$repositories.results.get(this.answers);
         route.params = res.data;
         route.query.id = res.data.id;
         sessionStorage.setItem(`traveldino-results-fetched`, "true");
         this.loading = false;
+        // simulating loading time..
+        const d = Date.now() - t;
+        if (d < s) {
+          await sleep(s - d);
+        }
         this.$router.push(route);
       } catch (err) {
         console.error(err);
