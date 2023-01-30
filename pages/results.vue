@@ -154,7 +154,7 @@ section {
   align-items: center;
   font-family: var(--font-face-default);
   /* yolo to get header in the image save */
-  top: calc(0px - var(--header-height));
+  margin-top: calc(0px - var(--header-height));
   padding-top: 0;
 }
 
@@ -165,7 +165,7 @@ section > *:not(:last-child) {
 /* yolo to get header in the image save */
 header {
   position: relative;
-  top: 0;
+  margin-bottom: 0;  
   width: calc(100% + 2rem);
   z-index: 10;
 }
