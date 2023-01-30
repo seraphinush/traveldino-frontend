@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!!data">
+  <section ref="print" v-if="!!data">
     <h2>
       {{ "당신에게 지금 딱 맞는 여행지는..." }}
     </h2>
@@ -136,7 +136,9 @@
       </p>
       <div class="actions">
         <div class="popup-container">
-          <span class="popup-message popup-message-share">링크 복사!</span>
+          <span class="popup-message popup-message-share">
+            {{ shareMessage }}
+          </span>
           <Button @click="handlePopup('share')" text="공유하기" />
         </div>
         <Button @click="handleClick('goto-main')" text="메인으로" />
@@ -262,6 +264,7 @@ button.heart:hover {
 }
 
 .img-heart {
+  width: inherit;
   filter: var(--clr-heart-full) grayscale(1);
   transition: filter 200ms ease-out, opacity 200ms linear;
   opacity: 0.5;
@@ -354,6 +357,12 @@ button.heart:hover {
 </style>
 
 <script>
+const STAT_MIN_VALUE = 100;
+const SHARE_IMAGE = "이미지 복사!";
+const SHARE_LINK = "링크 복사!";
+
+import * as html2canvas from "html2canvas";
+
 import { sleep, hasBatchim } from "@/assets/utils";
 export default {
   name: "results-page",
@@ -364,6 +373,7 @@ export default {
       stats: 0,
       liked: false,
       timeout: {},
+      shareMessage: "",
     };
   },
   methods: {
@@ -391,7 +401,6 @@ export default {
           const sessionId = sessionStorage.getItem("traveldino-session-id");
           if (sessionId) this.$repositories.like.set(sessionId);
         }
-        this.handlePopup("like");
       } catch (err) {
         console.error(err);
       }
@@ -400,15 +409,35 @@ export default {
       if (this.timeout[key]) clearTimeout(this.timeout[key]);
       const el = document.querySelector(`span.popup-message-${key}`);
       if (!el) return;
-      el.classList.add("active");
-      if (navigator.clipboard) {
-        const LINK = `${window.location.origin}/results?&id=${this.data.id}`;
-        navigator.clipboard.writeText(LINK);
-        console.log("Copied link : " + LINK);
+      try {
+        if (navigator.clipboard) {
+          if (!!navigator.clipboard.write) {
+            this.$nuxt.$emit("loading-on");
+            this.shareMessage = SHARE_IMAGE;
+            const DIV = this.$refs.print;
+            const canvas = await html2canvas(DIV);
+            await canvas.toBlob((blob) =>
+              navigator.clipboard.write([
+                new ClipboardItem({ "image/png": blob }),
+              ])
+            );
+            this.$nuxt.$emit("loading-off");
+            el.classList.add("active");
+          } else if (!!navigator.clipboard.writeText) {
+            this.shareMessage = SHARE_LINK;
+            const LINK = `${window.location.origin}/results?&id=${this.data.id}`;
+            navigator.clipboard.writeText(LINK);
+            console.log("Copied link : " + LINK);
+            el.classList.add("active");
+          }
+        }
+      } catch {
+        console.error(err);
+      } finally {
+        this.timeout[key] = setTimeout(() => {
+          el.classList.remove("active");
+        }, 2000);
       }
-      this.timeout[key] = setTimeout(() => {
-        el.classList.remove("active");
-      }, 2000);
     },
     hasBatchim: hasBatchim,
     getImage() {
@@ -418,6 +447,7 @@ export default {
   mounted: async function () {
     this.$nuxt.$emit("loading-on");
     this.query = this.$route.query || {};
+    this.shareMessage = SHARE_LINK;
     try {
       let data = null;
       const fetched = sessionStorage.getItem(`traveldino-results-fetched`);
@@ -435,14 +465,15 @@ export default {
       this.data = data;
 
       const resStats = await this.$repositories.stats.get(data.code);
-      if (resStats.data < 1000) {
+      if (resStats.data < STAT_MIN_VALUE) {
         if (sessionStorage.getItem(`traveldino-stats-${data.code}`)) {
           this.stats = Number(
             sessionStorage.getItem(`traveldino-stats-${data.code}`)
           );
           this.stats++;
         } else {
-          this.stats = Math.round(Math.random() * 1000 + Math.random() * 1000);
+          this.stats =
+            STAT_MIN_VALUE + Math.round(Math.random() * STAT_MIN_VALUE);
         }
       } else {
         this.stats = resStats.data - 1;

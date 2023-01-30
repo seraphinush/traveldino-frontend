@@ -1,7 +1,7 @@
 :root {
   --clr-background: #d5f0fe;
   --clr-background-dark: #83c6e9;
-  --clr-loading-background: hsla(0, 0%, 0%, 0);
+  --clr-loading-background: hsla(0, 0%, 100%, 0.5);
   --clr-white: #ffffff;
   --clr-black: hsla(0, 0%, 10%, 1);
   --clr-font: hsla(0, 0%, 40%, 1);
@@ -12,8 +12,10 @@
   --clr-secondary: #fc6c6c;
   --clr-secondary-light: #ff8b8b;
   --clr-secondary-ultra-light: #fcdad9;
-  --clr-heart-empty: invert(89%) sepia(0%) saturate(0%) hue-rotate(42deg) brightness(96%) contrast(84%);
-  --clr-heart-full: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg) brightness(100%) contrast(100%);
+  --clr-heart-empty: invert(89%) sepia(0%) saturate(0%) hue-rotate(42deg)
+    brightness(96%) contrast(84%);
+  --clr-heart-full: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg)
+    brightness(100%) contrast(100%);
   --font-face-default: "SeoulNamsan";
   --font-face-highlight: "BMJUA";
   --font-face-irregular: "Bazzi";
