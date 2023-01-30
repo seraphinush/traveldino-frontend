@@ -410,17 +410,31 @@ export default {
       const el = document.querySelector(`span.popup-message-${key}`);
       if (!el) return;
       try {
-        if (navigator.clipboard) {
-          if (!!navigator.clipboard.write) {
+        if (!!navigator.clipboard) {
+          if (!!navigator.clipboard) {
             this.$nuxt.$emit("loading-on");
             this.shareMessage = SHARE_IMAGE;
             const DIV = this.$refs.print;
             const canvas = await html2canvas(DIV);
-            await canvas.toBlob((blob) =>
-              navigator.clipboard.write([
-                new ClipboardItem({ "image/png": blob }),
-              ])
-            );
+
+            /* option 1 : copy image */
+            // await canvas.toBlob((blob) =>
+            //   navigator.clipboard.write([
+            //     new ClipboardItem({ "image/png": blob }),
+            //   ])
+            // );
+
+            /* option 2 : download image */
+            const blob = canvas.toDataURL("image/png");
+            let a = document.createElement("a");
+            a.style.display = "none";
+            a.setAttribute("href", blob);
+            a.setAttribute("download", "traveldino_result.png");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            /* options end */
+
             this.$nuxt.$emit("loading-off");
             await sleep(400);
             el.classList.add("active");
@@ -432,7 +446,7 @@ export default {
             el.classList.add("active");
           }
         }
-      } catch {
+      } catch (err) {
         console.error(err);
       } finally {
         this.timeout[key] = setTimeout(() => {
