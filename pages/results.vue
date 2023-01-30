@@ -1,5 +1,6 @@
 <template>
   <section ref="print" v-if="!!data">
+    <Header />
     <h2>
       {{ "당신에게 지금 딱 맞는 여행지는..." }}
     </h2>
@@ -152,10 +153,21 @@
 section {
   align-items: center;
   font-family: var(--font-face-default);
+  /* yolo to get header in the image save */
+  top: calc(0px - var(--header-height));
+  padding-top: 0;
 }
 
 section > *:not(:last-child) {
   margin-bottom: 1.5rem;
+}
+
+/* yolo to get header in the image save */
+header {
+  position: relative;
+  top: 0;
+  width: calc(100% + 2rem);
+  z-index: 10;
 }
 
 h1 {
@@ -429,13 +441,12 @@ export default {
             let a = document.createElement("a");
             a.style.display = "none";
             a.setAttribute("href", blob);
-            // a.setAttribute("target", "_blank");
+            a.setAttribute("target", "_blank");
             a.setAttribute("download", "traveldino_result.png");
             document.body.appendChild(a);
             a.click();
-            // 
-            setTimeout(() => document.body.removeChild(a), 100);
-            // document.body.removeChild(a);
+            await sleep(400);
+            document.body.removeChild(a);
             /* options end */
 
             this.$nuxt.$emit("loading-off");
