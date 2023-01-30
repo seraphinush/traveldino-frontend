@@ -429,10 +429,13 @@ export default {
             let a = document.createElement("a");
             a.style.display = "none";
             a.setAttribute("href", blob);
+            // a.setAttribute("target", "_blank");
             a.setAttribute("download", "traveldino_result.png");
             document.body.appendChild(a);
             a.click();
-            document.body.removeChild(a);
+            // 
+            setTimeout(() => document.body.removeChild(a), 100);
+            // document.body.removeChild(a);
             /* options end */
 
             this.$nuxt.$emit("loading-off");
