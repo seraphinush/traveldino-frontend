@@ -165,7 +165,7 @@ section > *:not(:last-child) {
 /* yolo to get header in the image save */
 header {
   position: relative;
-  margin-bottom: 0;  
+  margin-bottom: 0 !important;  
   width: calc(100% + 2rem);
   z-index: 10;
 }
