@@ -422,6 +422,7 @@ export default {
               ])
             );
             this.$nuxt.$emit("loading-off");
+            await sleep(400);
             el.classList.add("active");
           } else if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
