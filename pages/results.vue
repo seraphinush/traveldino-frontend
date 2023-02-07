@@ -154,7 +154,7 @@ section {
   align-items: center;
   font-family: var(--font-face-default);
   /* yolo to get header in the image save */
-  top: calc(0px - var(--header-height));
+  margin-top: calc(0px - var(--header-height));
   padding-top: 0;
 }
 
@@ -165,7 +165,7 @@ section > *:not(:last-child) {
 /* yolo to get header in the image save */
 header {
   position: relative;
-  top: 0;
+  margin-bottom: 0 !important;  
   width: calc(100% + 2rem);
   z-index: 10;
 }
@@ -189,6 +189,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2rem !important;
   padding: 0 2rem;
   z-index: 0;
 }
@@ -423,36 +424,37 @@ export default {
       if (!el) return;
       try {
         if (!!navigator.clipboard) {
-          if (!!navigator.clipboard) {
-            this.$nuxt.$emit("loading-on");
-            this.shareMessage = SHARE_IMAGE;
-            const DIV = this.$refs.print;
-            const canvas = await html2canvas(DIV);
+          // if (!!navigator.clipboard) {
+          //   this.$nuxt.$emit("loading-on");
+          //   this.shareMessage = SHARE_IMAGE;
+          //   const DIV = this.$refs.print;
+          //   const canvas = await html2canvas(DIV);
 
-            /* option 1 : copy image */
-            // await canvas.toBlob((blob) =>
-            //   navigator.clipboard.write([
-            //     new ClipboardItem({ "image/png": blob }),
-            //   ])
-            // );
+          //   /* option 1 : copy image */
+          //   // await canvas.toBlob((blob) =>
+          //   //   navigator.clipboard.write([
+          //   //     new ClipboardItem({ "image/png": blob }),
+          //   //   ])
+          //   // );
 
-            /* option 2 : download image */
-            const blob = canvas.toDataURL("image/png");
-            let a = document.createElement("a");
-            a.style.display = "none";
-            a.setAttribute("href", blob);
-            a.setAttribute("target", "_blank");
-            a.setAttribute("download", "traveldino_result.png");
-            document.body.appendChild(a);
-            a.click();
-            await sleep(400);
-            document.body.removeChild(a);
-            /* options end */
+          //   /* option 2 : download image */
+          //   const blob = canvas.toDataURL("image/png");
+          //   let a = document.createElement("a");
+          //   a.style.display = "none";
+          //   a.setAttribute("href", blob);
+          //   a.setAttribute("target", "_blank");
+          //   a.setAttribute("download", "traveldino_result.png");
+          //   document.body.appendChild(a);
+          //   a.click();
+          //   await sleep(400);
+          //   document.body.removeChild(a);
+          //   /* options end */
 
-            this.$nuxt.$emit("loading-off");
-            await sleep(400);
-            el.classList.add("active");
-          } else if (!!navigator.clipboard.writeText) {
+          //   this.$nuxt.$emit("loading-off");
+          //   await sleep(400);
+          //   el.classList.add("active");
+          // } else 
+          if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
             const LINK = `${window.location.origin}/results?&id=${this.data.id}`;
             navigator.clipboard.writeText(LINK);
