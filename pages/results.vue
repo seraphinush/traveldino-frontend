@@ -456,7 +456,7 @@ export default {
           // } else 
           if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
-            const LINK = `${window.location.origin}/results?&id=${this.data.id}`;
+            const LINK = `${window.location.origin}/results?id=${this.data.id}`;
             navigator.clipboard.writeText(LINK);
             console.log("Copied link : " + LINK);
             el.classList.add("active");
