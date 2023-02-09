@@ -2,6 +2,7 @@ const resource = "stats";
 
 export default ($axios) => ({
   get(payload) {
-    return $axios.get(`/${resource}?code=${payload}`);
+    const params = `?code=${payload}`;
+    return $axios.get(`/${resource}${params}`);
   },
 });

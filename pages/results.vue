@@ -165,7 +165,7 @@ section > *:not(:last-child) {
 /* yolo to get header in the image save */
 header {
   position: relative;
-  margin-bottom: 0 !important;  
+  margin-bottom: 0 !important;
   width: calc(100% + 2rem);
   z-index: 10;
 }
@@ -453,10 +453,15 @@ export default {
           //   this.$nuxt.$emit("loading-off");
           //   await sleep(400);
           //   el.classList.add("active");
-          // } else 
+          // } else
           if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
-            const LINK = `${window.location.origin}/results?id=${this.data.id}`;
+            const sessionId =
+              sessionStorage.getItem("traveldino-session-id") || "null";
+            const LINK =
+              `${window.location.origin}/results` +
+              `?countryId=${this.data.id}` +
+              `&sessionId=${sessionId}`;
             navigator.clipboard.writeText(LINK);
             console.log("Copied link : " + LINK);
             el.classList.add("active");
@@ -477,19 +482,36 @@ export default {
   },
   mounted: async function () {
     this.$nuxt.$emit("loading-on");
-    this.query = this.$route.query || {};
+    const query = Object.assign({}, this.$route.query) || {};
     this.shareMessage = SHARE_LINK;
     try {
-      let data = null;
-      const fetched = sessionStorage.getItem(`traveldino-results-fetched`);
-      if (fetched == "true") {
-        data = this.$route.params;
-        sessionStorage.removeItem("traveldino-results-fetched");
-      } else {
-        const query = this.$route.query;
-        const res = await this.$repositories.countries.get(query);
-        data = res.data;
+      if (!!query.id && !query.countryId) {
+        sessionStorage.removeItem("traveldino-session-id");
+        query.countryId = query.id;
+        query.sessionId = "null";
+        delete query.id;
+        const route = {
+          name: "results",
+          query: query,
+        };
+        this.$router.push(route);
       }
+      this.query = query;
+
+      // let data = null;
+      // const fetched = sessionStorage.getItem(`traveldino-results-fetched`);
+      // if (fetched == "true") {
+      //   data = this.$route.params;
+      //   sessionStorage.removeItem("traveldino-results-fetched");
+      // } else {
+      //   const query = this.$route.query;
+      //   const res = await this.$repositories.countries.get(query);
+      //   data = res.data;
+      // }
+
+      const res = await this.$repositories.results.get(query);
+      let data = res.data;
+
       if (data.type_id_a == "A") data.type_id_a_text = "모험";
       else if (data.type_id_a == "C") data.type_id_a_text = "도시문화";
       else if (data.type_id_a == "R") data.type_id_a_text = "휴양";
