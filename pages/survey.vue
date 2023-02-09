@@ -115,10 +115,9 @@ export default {
       const s = 3 * 1000; // 3 seconds
 
       try {
-        const res = await this.$repositories.results.get(this.answers);
-        route.params = res.data;
-        route.query.id = res.data.id;
-        sessionStorage.setItem(`traveldino-results-fetched`, "true");
+        const res = await this.$repositories.sessions.set(this.answers);
+        route.query.countryId = res.data.countryId;
+        route.query.sessionId = this.answers.id;
         this.loading = false;
         // simulating loading time..
         const d = Date.now() - t;
@@ -135,7 +134,8 @@ export default {
   mounted: async function () {
     this.$nuxt.$emit("loading-on");
     try {
-      this.query = this.$route.query || {};
+      const query = Object.assign({}, this.$route.query) || {};
+      this.query = query;
       const res = await this.$repositories.questions.get();
       this.questions = res.data;
       this.updateQuestion();
