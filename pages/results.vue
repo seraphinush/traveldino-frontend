@@ -385,6 +385,7 @@ export default {
       data: null,
       stats: 0,
       liked: false,
+      shared: false,
       timeout: {},
       shareMessage: "",
     };
@@ -465,6 +466,11 @@ export default {
             navigator.clipboard.writeText(LINK);
             console.log("Copied link : " + LINK);
             el.classList.add("active");
+            if (!this.shared) {
+              this.shared = true;
+              const sessionId = sessionStorage.getItem("traveldino-session-id");
+              if (sessionId) this.$repositories.share.set(sessionId);
+            }
           }
         }
       } catch (err) {
