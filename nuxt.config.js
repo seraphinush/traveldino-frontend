@@ -43,11 +43,15 @@ export default {
 
   buildModules: [],
 
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/google-gtag"],
 
   build: {},
 
   axios: {
     baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
+  },
+
+  'google-gtag': {
+    id: process.env.GGL_GTAG_ID,
   },
 };
