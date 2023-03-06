@@ -117,19 +117,19 @@
     </div>
 
     <!--  -->
-    <div class="results-post text-center">
-      <div class="like-container">
-        <p class="text-center text-highlight font-face-highlight">
-          결과가 마음에 들어요!
-        </p>
-        <div class="popup-container">
-          <!-- <span class="popup-message popup-message-like">좋아요!</span> -->
-          <button class="heart text-center" @click="handleLike()">
-            <img class="img-heart" src="@/assets/heart.svg" />
-          </button>
-        </div>
+    <div class="like-container">
+      <p class="text-center text-highlight font-face-highlight">
+        결과가 마음에 들어요!
+      </p>
+      <div class="popup-container">
+        <!-- <span class="popup-message popup-message-like">좋아요!</span> -->
+        <button class="heart text-center" @click="handleLike()">
+          <img class="img-heart" src="@/assets/heart.svg" />
+        </button>
       </div>
+    </div>
 
+    <div class="results-post text-center">
       <p class="text-center font-face-highlight">
         당신과 같은 여행지를 추천받은 사람은
         <span class="text-highlight">{{ stats.toLocaleString() }}</span
@@ -144,8 +144,17 @@
         </div>
         <Button @click="handleClick('goto-main')" text="메인으로" />
       </div>
-      <span>여행지 정보를 더 알고 싶다면 인스타 팔로우!</span>
-      <a class="instagram-link" :href="instagram" target="_blank">
+    </div>
+
+    <div class="results-post text-center">
+      <span class="font-face-highlight">
+        여행지 정보를 더 알고 싶다면 인스타 팔로우!
+      </span>
+      <a
+        class="instagram-link font-face-highlight"
+        :href="instagram"
+        target="_blank"
+      >
         <img class="icon" src="@/assets/instagram.svg" />
         <span>traveldino.app</span>
       </a>
