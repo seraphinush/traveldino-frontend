@@ -29,7 +29,8 @@ export default {
     link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
     script: [
       {
-        src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.GGL_ADSENSE_ID}`,
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+        "data-ad-client": `${process.env.GGL_ADSENSE_ID}`,
         crossorigin: "anonymous",
       },
     ],
