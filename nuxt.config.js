@@ -37,21 +37,24 @@ export default {
 
   css: ["@/assets/css/main.css"],
 
-  plugins: ["~/plugins/repositories.js"],
+  plugins: [
+    "~/plugins/repositories.js",
+    "~/plugins/google-analytics.client.js",
+  ],
 
   components: true,
 
   buildModules: [],
 
-  modules: ["@nuxtjs/axios", "@nuxtjs/google-gtag"],
+  modules: ["@nuxtjs/axios"],
 
   build: {},
 
-  axios: {
-    baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
+  publicRuntimeConfig: {
+    GGL_GTAG_ID: process.env.GGL_GTAG_ID || null,
   },
 
-  'google-gtag': {
-    id: process.env.GGL_GTAG_ID,
+  axios: {
+    baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
   },
 };
