@@ -33,7 +33,7 @@
     </div>
 
     <!-- variation 1  -->
-    <div v-if="data.results_page_type == 1" class="results-desc">
+    <div v-if="data.results_page_type == 1" class="results-section">
       <p>
         {{ `당신에게 꼭 맞는 여행지로` }}
         <span class="text-highlight">{{ `[${data.name}]` }}</span
@@ -61,7 +61,7 @@
     </div>
 
     <!-- variation 2  -->
-    <div v-if="data.results_page_type == 2" class="results-desc">
+    <div v-if="data.results_page_type == 2" class="results-section">
       <p>
         {{ `당신의 여행 스타일은 ` }}
         <span class="text-highlight">{{ `[${data.name}]` }}</span
@@ -89,7 +89,7 @@
     </div>
 
     <!-- variation 3  -->
-    <div v-if="data.results_page_type == 3" class="results-desc">
+    <div v-if="data.results_page_type == 3" class="results-section">
       <p>
         {{ `당신과` }}
         <span class="text-highlight">{{ `[${data.name}]` }}</span
@@ -129,7 +129,7 @@
       </div>
     </div>
 
-    <div class="results-post text-center">
+    <div class="results-section align-center">
       <p class="text-center font-face-highlight">
         당신과 같은 여행지를 추천받은 사람은
         <span class="text-highlight">{{ stats.toLocaleString() }}</span
@@ -146,7 +146,7 @@
       </div>
     </div>
 
-    <div class="results-post text-center">
+    <div class="results-section align-center">
       <span class="font-face-highlight">
         여행지 정보를 더 알고 싶다면 인스타 팔로우!
       </span>
@@ -251,19 +251,13 @@ h2 {
   width: 80%;
 }
 
-.results-desc,
-.results-post {
+.results-section {
   display: flex;
   flex-direction: column;
   padding: 0 2rem;
 }
 
-.results-post {
-  align-items: center;
-}
-
-.results-desc > *:not(:last-child),
-.results-post > *:not(:last-child) {
+.results-section > *:not(:last-child) {
   margin-bottom: 0.75rem;
 }
 
@@ -386,7 +380,12 @@ button.heart:hover {
   display: flex;
   align-items: center;
   color: var(--clr-secondary);
+  font-size: 1.5rem;
   cursor: pointer;
+}
+
+.instagram-link > * {
+  font-size: 1.5rem;
 }
 
 .instagram-link > img {

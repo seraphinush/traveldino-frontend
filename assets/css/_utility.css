@@ -13,3 +13,7 @@
 .font-face-highlight {
   font-family: var(--font-face-highlight);
 }
+
+.align-center {
+  align-items: center;
+}
