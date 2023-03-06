@@ -144,6 +144,11 @@
         </div>
         <Button @click="handleClick('goto-main')" text="메인으로" />
       </div>
+      <span>여행지 정보를 더 알고 싶다면 인스타 팔로우!</span>
+      <a class="instagram-link" :href="instagram" target="_blank">
+        <img class="icon" src="@/assets/instagram.svg" />
+        <span>traveldino.app</span>
+      </a>
     </div>
     <p class="text-subscript">사진 출처 : Pixabay, Unsplash, Pexels</p>
   </section>
@@ -367,6 +372,18 @@ button.heart:hover {
 .text-subscript {
   font-size: 0.6rem;
 }
+
+.instagram-link {
+  display: flex;
+  align-items: center;
+  color: var(--clr-secondary);
+  cursor: pointer;
+}
+
+.instagram-link > img {
+  width: 1.5rem;
+  filter: var(--clr-secondary-filter);
+}
 </style>
 
 <script>
@@ -388,6 +405,8 @@ export default {
       shared: false,
       timeout: {},
       shareMessage: "",
+
+      instagram: "https://instagram.com/traveldino.app",
     };
   },
   methods: {

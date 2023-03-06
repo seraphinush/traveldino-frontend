@@ -1,9 +1,9 @@
 <template>
   <footer>
     <div class="footer-info">
-      <span>문의</span>
-      <a :href="`mailto:${email}`">
-        {{ email }}
+      <span>인스타그램 문의</span>
+      <a :href="`https://instagram.com/${instagram}`">
+        {{ `@${instagram}` }}
       </a>
     </div>
     <span>
@@ -53,6 +53,7 @@ export default {
   data() {
     return {
       email: "info.traveldino@gmail.com",
+      instagram: "traveldino.app",
       copyright: "©TravelDino All Rights Reserved. 2022",
     };
   },

@@ -10,6 +10,7 @@
   --clr-primary-dark: hsla(171, 45%, 40%, 1);
   --clr-primary-light: hsla(171, 85%, 92.5%, 1);
   --clr-secondary: #fc6c6c;
+  --clr-secondary-filter: invert(48%) sepia(17%) saturate(1728%) hue-rotate(312deg) brightness(111%) contrast(98%);
   --clr-secondary-light: #ff8b8b;
   --clr-secondary-ultra-light: #fcdad9;
   --clr-heart-empty: invert(89%) sepia(0%) saturate(0%) hue-rotate(42deg)
