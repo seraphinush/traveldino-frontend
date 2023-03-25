@@ -1,15 +1,15 @@
 <template>
-  <section ref="print" v-if="!!data">
+  <section class="align-center" ref="print" v-if="!!data">
     <Header />
-    <h2>
+    <h2 class="font-face-highlight">
       {{ "당신에게 지금 딱 맞는 여행지는..." }}
     </h2>
-    <h1>
+    <h1 class="font-face-highlight text-highlight-light">
       {{ data.name }}
     </h1>
 
     <!--  -->
-    <div id="img-container">
+    <div id="img-container" class="align-center justify-center">
       <img id="img-location" :src="getImage()" />
       <img id="img-dino" src="@/assets/dino_hand.png" />
       <img id="img-marker" src="@/assets/location_marker.png" />
@@ -104,6 +104,7 @@
           } 원하는 당신에겐 최고의 여행지일 거예요.`
         }}
       </p>
+      >
       <p>
         {{ `${data.type_phrase}, ${data.keyword_phrase}` }}
       </p>
@@ -117,13 +118,13 @@
     </div>
 
     <!--  -->
-    <div class="like-container">
+    <div class="like-container align-center" @click="handleLike()">
       <p class="text-center text-highlight font-face-highlight">
         결과가 마음에 들어요!
       </p>
-      <div class="popup-container">
-        <!-- <span class="popup-message popup-message-like">좋아요!</span> -->
-        <button class="heart text-center" @click="handleLike()">
+      <div class="popup-container justify-center">
+        <!-- <span class="popup-message popup-message-like text-center">좋아요!</span> -->
+        <button class="heart text-center">
           <img class="img-heart" src="@/assets/heart.svg" />
         </button>
       </div>
@@ -135,9 +136,9 @@
         <span class="text-highlight">{{ stats.toLocaleString() }}</span
         >명이에요
       </p>
-      <div class="actions">
-        <div class="popup-container">
-          <span class="popup-message popup-message-share">
+      <div class="actions justify-center">
+        <div class="popup-container justify-center">
+          <span class="popup-message popup-message-share text-center">
             {{ shareMessage }}
           </span>
           <Button @click="handlePopup('share')" text="공유하기" />
@@ -151,7 +152,7 @@
         여행지 정보를 더 알고 싶다면 인스타 팔로우!
       </span>
       <a
-        class="instagram-link font-face-highlight"
+        class="instagram-link align-center font-face-highlight"
         :href="instagram"
         target="_blank"
       >
@@ -165,7 +166,6 @@
 
 <style scoped>
 section {
-  align-items: center;
   font-family: var(--font-face-default);
   /* yolo to get header in the image save */
   margin-top: calc(0px - var(--header-height));
@@ -186,14 +186,11 @@ header {
 
 h1 {
   margin-bottom: 3.5rem !important;
-  font-family: var(--font-face-highlight);
   font-size: 2.8rem;
-  color: var(--clr-secondary);
 }
 
 h2 {
   margin: 2rem 0 0.5rem 0 !important;
-  font-family: var(--font-face-highlight);
   font-weight: 400;
   font-size: 2rem;
 }
@@ -201,8 +198,6 @@ h2 {
 #img-container {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 2rem !important;
   padding: 0 2rem;
   z-index: 0;
@@ -263,24 +258,26 @@ h2 {
 
 .like-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border: 0.1875rem solid var(--clr-secondary);
   border-radius: 10px;
   margin: 0 0 2rem 0 !important;
   padding: 0.75rem 1rem;
   width: fit-content;
+  cursor: pointer;
 }
 
 .like-container > *:not(:last-child) {
-  margin-bottom: 0.75rem;
+  margin-right: 0.5rem;
 }
 
 button.heart {
-  width: 2rem;
+  display: flex;
+  width: 1.5rem;
   transition: transform 100ms linear;
 }
 
-button.heart:hover {
+.like-container:hover button.heart {
   transform: scale(1.1);
 }
 
@@ -308,7 +305,7 @@ button.heart:hover {
     transform: scale(1.1, 0.9) translateY(0);
   }
   30% {
-    transform: scale(0.9, 1.1) translateY(-10px);
+    transform: scale(0.9, 1.1) translateY(-20px);
   }
   50% {
     transform: scale(1.05, 0.95) translateY(0);
@@ -327,7 +324,6 @@ button.heart:hover {
 .actions {
   position: relative;
   display: flex;
-  justify-content: center;
 }
 
 .actions > *:not(:last-child) {
@@ -337,7 +333,6 @@ button.heart:hover {
 .popup-container {
   display: flex;
   position: relative;
-  justify-content: center;
 }
 
 .popup-message {
@@ -347,7 +342,6 @@ button.heart:hover {
   border-radius: 10px;
   background-color: #50c878;
   color: #eee;
-  text-align: center;
   transition: all 150ms ease-out;
   transform: scale(0.5) translateY(0);
   opacity: 0;
@@ -378,25 +372,25 @@ button.heart:hover {
 
 .instagram-link {
   display: flex;
-  align-items: center;
-  color: var(--clr-secondary);
+  padding: 0.25rem 0.5rem;
   font-size: 1.5rem;
+  border: 0.2rem solid black;
+  border-radius: 0.75rem;
   cursor: pointer;
 }
 
 .instagram-link > * {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
 }
 
 .instagram-link > img {
-  width: 1.5rem;
-  filter: var(--clr-secondary-filter);
+  width: 1.0rem;
+  /* filter: var(--clr-secondary-filter); */
 }
 </style>
 
 <script>
 const STAT_MIN_VALUE = 100;
-const SHARE_IMAGE = "이미지 복사!";
 const SHARE_LINK = "링크 복사!";
 
 import * as html2canvas from "html2canvas";

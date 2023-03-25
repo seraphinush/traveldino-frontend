@@ -1,7 +1,7 @@
 <template>
-  <div class="progress-container">
+  <div class="progress-container justify-center">
     <img src="@/assets/dino_airplane.png" />
-    <div class="progress-info">
+    <div class="progress-info justify-center">
       <p class="progress-header">
         {{ "나에게 딱 맞는 여행지를 찾기까지..." }}
       </p>
@@ -18,7 +18,6 @@
 .progress-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   position: relative;
   width: 100%;
   text-align: right;
@@ -35,7 +34,6 @@ img {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   white-space: nowrap;
   font-size: var(--progress-bar-font-size);
 }

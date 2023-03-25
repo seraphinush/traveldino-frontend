@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile align-center">
     <img class="profile-image" :src="getSrc(imgSrc)" />
     <div class="text-center">
       <p class="profile-name font-face-highlight">{{ label }}</p>
@@ -15,7 +15,6 @@
 .profile {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .profile > *:not(:last-child) {

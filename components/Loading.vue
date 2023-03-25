@@ -1,8 +1,12 @@
 <template>
-  <div v-show="enabled" id="loading-container">
-    <div class="loading">
+  <div
+    v-show="enabled"
+    id="loading-container"
+    class="align-center justify-center"
+  >
+    <div class="loading justify-center">
       <span>...LOADING...</span>
-      <div class="loading-anim">
+      <div class="loading-anim justify-center">
         <span :style="`--i:0;`">두</span>
         <span :style="`--i:1;`">구</span>
         <span :style="`--i:0;`">두</span>
@@ -22,8 +26,6 @@
   width: inherit;
   height: inherit;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--clr-loading-background);
   backdrop-filter: blur(2px);
   z-index: 1001;
@@ -38,7 +40,6 @@
 .loading {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   z-index: 9999;
   font-family: var(--font-face-highlight);
   color: var(--clr-secondary);
@@ -55,7 +56,6 @@
 .loading-anim {
   display: flex;
   flex-direction: row;
-  justify-content: center;
 }
 
 .loading-anim span {
@@ -70,7 +70,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(.20rem);
+    transform: translateY(0.2rem);
   }
 }
 </style>

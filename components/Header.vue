@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="align-center justify-center">
     <NuxtLink to="/"><span>TravelDino</span></NuxtLink>
   </header>
 </template>
@@ -9,8 +9,6 @@ header {
   position: sticky;
   top: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1rem 0;
   height: var(--header-height);
   background-color: var(--clr-primary);

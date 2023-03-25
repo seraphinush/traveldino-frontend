@@ -1,15 +1,11 @@
 <template>
-  <section id="index-page">
+  <section id="index-page" class="align-center">
     <img src="@/assets/main.png" />
     <Button @click="start()" text="테스트 시작!" />
   </section>
 </template>
 
 <style scoped>
-section {
-  align-items: center;
-}
-
 section > * {
   margin-bottom: 2.5rem;
 }

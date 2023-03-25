@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="align-center justify-center">
     <div class="footer-info">
       <span>인스타그램 문의</span>
       <a :href="`https://instagram.com/${instagram}`">
@@ -16,8 +16,6 @@
 footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 0.75rem 0;
   height: var(--footer-height);
   background-color: var(--clr-primary-light);
