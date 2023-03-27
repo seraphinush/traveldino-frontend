@@ -104,7 +104,6 @@
           } 원하는 당신에겐 최고의 여행지일 거예요.`
         }}
       </p>
-      >
       <p>
         {{ `${data.type_phrase}, ${data.keyword_phrase}` }}
       </p>
