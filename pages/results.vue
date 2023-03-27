@@ -159,6 +159,40 @@
         <span>traveldino.app</span>
       </a>
     </div>
+
+    <div class="results-section more align-center">
+      <span class="more-text"> 이 여행지가 더 궁금하다면? </span>
+      <div class="more-items flex flex-row justify-around">
+        <a
+          class="more-item flex flex-col align-center"
+          :href="data.link_general_info"
+          target="_blank"
+        >
+          <img class="more-img" src="@/assets/more_info.png" />
+          <span>나라정보</span>
+          <span>보러가기</span>
+        </a>
+        <a
+          class="more-item flex flex-col align-center"
+          :href="data.link_travel_info"
+          target="_blank"
+        >
+          <img class="more-img" src="@/assets/more_marker.png" />
+          <span>여행정보</span>
+          <span>보러가기</span>
+        </a>
+        <a
+          class="more-item flex flex-col align-center"
+          :href="data.link_ticket_info"
+          target="_blank"
+        >
+          <img class="more-img" src="@/assets/more_plane.png" />
+          <span>예매정보</span>
+          <span>보러가기</span>
+        </a>
+      </div>
+    </div>
+
     <p class="text-subscript">사진 출처 : Pixabay, Unsplash, Pexels</p>
   </section>
 </template>
@@ -379,12 +413,34 @@ button.heart {
 }
 
 .instagram-link > * {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 .instagram-link > img {
-  width: 1.0rem;
+  width: 1rem;
   /* filter: var(--clr-secondary-filter); */
+}
+
+.more {
+  padding: 1.5rem 0;
+  width: 100%;
+  background: var(--clr-primary-light);
+  border-radius: 1rem;
+  color: var(--clr-primary-dark);
+}
+
+.more-items {
+  width: 100%;
+}
+
+.more-item {
+  color: var(--clr-secondary);
+  cursor: pointer;
+}
+
+.more-img {
+  width: 4rem;
+  margin-bottom: 0.5rem;
 }
 </style>
 
