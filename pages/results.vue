@@ -1,5 +1,33 @@
 <template>
   <section class="align-center" ref="print" v-if="!!data">
+    <div v-if="showEvent" class="event flex align-center justify-center">
+      <svg
+        class="flex align-center justify-center"
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        @click="handleClick('close-event')"
+      >
+        <g transform="scale(0.5) translate(5.8,6)">
+          <path
+            d="M2.5,2.5 Q6,6 9.5,9.5"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M2.5,9.5 Q6,6 9.5,2.5"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </g>
+      </svg>
+      <div @click="handleClick('goto-event')"></div>
+    </div>
     <Header />
     <h2 class="font-face-highlight">
       {{ "당신에게 지금 딱 맞는 여행지는..." }}
@@ -199,6 +227,7 @@
 
 <style scoped>
 section {
+  position: relative;
   font-family: var(--font-face-default);
   /* yolo to get header in the image save */
   margin-top: calc(0px - var(--header-height));
@@ -442,6 +471,42 @@ button.heart {
   width: 4rem;
   margin-bottom: 0.5rem;
 }
+
+.event {
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  margin: 2rem;
+  z-index: 9990;
+}
+
+.event svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: var(--clr-secondary);
+  cursor: pointer;
+  z-index: 9992;
+  transition: transform 0.2s;
+}
+.event svg:hover {
+  transform: scale(1.1);
+}
+
+.event div {
+  width: 16rem;
+  height: 16rem;
+  background: no-repeat center url("@/assets/event_2023q2_starbucks.png");
+  background-size: 101%;
+  border-radius: 9999px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+  z-index: 9991;
+}
 </style>
 
 <script>
@@ -464,6 +529,9 @@ export default {
       shareMessage: "",
 
       instagram: "https://instagram.com/traveldino.app",
+
+      // event_2023q2_starbucks
+      showEvent: true,
     };
   },
   methods: {
@@ -475,6 +543,15 @@ export default {
 
       if (action == "goto-main") {
         this.$router.push(route);
+      }
+
+      // event_2023q2_starbucks
+      if (action == "goto-event") {
+        window.open("https://forms.gle/udBDcjq75PyAwsim9", "_blank");
+      }
+
+      if (action == "close-event") {
+        this.showEvent = false;
       }
     },
     handleLike: async function () {
