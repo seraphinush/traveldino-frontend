@@ -531,7 +531,7 @@ export default {
       instagram: "https://instagram.com/traveldino.app",
 
       // event_2023q2_starbucks
-      showEvent: true,
+      showEvent: false,
     };
   },
   methods: {
