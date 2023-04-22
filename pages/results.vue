@@ -1,5 +1,6 @@
 <template>
   <section class="align-center" ref="print" v-if="!!data">
+    <!-- event related -->
     <div v-if="showEvent" class="event flex align-center justify-center">
       <svg
         class="flex align-center justify-center"
@@ -28,6 +29,7 @@
       </svg>
       <div @click="handleClick('goto-event')"></div>
     </div>
+
     <Header />
     <h2 class="font-face-highlight">
       {{ "당신에게 지금 딱 맞는 여행지는..." }}
@@ -145,7 +147,7 @@
     </div>
 
     <!--  -->
-    <div class="like-container align-center" @click="handleLike()">
+    <div class="like-container align-center" @click="handleClick('like')">
       <p class="text-center text-highlight font-face-highlight">
         결과가 마음에 들어요!
       </p>
@@ -191,33 +193,30 @@
     <div class="results-section more align-center">
       <span class="more-text"> 이 여행지가 더 궁금하다면? </span>
       <div class="more-items flex flex-row justify-around">
-        <a
+        <div
           class="more-item flex flex-col align-center"
-          :href="data.link_general_info"
-          target="_blank"
+          @click="handleClick('general-info')"
         >
           <img class="more-img" src="@/assets/more_info.png" />
           <span>나라정보</span>
           <span>보러가기</span>
-        </a>
-        <a
+        </div>
+        <div
           class="more-item flex flex-col align-center"
-          :href="data.link_travel_info"
-          target="_blank"
+          @click="handleClick('travel-info')"
         >
           <img class="more-img" src="@/assets/more_marker.png" />
           <span>여행정보</span>
           <span>보러가기</span>
-        </a>
-        <a
+        </div>
+        <div
           class="more-item flex flex-col align-center"
-          :href="data.link_ticket_info"
-          target="_blank"
+          @click="handleClick('ticket-info')"
         >
           <img class="more-img" src="@/assets/more_plane.png" />
           <span>예매정보</span>
           <span>보러가기</span>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -535,41 +534,56 @@ export default {
     };
   },
   methods: {
-    handleClick: function (action) {
+    handleClick: function (type) {
       const route = { name: "index", query: {} };
+      // set test mode
       if (this.query.mode === "test") {
         route.query.mode = "test";
       }
-
-      if (action == "goto-main") {
+      // route to main
+      if (type == "goto-main") {
         this.$router.push(route);
       }
 
-      // event_2023q2_starbucks
-      if (action == "goto-event") {
+      // event related
+      else if (type == "goto-event") {
         window.open("https://forms.gle/udBDcjq75PyAwsim9", "_blank");
       }
-
-      if (action == "close-event") {
+      // event related
+      else if (type == "close-event") {
         this.showEvent = false;
       }
-    },
-    handleLike: async function () {
-      try {
-        const el = document.querySelector(".img-heart");
-        if (!el) return;
-        el.classList.add("active");
-        el.classList.remove("bounce");
-        setTimeout(() => {
-          el.classList.add("bounce");
-        }, 1);
-        if (!this.liked) {
-          this.liked = true;
-          const sessionId = sessionStorage.getItem("traveldino-session-id");
-          if (sessionId) this.$repositories.like.set(sessionId);
+
+      //
+      else {
+        const sessionId = sessionStorage.getItem("traveldino-session-id");
+        try {
+          if (type == "like") {
+            const el = document.querySelector(".img-heart");
+            if (!el) return;
+            el.classList.add("active");
+            el.classList.remove("bounce");
+            setTimeout(() => el.classList.add("bounce"), 1);
+            if (!this.liked) {
+              this.liked = true;
+              if (sessionId) this.$repositories.stats.set("like", sessionId);
+            }
+          } else if (type == "general-info") {
+            if (sessionId)
+              this.$repositories.stats.set("general-info", sessionId);
+            window.open(this.data.link_general_info, "_blank");
+          } else if (type == "travel-info") {
+            if (sessionId)
+              this.$repositories.stats.set("travel-info", sessionId);
+            window.open(this.data.link_travel_info, "_blank");
+          } else if (type == "ticket-info") {
+            if (sessionId)
+              this.$repositories.stats.set("ticket-info", sessionId);
+            window.open(this.data.link_ticket_info, "_blank");
+          }
+        } catch (err) {
+          console.error(err);
         }
-      } catch (err) {
-        console.error(err);
       }
     },
     handlePopup: async function (key) {
@@ -622,7 +636,7 @@ export default {
             if (!this.shared) {
               this.shared = true;
               const sessionId = sessionStorage.getItem("traveldino-session-id");
-              if (sessionId) this.$repositories.share.set(sessionId);
+              if (sessionId) this.$repositories.stats.set("share", sessionId);
             }
           }
         }
@@ -644,6 +658,7 @@ export default {
     const query = Object.assign({}, this.$route.query) || {};
     this.shareMessage = SHARE_LINK;
     try {
+      /* old url support */
       if (!!query.id && !query.countryId) {
         sessionStorage.removeItem("traveldino-session-id");
         query.countryId = query.id;

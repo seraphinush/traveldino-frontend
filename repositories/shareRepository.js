@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 const resource = "share";
 
 export default ($axios) => ({

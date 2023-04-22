@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 const resource = "like";
 
 export default ($axios) => ({

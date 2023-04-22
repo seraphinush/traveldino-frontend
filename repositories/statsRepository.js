@@ -5,4 +5,11 @@ export default ($axios) => ({
     const params = `?code=${payload}`;
     return $axios.get(`/${resource}${params}`);
   },
+  set(type, payload) {
+    const body = {
+      id: payload,
+      type: type,
+    };
+    return $axios.post(`/${resource}`, body);
+  },
 });
