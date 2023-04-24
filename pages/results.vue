@@ -683,6 +683,7 @@ export default {
       //   data = res.data;
       // }
 
+      if (!query.sessionId) query.sessionId = "null";
       const res = await this.$repositories.results.get(query);
       let data = res.data;
 
