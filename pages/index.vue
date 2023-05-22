@@ -18,7 +18,7 @@ img {
 
 <script>
 export default {
-  name: "index-page",
+  name: "index",
   data() {
     return {
       query: {},

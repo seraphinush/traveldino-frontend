@@ -40,7 +40,7 @@ nav {
 import { sleep, getQuestionType } from "@/assets/utils";
 import Progress from "../components/Progress";
 export default {
-  name: "survey-page",
+  name: "survey",
   layout: "survey",
   components: { Progress },
   data() {
@@ -99,7 +99,12 @@ export default {
     async evaluate() {
       this.$nuxt.$emit("loading-on");
       this.question = null;
-      const route = { name: "results", query: {} };
+      const route = {
+        name: "results-id",
+        path: "/results/:id",
+        params: {},
+        query: {},
+      };
       const sessionId = sessionStorage.getItem("traveldino-session-id");
 
       // client mode
@@ -116,7 +121,7 @@ export default {
 
       try {
         const res = await this.$repositories.sessions.set(this.answers);
-        route.query.countryId = res.data.countryId;
+        route.params.id = res.data.countryId;
         route.query.sessionId = this.answers.id;
         this.loading = false;
         // simulating loading time..

@@ -516,7 +516,7 @@ import * as html2canvas from "html2canvas";
 
 import { sleep, hasBatchim } from "@/assets/utils";
 export default {
-  name: "results-page",
+  name: "results-id",
   data() {
     return {
       query: {},
@@ -624,12 +624,7 @@ export default {
           // } else
           if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
-            const sessionId =
-              sessionStorage.getItem("traveldino-session-id") || "null";
-            const LINK =
-              `${window.location.origin}/results` +
-              `?countryId=${this.data.id}` +
-              `&sessionId=${sessionId}`;
+            const LINK = window.location.href;
             navigator.clipboard.writeText(LINK);
             console.log("Copied link : " + LINK);
             el.classList.add("active");
@@ -655,37 +650,15 @@ export default {
   },
   mounted: async function () {
     this.$nuxt.$emit("loading-on");
-    const query = Object.assign({}, this.$route.query) || {};
+    const { query, params } = this.$route || {};
     this.shareMessage = SHARE_LINK;
     try {
-      /* old url support */
-      if (!!query.id && !query.countryId) {
-        sessionStorage.removeItem("traveldino-session-id");
-        query.countryId = query.id;
-        query.sessionId = "null";
-        delete query.id;
-        const route = {
-          name: "results",
-          query: query,
-        };
-        this.$router.push(route);
-      }
+      query.countryId = params.id;
       this.query = query;
-
-      // let data = null;
-      // const fetched = sessionStorage.getItem(`traveldino-results-fetched`);
-      // if (fetched == "true") {
-      //   data = this.$route.params;
-      //   sessionStorage.removeItem("traveldino-results-fetched");
-      // } else {
-      //   const query = this.$route.query;
-      //   const res = await this.$repositories.countries.get(query);
-      //   data = res.data;
-      // }
 
       if (!query.sessionId) query.sessionId = "null";
       const res = await this.$repositories.results.get(query);
-      let data = res.data;
+      const data = res.data;
 
       if (data.type_id_a == "A") data.type_id_a_text = "모험";
       else if (data.type_id_a == "C") data.type_id_a_text = "도시문화";
