@@ -624,16 +624,7 @@ export default {
           // } else
           if (!!navigator.clipboard.writeText) {
             this.shareMessage = SHARE_LINK;
-
-            // TEMP
-            const sessionId =
-              sessionStorage.getItem("traveldino-session-id") || "null";
-            const LINK =
-              `${window.location.origin}/results` +
-              `?countryId=${this.data.id}` +
-              `&sessionId=${sessionId}`;
-
-            // const LINK = window.location.href;
+            const LINK = window.location.href;
             navigator.clipboard.writeText(LINK);
             console.log("Copied link : " + LINK);
             el.classList.add("active");
