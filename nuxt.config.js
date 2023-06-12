@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+import axios from "axios";
+
 export default {
   target: "static",
 
@@ -47,7 +49,7 @@ export default {
 
   buildModules: [],
 
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/sitemap"],
 
   build: {},
 
@@ -57,5 +59,13 @@ export default {
 
   axios: {
     baseURL: process.env.API_BASE_URL || "http://localhost:4000/",
+  },
+
+  sitemap: {
+    hostname: process.env.WEB_BASE_URL,
+    routes: async () => {
+      const res = await axios.get(process.env.API_BASE_URL + "/countries/ids");
+      return res.data.map((x) => `/results/${x}`);
+    },
   },
 };
