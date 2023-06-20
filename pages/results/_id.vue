@@ -1,7 +1,7 @@
 <template>
   <section class="align-center" ref="print" v-if="!!data">
     <!-- event related -->
-    <div v-if="showEvent" class="event flex align-center justify-center">
+    <div v-if="eventEnabled" class="event flex align-center justify-center">
       <svg
         class="flex align-center justify-center"
         xmlns="http://www.w3.org/2000/svg"
@@ -529,8 +529,9 @@ export default {
 
       instagram: "https://instagram.com/traveldino.app",
 
-      // event_2023q2_starbucks
-      showEvent: false,
+      // event
+      eventEnabled: true,
+      eventLink: "https://forms.gle/HQSPEeFkudmtvCip8",
     };
   },
   methods: {
@@ -547,11 +548,11 @@ export default {
 
       // event related
       else if (type == "goto-event") {
-        window.open("https://forms.gle/udBDcjq75PyAwsim9", "_blank");
+        window.open(this.eventLink, "_blank");
       }
       // event related
       else if (type == "close-event") {
-        this.showEvent = false;
+        this.eventEnabled = false;
       }
 
       //
