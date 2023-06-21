@@ -530,7 +530,7 @@ export default {
       instagram: "https://instagram.com/traveldino.app",
 
       // event_2023q2_starbucks
-      showEvent: false,
+      showEvent: true,
     };
   },
   methods: {
@@ -547,7 +547,7 @@ export default {
 
       // event related
       else if (type == "goto-event") {
-        window.open("https://forms.gle/udBDcjq75PyAwsim9", "_blank");
+        window.open("https://forms.gle/HQSPEeFkudmtvCip8", "_blank");
       }
       // event related
       else if (type == "close-event") {
