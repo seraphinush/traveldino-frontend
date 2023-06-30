@@ -530,7 +530,7 @@ export default {
       instagram: "https://instagram.com/traveldino.app",
 
       // event
-      eventEnabled: true,
+      eventEnabled: false,
       eventLink: "https://forms.gle/HQSPEeFkudmtvCip8",
     };
   },
