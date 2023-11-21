@@ -1,0 +1,32 @@
+.bold {
+  font-weight: 500;
+}
+
+.bolder {
+  font-weight: 700;
+}
+
+.emphasis {
+  font-family: var(--font-face-emphasis);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.spacer {
+  display: block;
+  height: 4rem;
+}
+
+.bg-secondary {
+  background-color: var(--clr-bg-secondary);
+}
+
+.bg-gray-light {
+  background-color: var(--clr-bg-gray-light);
+}
+
+.no-scroll {
+  overflow: hidden;
+}

@@ -7,7 +7,6 @@ html {
 
 html,
 body {
-  overscroll-behavior-y: contain;
 }
 
 *,
@@ -17,9 +16,11 @@ body {
   padding: 0;
   text-decoration: none;
   font-size: 1rem;
+  font-weight: 400;
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
+  overscroll-behavior-y: none;
 }
 
 p,
@@ -51,28 +52,4 @@ input[type="reset"] {
 
 ul {
   list-style-type: none;
-}
-
-.content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: #fff;
-
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.content::-webkit-scrollbar {
-  display: none;
-}
-
-section {
-  flex-grow: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
 }

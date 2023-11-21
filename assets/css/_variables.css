@@ -1,23 +1,17 @@
 :root {
-  --clr-background: #d5f0fe;
-  --clr-background-dark: #83c6e9;
-  --clr-loading-background: hsla(0, 0%, 100%, 0.5);
   --clr-white: #ffffff;
+  --clr-gray: hsla(0, 0%, 40%, 1);
+  --clr-gray-light: hsla(0, 0%, 75%, 1);
   --clr-black: hsla(0, 0%, 10%, 1);
-  --clr-font: hsla(0, 0%, 40%, 1);
-  --clr-font-light: hsla(0, 0%, 75%, 1);
-  --clr-primary: hsla(171, 71%, 80%, 1);
-  --clr-primary-dark: hsla(171, 45%, 40%, 1);
-  --clr-primary-light: hsla(171, 85%, 92.5%, 1);
-  --clr-secondary: #fc6c6c;
-  --clr-secondary-filter: invert(48%) sepia(17%) saturate(1728%) hue-rotate(312deg) brightness(111%) contrast(98%);
-  --clr-secondary-light: #ff8b8b;
-  --clr-secondary-ultra-light: #fcdad9;
-  --clr-heart-empty: invert(89%) sepia(0%) saturate(0%) hue-rotate(42deg)
-    brightness(96%) contrast(84%);
-  --clr-heart-full: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg)
-    brightness(100%) contrast(100%);
-  --font-face-default: "SeoulNamsan";
-  --font-face-highlight: "BMJUA";
-  --font-face-irregular: "Bazzi";
+  --clr-bg-primary: var(--clr-white);
+  --clr-bg-secondary: #f6f2ff;
+  --clr-bg-gray-light: #f4f4f4;
+  --clr-font: var(--clr-gray-light);
+  --clr-font-light: var(--clr-gray-light);
+  --clr-primary: #a67cff;
+  --clr-primary-light: #dac9ff;
+  --clr-secondary: #68e7b2;
+  --font-face-default: "Pretendard";
+  --font-face-emphasis: "KBODiaGothic";
+  --box-shadow-default: 0 4px 10px hsla(0, 0%, 40%, 1);
 }

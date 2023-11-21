@@ -1,68 +1,59 @@
-@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
 @import "@/assets/css/_default.css";
 @import "@/assets/css/_variables.css";
-@import "@/assets/css/_utility.css";
+@import "@/assets/css/_utilities.css";
 @import "@/assets/css/_responsive.css";
 
-@font-face {
-  font-family: "Bazzi";
-  src: url("~assets/fonts/Bazzi.ttf") format("truetype");
-}
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
 
 @font-face {
-  font-family: "BMJUA";
-  src: url("~assets/fonts/BMJUA.ttf") format("truetype");
+  font-family: "KBODiaGothic";
+  src: url("/fonts/KBODiaGothicL.ttf") format("truetype");
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: "SeoulNamsan";
-  src: url("~assets/fonts/SeoulNamsanM.ttf") format("truetype");
+  font-family: "KBODiaGothic";
+  src: url("/fonts/KBODiaGothicM.ttf") format("truetype");
+  font-weight: 500;
 }
 
-#container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--clr-background);
+@font-face {
+  font-family: "KBODiaGothic";
+  src: url("/fonts/KBODiaGothicB.ttf") format("truetype");
+  font-weight: 600;
 }
 
-#wrapper {
-  position: relative;
-  width: min(560px, 100%);
-  height: min(900px, 100%);
-  background: transparent;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  background-color: var(--clr-white);
+html {
+  font-family: var(--font-face-default);
+  background-color: var(--clr-bg-primary);
 }
 
-#wrapper::-webkit-scrollbar {
-  display: none;
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
-@media screen and (min-width: 560px) {
-  #wrapper {
-    border-radius: 25px;
-    box-shadow: 12px 8px 0 0 var(--clr-background-dark);
-  }
+h2 {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
 }
 
-#content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: inherit;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+h3 {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
 }
 
-#content::-webkit-scrollbar {
-  display: none;
+h4 {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  text-wrap: balance;
 }
 
-#content.noscroll {
-  overflow: hidden;
+h2 > span,
+h3 > span,
+h4 > span {
+  font-size: inherit;
+  line-height: inherit;
 }
