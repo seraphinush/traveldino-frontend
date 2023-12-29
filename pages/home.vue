@@ -13,7 +13,7 @@
           <span class="spacer"></span>
           <span class="spacer"></span>
           <h2>우리 여행갈까?</h2>
-          <h2>근데... <span class="bold">어디로 가지?</span></h2>
+          <h2>근데... <span class="fw-500">어디로 가지?</span></h2>
           <img src="/images/dinoanimation1.png" alt="" />
         </div>
       </div>
@@ -36,7 +36,7 @@
         >
           <span class="spacer"></span>
           <span class="spacer"></span>
-          <h2>나한테 <span class="bold">딱 맞는 여행지</span> 없을까?</h2>
+          <h2>나한테 <span class="fw-500">딱 맞는 여행지</span> 없을까?</h2>
           <img src="/images/dinoanimation3.png" alt="" />
         </div>
       </div>
@@ -50,7 +50,7 @@
       <div class="index__section-two content">
         <span class="spacer"></span>
         <h2>나도 몰랐던 나의 취향,</h2>
-        <h2><span class="bold">트래블다이노</span>는 알고 있어요!</h2>
+        <h2><span class="fw-500">트래블다이노</span>는 알고 있어요!</h2>
         <h4>다이노의 질문을 따라가다보면 내 취향의 여행지가 짠!</h4>
         <span class="spacer"></span>
         <IndexLinearCarousel></IndexLinearCarousel>
@@ -61,7 +61,7 @@
       <div class="index__section-three content">
         <span class="spacer"></span>
         <h2>세계를 여행한 다이노가 알려주는</h2>
-        <h2><span class="bold">새로운</span> 여행지</h2>
+        <h2><span class="fw-500">새로운</span> 여행지</h2>
         <h4>
           전 세계를 돌아다닌 다이노의 경험을 담아 새로운 여행지를 추천해요!
         </h4>
@@ -74,7 +74,7 @@
       <div class="index__section-four content">
         <span class="spacer"></span>
         <h2>알고 있던 여행지의</h2>
-        <h2><span class="bold">새로운</span> 모습 발견</h2>
+        <h2><span class="fw-500">새로운</span> 모습 발견</h2>
         <h4>이미 알고 있던 나라가 나왔다고요?</h4>
         <h4>걱정 마세요, 이번엔 다를 테니까요!</h4>
         <span class="spacer"></span>

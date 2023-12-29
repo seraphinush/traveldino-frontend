@@ -28,9 +28,6 @@
               {{ link.label }}
             </li>
           </NuxtLink>
-          <a href="https://www.traveldino.app/" target="_blank">
-            <li class="emphasis">Try now!</li>
-          </a>
         </ul>
         <img src="/images/dinohand.png" alt="" />
       </div>
@@ -272,11 +269,11 @@ const links = [
     to: "/contact",
     emphasis: false,
   },
-  // {
-  //   label: "Try now!",
-  //   to: "/survey",
-  //   emphasis: true,
-  // },
+  {
+    label: "Try now!",
+    to: "/",
+    emphasis: true,
+  },
 ];
 
 const mobileHeaderEnabled = useState("mobileHeaderEnabled");

@@ -1,7 +1,7 @@
 <template>
   <header class="content" ref="header">
     <div class="inner content">
-      <NuxtLink :to="logoLink" @click="closeMobileMenu">
+      <NuxtLink :to="logoLink" @click="closeMobileMenu, setHeaderActiveMenuIndex(index)">
         <img src="@/assets/logo.svg" alt="" />
       </NuxtLink>
       <ul>
@@ -20,9 +20,6 @@
             {{ link.label }}
           </li>
         </NuxtLink>
-        <a href="https://www.traveldino.app/" target="_blank">
-          <li class="emphasis">Try now!</li>
-        </a>
       </ul>
     </div>
   </header>
@@ -88,7 +85,7 @@ img {
 </style>
 <script setup>
 import { setHeaderActiveMenuIndex } from "~/utils";
-const logoLink = "/home";
+const logoLink = "/";
 const links = [
   {
     label: "Home",
@@ -110,17 +107,18 @@ const links = [
     to: "/contact",
     emphasis: false,
   },
-  // {
-  //   label: "Try now!",
-  //   to: "/survey",
-  //   emphasis: true,
-  // },
+  {
+    label: "Try now!",
+    to: "/",
+    emphasis: true,
+  },
 ];
 
 const pathIndexes = {
   "/home": 0,
   "/about": 1,
   "/contact": 2,
+  "/test": 3,
 };
 
 const mobileHeaderEnabled = useState("mobileHeaderEnabled");

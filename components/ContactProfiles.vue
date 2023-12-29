@@ -7,7 +7,7 @@
     >
       <img :src="profile.imgSrc" alt="" />
       <div class="contact__profile-info">
-        <p class="bold">{{ profile.label }}</p>
+        <p class="fw-500">{{ profile.label }}</p>
         <span>{{ profile.description }}</span>
       </div>
     </div>

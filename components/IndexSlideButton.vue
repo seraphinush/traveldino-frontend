@@ -3,7 +3,7 @@
     <div class="index__slide-button-container">
       <img src="/images/dino_airplane.png" alt="" ref="button" />
       <span class="placeholder"></span>
-      <h3 class="bold">{{ buttonText }}</h3>
+      <h3 class="fw-500">{{ buttonText }}</h3>
     </div>
   </a>
 </template>

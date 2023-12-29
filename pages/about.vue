@@ -7,9 +7,9 @@
         <span class="spacer"></span>
         <span class="spacer"></span>
         <span class="spacer"></span>
-        <h3 class="bold">수없이 떠나본 사람에게도</h3>
-        <h3 class="bold">모든 '떠남'은 항상 최초의 경험이다.</h3>
-        <h3 class="bold">
+        <h3 class="fw-500">수없이 떠나본 사람에게도</h3>
+        <h3 class="fw-500">모든 '떠남'은 항상 최초의 경험이다.</h3>
+        <h3 class="fw-500">
           떠나는 방법은 자기 스스로에게도 교육할 수 없는 것이다.
         </h3>
         <span class="vertical-line"></span>
@@ -23,7 +23,7 @@
       <div class="content">
         <span class="spacer"></span>
         <h3>
-          그동안 여러분의 모든 <span class="bolder">'떠남'</span>은 어땠나요?
+          그동안 여러분의 모든 <span class="fw-700">'떠남'</span>은 어땠나요?
         </h3>
         <h3>무엇을 기대하며 어떤 여행지를 선택했나요?</h3>
         <h3>&nbsp;</h3>
@@ -31,11 +31,13 @@
         <h3>기대감을 채우지 못한 적이 있나요?</h3>
         <h3>&nbsp;</h3>
         <h3>만약 그렇다면 지금 트래블다이노에서</h3>
-        <h3><span class="bolder">가장 나다운 여행지</span>를 만나보세요!</h3>
+        <h3><span class="fw-700">가장 나다운 여행지</span>를 만나보세요!</h3>
         <h3>&nbsp;</h3>
         <img src="/images/dino1.png" alt="" />
         <h3>&nbsp;</h3>
-        <h2 class="emphasis bolder">We Are <span class="bolder">TravelDino!</span></h2>
+        <h2 class="emphasis fw-700">
+          We Are <span class="fw-700">TravelDino!</span>
+        </h2>
         <span class="spacer"></span>
         <about-image-slides></about-image-slides>
         <span class="spacer"></span>
@@ -43,8 +45,8 @@
     </section>
     <section class="about__footer">
       <div class="content">
-        <h3 class="bold">
-          가장 나다운 여행을 떠나는 방법<span class="bold">.</span>
+        <h3 class="fw-500">
+          가장 나다운 여행을 떠나는 방법<span class="fw-500">.</span>
         </h3>
         <img src="@/assets/logo.svg" alt="" class="logo" />
       </div>

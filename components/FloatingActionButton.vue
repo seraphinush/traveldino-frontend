@@ -1,7 +1,7 @@
 <template>
   <div class="container" ref="fab">
     <img src="/images/dinohand.png" alt="" />
-    <a href="https://www.traveldino.app/" target="_blank" class="bolder">
+    <a href="https://www.traveldino.app/" target="_blank" class="fw-700">
       {{ text }}
     </a>
   </div>
@@ -56,6 +56,7 @@ const pathIndexes = {
   "/home": 0,
   "/about": 1,
   "/contact": 2,
+  "/test": 3,
 };
 
 const fab = ref(null);

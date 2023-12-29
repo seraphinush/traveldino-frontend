@@ -9,7 +9,7 @@
         <img :src="card.image" alt="" />
         <div class="overlap-carousel-card-info">
           <div class="overlap-carousel-card-title">
-            <span class="city">{{ card.city }}</span
+            <span class="city fw-500">{{ card.city }}</span
             ><span class="country">{{ card.country }}</span>
           </div>
           <div class="overlap-carousel-card-summary">
@@ -98,7 +98,6 @@
 
 .overlap-carousel-card-title > .city {
   font-size: 2.25rem;
-  font-weight: bold;
   margin-right: 1rem;
 }
 

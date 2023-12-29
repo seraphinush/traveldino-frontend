@@ -7,7 +7,7 @@
         <span class="spacer"></span>
         <span class="spacer"></span>
         <div class="content__hero_text">
-          <h2 v-for="(text, index) in heroTexts" :key="index" class="bold">
+          <h2 v-for="(text, index) in heroTexts" :key="index" class="fw-500">
             {{ text }}
           </h2>
         </div>
@@ -19,7 +19,7 @@
     <section class="content__section-two">
       <div class="content">
         <span class="spacer"></span>
-        <h3 class="content__section-header bolder">
+        <h3 class="content__section-header fw-700">
           수많은 리뷰들로 검증된 곳을 원한다면,
         </h3>
         <div
@@ -54,7 +54,7 @@
     <section class="content__section-two">
       <div class="content">
         <span class="spacer"></span>
-        <h3 class="content__section-header bolder">
+        <h3 class="content__section-header fw-700">
           아무도 안 가본 새로운 세상을 원한다면,
         </h3>
         <div
@@ -67,7 +67,7 @@
           <img :src="card.imageUrl" alt="" />
           <div class="content__card-info">
             <div class="content__card-title">
-              <span class="city">{{ card.city }}</span>
+              <span class="city fw-500">{{ card.city }}</span>
               <span class="country">{{ card.country }}</span>
             </div>
             <p
@@ -102,14 +102,14 @@
                 fill="black"
               />
             </svg>
-            <h4 class="bold">PREV</h4>
+            <h4 class="fw-500">PREV</h4>
           </div>
 
-          <h4 class="emphasis bold">{{ prevText }}</h4>
+          <h4 class="emphasis fw-500">{{ prevText }}</h4>
         </NuxtLink>
         <NuxtLink :to="nextLink">
           <div class="button-content">
-            <h4 class="bold">NEXT</h4>
+            <h4 class="fw-500">NEXT</h4>
             <svg
               width="24"
               height="20"
@@ -123,7 +123,7 @@
             </svg>
           </div>
 
-          <h4 class="emphasis bold">{{ nextText }}</h4>
+          <h4 class="emphasis fw-500">{{ nextText }}</h4>
         </NuxtLink>
       </div>
     </section>
@@ -190,7 +190,6 @@
 
 .content__card-title > .city {
   font-size: 2.25rem;
-  font-weight: bold;
   margin-right: 1rem;
 }
 

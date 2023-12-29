@@ -3,5 +3,7 @@
 </template>
 <style scoped></style>
 <script setup>
-await navigateTo("/content/resort");
+await navigateTo({
+  path: "/content/resort",
+});
 </script>
