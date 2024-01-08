@@ -33,19 +33,35 @@ img {
   top: 50%;
   transform: translateY(-50%);
   height: 3px;
-  background-color: var(--clr-test-primary-100);
+  background-color: transparent;
+  z-index: 2;
+
+  transition: width 300ms ease-out;
+  width: 100%;
+  /* width: calc(var(--current) / var(--total) * 100%); */
+}
+
+.bar::before {
+  display: block;
+  position: absolute;
+  content: "";
+  height: 3px;
+  background: var(--clr-bg-gray-light);
+  z-index: 1;
+
+  width: 100%;
+}
+
+.bar::after {
+  display: block;
+  position: absolute;
+  content: "";
+  height: 3px;
+  background: var(--clr-test-primary-500);
   z-index: 2;
 
   transition: width 300ms ease-out;
   width: calc(var(--current) / var(--total) * 100%);
-}
-
-.bar::before {
-  content: "";
-  width: 100%;
-  height: 3px;
-  background: var(--clr-bg-gray-light);
-  z-index: 1;
 }
 
 .progress-counter {

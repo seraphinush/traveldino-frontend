@@ -1,12 +1,15 @@
 <template>
   <div class="container">
     <section class="mobile-content">
+      <span class="spacer"></span>
+      <span class="spacer"></span>
       <div>
         <h2>나도 몰랐던,</h2>
         <h2>나에게 지금 <span class="fw-500">딱 맞는 여행지</span></h2>
       </div>
       <img src="/images/dino1.png" alt="" />
       <button @click="start" class="fw-500">지금 알아보기</button>
+      <span class="spacer"></span>
     </section>
   </div>
 </template>
@@ -15,7 +18,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 section {
@@ -28,6 +31,10 @@ section {
 section > div {
   width: 100%;
   font-family: var(--font-face-emphasis);
+}
+
+img {
+  max-width: 80vw;
 }
 
 button {

@@ -2,6 +2,7 @@
   <div class="question-container">
     <span>{{ question.label }}</span>
     <span class="spacer"></span>
+    <span class="spacer"></span>
     <ul :data-columns="question.options.length > 3 ? '2' : '1'">
       <li v-for="(option, index) in question.options" :key="index">
         <button @click="handleClick(option.value)">
@@ -13,17 +14,16 @@
 </template>
 <style scoped>
 .question-container {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
-  height: 100%;
 }
 
-.question-container > span {
+.question-container > span:first-of-type {
   font-size: 1.5rem;
   line-height: 2rem;
+
+  height: 4rem;
 }
 
 .question-container > ul {

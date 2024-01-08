@@ -21,18 +21,18 @@
         <!-- checklist -->
         <div class="results-checklist">
           <span v-if="data.type"></span>
-          <span v-if="data.type_id_b == 'F'">잘_알려진</span>
-          <span v-if="data.type_id_b == 'H'">나만_알고픈</span>
+          <span v-if="data.type_id_b == 'F'">잘알려진</span>
+          <span v-if="data.type_id_b == 'H'">나만알고픈</span>
           <span v-if="data.type_id_c == 'D'">선진화된</span>
           <span v-if="data.type_id_c == 'U'">정겨운</span>
           <span v-if="data.type_id_a == 'A'">어드벤처</span>
-          <span v-if="data.type_id_a == 'C'">도시_문화</span>
+          <span v-if="data.type_id_a == 'C'">도시문화</span>
           <span v-if="data.type_id_a == 'R'">휴양지</span>
-          <span v-if="data.is_cost_effective">혜자_물가</span>
-          <span v-if="data.is_walk">대중교통_편리</span>
-          <span v-if="data.is_soloable">혼자서도_굿</span>
-          <span v-if="data.is_time_efficient">단기간_가능</span>
-          <span v-if="data.is_safe">안전한_치안</span>
+          <span v-if="data.is_cost_effective">혜자물가</span>
+          <span v-if="data.is_walk">대중교통편리</span>
+          <span v-if="data.is_soloable">혼자서도굿</span>
+          <span v-if="data.is_time_efficient">단기간가능</span>
+          <span v-if="data.is_safe">안전한치안</span>
         </div>
       </div>
 
@@ -137,7 +137,10 @@
         :data-text="SHARE_LINK"
         @click="handleClick('share')"
       >
-        <div>공유하기</div>
+        <div>
+          <span>공유하기</span>
+          <img src="@/assets/share.svg" alt="" />
+        </div>
       </button>
 
       <!-- stats -->
@@ -227,11 +230,16 @@ section > h2 {
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
-  color: var(--clr-test-secondary-300);
+  color: var(--clr-test-secondary-500);
 }
 
 .results-checklist > span::before {
   content: "#";
+  font-weight: 700;
+}
+
+.results-checklist > span {
+  font-weight: 700;
 }
 
 .results-section {
@@ -315,6 +323,7 @@ section > h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 
   position: relative;
   width: 100%;
@@ -330,6 +339,13 @@ section > h2 {
   border-radius: 50px;
   background-color: var(--clr-white);
   z-index: -1;
+}
+
+.results-btn-share img {
+  width: 1rem;
+  height: 1rem;
+  filter: invert(47%) sepia(56%) saturate(1428%) hue-rotate(224deg)
+    brightness(105%) contrast(102%);
 }
 
 .results-btn-share::before {

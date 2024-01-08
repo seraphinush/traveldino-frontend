@@ -1,12 +1,13 @@
 <template>
   <div class="container">
+    <span class="spacer"></span>
     <section class="mobile-content">
       <TestQuestion
         v-if="question != null"
         :question="question"
         @on-answer="handleAnswer"
       />
-      <span class="spacer"></span>
+      <span style="flex: 1;" class="spacer"></span>
       <div class="question-actions">
         <button @click="handleNavClick('goto-prev')" :disabled="answered == 0">
           뒤로
@@ -15,24 +16,24 @@
       </div>
       <TestProgress :current="answered" :total="questionsTotal" />
     </section>
+    <span class="spacer"></span>
   </div>
 </template>
 <style scoped>
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
   margin-top: 4rem;
 }
 
 section {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   height: 100%;
-  padding: 4rem 0;
 }
 
 .question-actions {
