@@ -74,6 +74,7 @@ const answers = ref([]);
 
 const handleNavClick = (action) => {
   if (action == "goto-main") {
+    delete query.value.sid;
     navigateTo({
       path: "/",
       query: query.value,

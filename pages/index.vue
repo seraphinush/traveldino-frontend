@@ -66,15 +66,16 @@ const start = async () => {
   testLoadingEnabled.value = true;
   try {
     if (query.value.mode == "test") {
-      route.query.mode = "test";
-      route.query.sid = "test";
+      query.value.mode = "test";
+      query.value.sid = "test";
       console.log("Running test in dev mode");
     } else {
       const { data, error } = await $api.sessions.get();
       if (!!error.value) {
         throw error.value;
       }
-      route.query.sid = data.value;
+      query.value.sid = data.value;
+      console.log("Running test in prod mode");
     }
 
     await navigateTo({
@@ -95,17 +96,18 @@ onMounted(async () => {
   query.value = route.query || {};
   const { data } = await $api.server.ping();
 
-  if (query.value.mode == "test") {
-    console.log(route.query);
-  } else {
-    query.value.mode = "test";
-    window.history.replaceState({}, "", route.path);
-    await navigateTo({
-      replace: true,
-      path: "/",
-      query: { ...query.value },
-    });
-  }
+  // set test in dev mode
+  // if (query.value.mode == "test") {
+  //   console.log(route.query);
+  // } else {
+  //   query.value.mode = "test";
+  //   window.history.replaceState({}, "", route.path);
+  //   await navigateTo({
+  //     replace: true,
+  //     path: "/",
+  //     query: { ...query.value },
+  //   });
+  // }
 });
 onUnmounted(() => {});
 </script>
