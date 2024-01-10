@@ -1,5 +1,4 @@
 import { $fetch } from "ofetch";
-import { defineNuxtPlugin } from '#app';
 
 import keywordsModule from "~/repository/modules/keywords";
 import questionsModule from "~/repository/modules/questions";
@@ -10,9 +9,12 @@ import statsModule from "~/repository/modules/stats";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
+  const { API_BASE_URL } = config.public;
+  if (!API_BASE_URL)
+    throw new Error("Environmental variable API_BASE_URL is undefined");
 
   const fetchOptions = {
-    baseURL: config.public.API_BASE_URL,
+    baseURL: API_BASE_URL,
   };
 
   const apiFecther = $fetch.create(fetchOptions);
