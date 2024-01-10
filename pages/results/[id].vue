@@ -139,7 +139,7 @@
       >
         <div>
           <span>공유하기</span>
-          <img src="@/assets/share.svg" alt="" />
+          <img src="@/assets/link.svg" alt="" />
         </div>
       </button>
 
@@ -344,8 +344,7 @@ section > h2 {
 .results-btn-share img {
   width: 1rem;
   height: 1rem;
-  filter: invert(47%) sepia(56%) saturate(1428%) hue-rotate(224deg)
-    brightness(105%) contrast(102%);
+  transform: rotate(-45deg);
 }
 
 .results-btn-share::before {
