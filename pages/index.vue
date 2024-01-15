@@ -39,10 +39,11 @@ img {
 
 button {
   padding: 0.5rem 1rem;
-  border: 3px solid #000;
-  border-radius: 0.75rem;
+  border: 2px solid #000;
+  border-radius: 1rem;
   font-family: var(--font-face-emphasis);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
   transition: all 300ms linear;
   background-color: var(--clr-test-primary-100);
 }
