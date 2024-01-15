@@ -483,6 +483,9 @@ const handleClick = async (action) => {
           if (sid) $api.stats.set("like", sid);
         }
       } else if (action == "share") {
+        const LINK = window.location.href;
+        navigator.clipboard.writeText(LINK);
+        console.log("Copied link : " + LINK);
         sharedActive.value = false;
         setTimeout(() => (sharedActive.value = true), 1);
         if (!shared.value) {
