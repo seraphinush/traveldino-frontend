@@ -514,10 +514,15 @@ onMounted(async () => {
   if (!!query.value.sessionId) {
     query.value.sid = query.value.sessionId;
     delete query.value.sessionId;
-    navigateTo({
-      path: route.path,
-      query: query.value,
-    });
+
+    let queries = "?";
+    for (const x in query.value) {
+      if (queries.length > 1) {
+        queries += "&";
+      }
+      queries += `${x}=${query.value[x]}`;
+    }
+    window.history.replaceState({}, "", `${route.path}${queries}`);
   }
 
   try {
