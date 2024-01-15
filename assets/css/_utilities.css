@@ -1,0 +1,28 @@
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.emphasis {
+  font-family: var(--font-face-emphasis);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.spacer {
+  display: block;
+  height: 4rem;
+}
+
+.bg-secondary {
+  background-color: var(--clr-bg-secondary);
+}
+
+.no-scroll {
+  overflow: hidden;
+}

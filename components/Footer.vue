@@ -1,59 +1,95 @@
 <template>
-  <footer class="align-center justify-center">
-    <div class="footer-info">
-      <span>인스타그램 문의</span>
-      <a :href="`https://instagram.com/${instagram}`">
-        {{ `@${instagram}` }}
+  <footer class="bg-secondary">
+    <img src="@/assets/logo.svg" alt="" class="logo" />
+    <div class="content links">
+      <a
+        v-for="(link, index) in links"
+        :key="index"
+        :href="link.url"
+        class="link"
+      >
+        <div class="icon">
+          <img :src="link.iconSrc" alt="" />
+        </div>
+        <p>{{ link.label }}</p>
       </a>
     </div>
-    <span>
-      {{ copyright }}
-    </span>
+    <span>{{ copyright }}</span>
   </footer>
 </template>
-
 <style scoped>
 footer {
+  padding: 3rem 0;
   display: flex;
   flex-direction: column;
-  padding: 0.75rem 0;
-  height: var(--footer-height);
-  background-color: var(--clr-primary-light);
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
   font-family: var(--font-face-default);
-  font-size: 0.75rem;
-  color: var(--clr-black);
-  z-index: 1000;
 }
 
-.footer-info {
+footer > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  width: 12rem;
+  filter: brightness(0%);
+}
+
+.links {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  font-size: inherit;
+  gap: 1rem;
 }
 
-.footer-info > *:not(:last-child) {
-  margin-right: 0.2rem;
+.link {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-a {
-  font-weight: 700;
-  color: inherit;
-  font-size: inherit;
+.icon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  background: var(--clr-primary-light);
+  border-radius: 9999px;
+}
+
+.icon > img {
+  width: 1rem;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 span {
-  font-size: inherit;
+  font-size: 0.8rem;
+}
+
+@media screen and (min-width: 0px) {
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .links {
+    flex-direction: row;
+    width: unset;
+  }
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      email: "info.traveldino@gmail.com",
-      instagram: "traveldino.app",
-      copyright: "©TravelDino All Rights Reserved. 2022",
-    };
-  },
-};
+<script setup>
+import data from "~/assets/data/footer.json";
+const links = data.links;
+const copyright = data.copyright;
 </script>

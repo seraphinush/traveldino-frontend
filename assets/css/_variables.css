@@ -1,23 +1,37 @@
 :root {
-  --clr-background: #d5f0fe;
-  --clr-background-dark: #83c6e9;
-  --clr-loading-background: hsla(0, 0%, 100%, 0.5);
   --clr-white: #ffffff;
+  --clr-gray: hsla(0, 0%, 40%, 1);
+  --clr-gray-light: hsla(0, 0%, 75%, 1);
   --clr-black: hsla(0, 0%, 10%, 1);
-  --clr-font: hsla(0, 0%, 40%, 1);
-  --clr-font-light: hsla(0, 0%, 75%, 1);
-  --clr-primary: hsla(171, 71%, 80%, 1);
-  --clr-primary-dark: hsla(171, 45%, 40%, 1);
-  --clr-primary-light: hsla(171, 85%, 92.5%, 1);
-  --clr-secondary: #fc6c6c;
-  --clr-secondary-filter: invert(48%) sepia(17%) saturate(1728%) hue-rotate(312deg) brightness(111%) contrast(98%);
-  --clr-secondary-light: #ff8b8b;
-  --clr-secondary-ultra-light: #fcdad9;
-  --clr-heart-empty: invert(89%) sepia(0%) saturate(0%) hue-rotate(42deg)
-    brightness(96%) contrast(84%);
-  --clr-heart-full: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg)
-    brightness(100%) contrast(100%);
-  --font-face-default: "SeoulNamsan";
-  --font-face-highlight: "BMJUA";
-  --font-face-irregular: "Bazzi";
+  --clr-bg-primary: var(--clr-white);
+  --clr-bg-secondary: #f6f2ff;
+  --clr-bg-gray-light: #f4f4f4;
+  --clr-font: var(--clr-gray-light);
+  --clr-font-light: var(--clr-gray-light);
+  --clr-primary: #a67cff;
+  --clr-primary-light: #dac9ff;
+  --clr-secondary: #68e7b2;
+  /* --clr-test-primary-50: #ffeded; */
+  --clr-test-primary-100: #fed3d3;
+  /* --clr-test-primary-200: #feb6b6; */
+  --clr-test-primary-300: #fd9898;
+  /* --clr-test-primary-400: #fc8282; */
+  --clr-test-primary-500: #fc6c6c;
+  /* --clr-test-primary-600: #fc6464; */
+  --clr-test-primary-700: #fb5959;
+  /* --clr-test-primary-800: #fb4f4f; */
+  --clr-test-primary-900: #fa3d3d;
+  --clr-test-secondary-50: #f4efff;
+  --clr-test-secondary-100: #e4d8ff;
+  /* --clr-test-secondary-200: #d3beff; */
+  --clr-test-secondary-300: #c1a3ff;
+  /* --clr-test-secondary-400: #b390ff; */
+  --clr-test-secondary-500: #a67cff;
+  /* --clr-test-secondary-600: #9e74ff; */
+  --clr-test-secondary-700: #9569ff;
+  /* --clr-test-secondary-800: #8b5fff; */
+  --clr-test-secondary-900: #7b4cff;
+  --font-face-default: "Pretendard";
+  --font-face-emphasis: "KBODiaGothic";
+  --box-shadow-default: 0 4px 10px hsla(0, 0%, 40%, 1);
 }

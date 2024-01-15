@@ -1,37 +1,36 @@
 <template></template>
-
 <style></style>
+<script setup>
+const testLoadingEnabled = useState("testLoadingEnabled");
+const route = useRoute();
+const query = ref({});
 
-<script>
-export default {
-  name: "results",
-  data() {
-    return {};
-  },
+onMounted(() => {
+  query.value = route.query || {};
+  let id = -1;
+  if (!!query.value.id) {
+    id = query.value.id;
+    delete query.value;
+  }
 
-  methods: {},
-  mounted: async function () {
-    this.$nuxt.$emit("loading-on");
-    const query = Object.assign({}, this.$route.query) || {};
-    try {
-      let id = -1;
-      sessionStorage.removeItem("traveldino-session-id");
-      if (!!query.id) {
-        id = query.id;
-        delete query.id;
-      }
-      if (!!query.countryId) {
-        id = query.countryId;
-        delete query.countryId;
-      }
-      const route = {
-        name: "results-id",
-        path: "/results/:id",
-        query: query,
-        params: { id: id },
-      };
-      this.$router.push(route);
-    } catch {}
-  },
-};
+  if (!!query.value.countryId) {
+    id = query.value.countryId;
+    delete query.value.countryId;
+  }
+
+  if (!!query.value.sessionId) {
+    query.value.sid = query.value.sessionId;
+    delete query.value.sessionId;
+  }
+
+  if (id >= 0) {
+    testLoadingEnabled.value = true;
+    navigateTo({
+      path: `/results/${id}`,
+      query: query.value,
+    });
+  } else {
+    //
+  }
+});
 </script>

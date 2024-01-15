@@ -1,54 +1,114 @@
 <template>
-  <section id="index-page" class="align-center">
-    <img src="@/assets/main.png" />
-    <Button @click="start()" text="테스트 시작!" />
-  </section>
+  <div class="container">
+    <section class="mobile-content">
+      <span class="spacer"></span>
+      <span class="spacer"></span>
+      <div>
+        <h2>나도 몰랐던,</h2>
+        <h2>나에게 지금 <span class="fw-500">딱 맞는 여행지</span></h2>
+      </div>
+      <img src="/images/dino1.png" alt="" />
+      <button @click="start" class="fw-500">지금 알아보기</button>
+      <span class="spacer"></span>
+    </section>
+  </div>
 </template>
-
 <style scoped>
-section > * {
-  margin-bottom: 2.5rem;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+section > div {
+  width: 100%;
+  font-family: var(--font-face-emphasis);
 }
 
 img {
-  margin-top: 2.5rem;
-  width: 100%;
+  max-width: 80vw;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  font-family: var(--font-face-emphasis);
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  transition: all 300ms linear;
+  background-color: var(--clr-test-primary-100);
+}
+
+button:hover {
+  background-color: var(--clr-test-primary-300);
 }
 </style>
+<script setup>
+definePageMeta({
+  layout: "test",
+});
 
-<script>
-export default {
-  name: "index",
-  data() {
-    return {
-      query: {},
-    };
-  },
-  methods: {
-    async start() {
-      try {
-        this.$nuxt.$emit("loading-on");
-        const route = { name: "survey", query: {} };
+const testLoadingEnabled = useState("testLoadingEnabled");
+const { $api } = useNuxtApp();
 
-        // client mode
-        if (this.query.mode == "test") {
-          route.query.mode = "test";
-          sessionStorage.removeItem("traveldino-session-id");
-          console.log("Running survey in test mode");
-        } else {
-          const res = await this.$repositories.sessions.get();
-          sessionStorage.setItem("traveldino-session-id", res.data);
-        }
+const route = useRoute();
+const query = ref({});
 
-        this.$router.push(route);
-      } catch (err) {
-        console.error(err);
+const start = async () => {
+  testLoadingEnabled.value = true;
+  try {
+    if (query.value.mode == "test") {
+      query.value.mode = "test";
+      query.value.sid = "test";
+      console.log("Running test in dev mode");
+    } else {
+      const { data, error } = await $api.sessions.get();
+      if (!!error.value) {
+        throw error.value;
       }
-    },
-  },
-  mounted: async function () {
-    this.query = this.$route.query || {};
-    await this.$repositories.server.ping();
-  },
+      query.value.sid = data.value;
+      console.log("Running test in prod mode");
+    }
+
+    await navigateTo({
+      path: "test",
+      query: query.value,
+    });
+  } catch (err) {
+    console.log(err);
+    throw createError({
+      statusCode: err.statusCode,
+      statusMessage: err.statusMessage,
+      fatal: true,
+    });
+  }
 };
+
+onMounted(async () => {
+  query.value = route.query || {};
+  const { data } = await $api.server.ping();
+
+  // set test in dev mode
+  // if (query.value.mode == "test") {
+  //   console.log(route.query);
+  // } else {
+  //   query.value.mode = "test";
+  //   window.history.replaceState({}, "", route.path);
+  //   await navigateTo({
+  //     replace: true,
+  //     path: "/",
+  //     query: { ...query.value },
+  //   });
+  // }
+});
+onUnmounted(() => {});
 </script>

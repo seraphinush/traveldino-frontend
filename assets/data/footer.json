@@ -1,0 +1,15 @@
+{
+  "links": [
+    {
+      "iconSrc": "/ico_email.svg",
+      "label": "info.traveldino@gmail.com",
+      "url": "mailto:info.traveldino@gmail.com"
+    },
+    {
+      "iconSrc": "/ico_insta.svg",
+      "label": "@traveldino.app",
+      "url": "https://instagram.com/traveldino.app"
+    }
+  ],
+  "copyright": "©TravelDino All Rights Reserved. 2023"
+}
