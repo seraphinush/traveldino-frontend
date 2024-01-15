@@ -511,6 +511,15 @@ onMounted(async () => {
   query.value = route.query || {};
   const params = route.params || {};
 
+  if (!!query.value.sessionId) {
+    query.value.sid = query.value.sessionId;
+    delete query.value.sessionId;
+    navigateTo({
+      path: route.path,
+      query: query.value,
+    });
+  }
+
   try {
     query.value.countryId = params.id;
 
