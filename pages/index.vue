@@ -95,7 +95,6 @@ const start = async () => {
 
 onMounted(async () => {
   query.value = route.query || {};
-  const { data } = await $api.server.ping();
 
   // set test in dev mode
   // if (query.value.mode == "test") {
@@ -109,6 +108,14 @@ onMounted(async () => {
   //     query: { ...query.value },
   //   });
   // }
+
+  try {
+    const { data } = await $api.server.ping();
+  } catch (err) {
+    console.error(err);
+  } finally {
+    testLoadingEnabled.value = false;
+  }
 });
 onUnmounted(() => {});
 </script>
