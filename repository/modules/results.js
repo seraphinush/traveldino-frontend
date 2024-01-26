@@ -3,9 +3,10 @@ import FetchFactory from "../factory";
 class resultsModule extends FetchFactory {
   RESOURCE = "/results";
 
-  async get(payload = null, asyncDataOptions) {
-    const params =
-      `?countryId=${payload.countryId}` + `&sessionId=${payload.sid}`;
+  async get(payload = {}, asyncDataOptions) {
+    const COUNTRY_ID = payload.countryId || null;
+    const SESSION_ID = payload.sid || null;
+    const params = `?countryId=${COUNTRY_ID}&sessionId=${SESSION_ID}`;
     return useAsyncData(() => {
       const fetchOptions = {};
       return this.call(
