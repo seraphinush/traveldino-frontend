@@ -60,6 +60,11 @@ definePageMeta({
   layout: "test",
 });
 
+useSeoMeta({
+  title: "여행지 추천받기 | 트레블다이노",
+  ogTitle: "여행지 추천받기 | 트레블다이노",
+});
+
 import { sleep, getQuestionType } from "@/assets/utils";
 const testLoadingEnabled = useState("testLoadingEnabled");
 const { $api } = useNuxtApp();

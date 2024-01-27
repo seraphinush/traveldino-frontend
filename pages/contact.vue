@@ -122,6 +122,11 @@ h2 {
 }
 </style>
 <script setup>
+useSeoMeta({
+  title: "Contact | 트레블다이노",
+  ogTitle: "Contact | 트레블다이노",
+});
+
 const contactCards = [
   {
     type: "Email",

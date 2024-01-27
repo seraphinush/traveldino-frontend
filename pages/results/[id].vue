@@ -435,6 +435,11 @@ definePageMeta({
   layout: "test",
 });
 
+useSeoMeta({
+  title: "트레블다이노",
+  ogTitle: "트레블다이노",
+});
+
 import { sleep, hasBatchim } from "@/assets/utils";
 const testLoadingEnabled = useState("testLoadingEnabled");
 const { $api } = useNuxtApp();
@@ -565,6 +570,11 @@ onMounted(async () => {
     }
     sessionStorage.setItem(`traveldino-stats-${data.value.code}`, stats.value);
     await sleep(400);
+
+    useSeoMeta({
+      title: () => `추천받은 여행지는 ${data.value.name}! | 트레블다이노`,
+      ogTitle: () => `추천받은 여행지는 ${data.value.name}! | 트레블다이노`,
+    });
   } catch (err) {
     console.error(err);
     throw createError({

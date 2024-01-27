@@ -361,84 +361,85 @@
   }
 }
 </style>
-<script>
-export default {
-  name: "index",
-  data() {
-    return {
-      currSlide: 1,
-      totalSlides: 4,
-      scrollCooldown: 1000,
-      scrollTimestamp: Date.now(),
-      touchStartY: 0,
-    };
-  },
-  methods: {
-    handleScroll(e) {
-      const totalSlides = this.totalSlides;
-      if (window.scrollY > 0 && this.currSlide == totalSlides) return;
-      const now = Date.now();
-      if (
-        this.currSlide < totalSlides &&
-        now - this.scrollTimestamp < this.scrollCooldown
-      )
-        return;
 
-      if (e.wheelDelta > 0) {
-        if (this.currSlide > 1) {
-          this.currSlide--;
-        }
-      } else if (e.wheelDelta < 0) {
-        if (this.currSlide < totalSlides) {
-          this.currSlide++;
-        }
-      }
-      this.scrollTimestamp = Date.now();
-    },
-    handleTouchStart(e) {
-      this.touchStartY = e.touches[0].clientY;
-    },
-    handleTouchMove(e) {
-      const totalSlides = this.totalSlides;
-      if (window.scrollY > 0 && this.currSlide == totalSlides) return;
-      const now = Date.now();
-      if (
-        this.currSlide < totalSlides &&
-        now - this.scrollTimestamp < this.scrollCooldown
-      )
-        return;
+<script setup>
+useSeoMeta({
+  title: "Home | 트레블다이노",
+  ogTitle: "Home | 트레블다이노",
+});
 
-      const currentY = e.touches[0].clientY;
-      if (currentY > this.touchStartY) {
-        if (this.currSlide > 1) {
-          this.currSlide--;
-        }
-      } else if (currentY < this.touchStartY) {
-        if (this.currSlide < totalSlides) {
-          this.currSlide++;
-        }
-      }
-      this.scrollTimestamp = Date.now();
-    },
-    nextSlide() {
-      this.currSlide++;
-      if (this.currSlide > 4) {
-        this.currSlide == 4;
-      }
-    },
-  },
-  mounted() {
-    this.currSlide = 1;
-    window.document.addEventListener("wheel", this.handleScroll);
-    window.document.addEventListener("mousewheel", this.handleScroll);
-    window.document.addEventListener("touchstart", this.handleTouchStart);
-    window.document.addEventListener("touchmove", this.handleTouchMove);
-  },
-  unmounted() {
-    window.document.removeEventListener("wheel", this.handleScroll);
-    window.document.removeEventListener("mousewheel", this.handleScroll);
-    window.document.removeEventListener("touchstart", this.handleTouchStart);
-    window.document.removeEventListener("touchmove", this.handleTouchMove);
-  },
+const currSlide = ref(1);
+const totalSlides = 4;
+const scrollCooldown = 1000;
+const scrollTimestamp = ref(Date.now());
+const touchStartY = ref(0);
+
+const handleScroll = (e) => {
+  if (window.scrollY > 0 && currSlide.value == totalSlides) return;
+  const now = Date.now();
+  if (
+    currSlide.value < totalSlides &&
+    now - scrollTimestamp.value < scrollCooldown
+  )
+    return;
+
+  if (e.wheelDelta > 0) {
+    if (currSlide.value > 1) {
+      currSlide.value--;
+    }
+  } else if (e.wheelDelta < 0) {
+    if (currSlide.value < totalSlides) {
+      currSlide.value++;
+    }
+  }
+  scrollTimestamp.value = Date.now();
 };
+
+const handleTouchStart = (e) => {
+  touchStartY.value = e.touches[0].clientY;
+};
+
+const handleTouchMove = (e) => {
+  if (window.scrollY > 0 && currSlide.value == totalSlides) return;
+  const now = Date.now();
+  if (
+    currSlide.value < totalSlides &&
+    now - scrollTimestamp.value < scrollCooldown
+  )
+    return;
+
+  const currentY = e.touches[0].clientY;
+  if (currentY > touchStartY.value) {
+    if (currSlide.value > 1) {
+      currSlide.value--;
+    }
+  } else if (currentY < touchStartY.value) {
+    if (currSlide.value < totalSlides) {
+      currSlide.value++;
+    }
+  }
+  scrollTimestamp.value = Date.now();
+};
+
+const nextSlide = () => {
+  currSlide.value++;
+  if (currSlide.value > 4) {
+    currSlide.value = 4;
+  }
+};
+
+onMounted(() => {
+  currSlide.value = 1;
+  window.document.addEventListener("wheel", handleScroll);
+  window.document.addEventListener("mousewheel", handleScroll);
+  window.document.addEventListener("touchstart", handleTouchStart);
+  window.document.addEventListener("touchmove", handleTouchMove);
+});
+
+onUnmounted(() => {
+  window.document.removeEventListener("wheel", handleScroll);
+  window.document.removeEventListener("mousewheel", handleScroll);
+  window.document.removeEventListener("touchstart", handleTouchStart);
+  window.document.removeEventListener("touchmove", handleTouchMove);
+});
 </script>

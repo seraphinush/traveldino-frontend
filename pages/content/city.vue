@@ -351,6 +351,11 @@
 }
 </style>
 <script setup>
+useSeoMeta({
+  title: "도시 | 트레블다이노",
+  ogTitle: "도시 | 트레블다이노",
+});
+
 const heroImageUrl = "/images/city_main_banner.jpg";
 const heroTexts = ["웅장한 건축물,", "맛있는 음식,", "사람들로 북적이는 도시"];
 

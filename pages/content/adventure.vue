@@ -351,6 +351,11 @@
 }
 </style>
 <script setup>
+useSeoMeta({
+  title: "모험 | 트레블다이노",
+  ogTitle: "모험 | 트레블다이노",
+});
+
 const heroImageUrl = "/images/adventure_main_banner.jpg";
 const heroTexts = ["평범한 여행보단", "새로운 모험"];
 

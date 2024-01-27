@@ -351,6 +351,11 @@
 }
 </style>
 <script setup>
+useSeoMeta({
+  title: "휴양 | 트레블다이노",
+  ogTitle: "휴양 | 트레블다이노",
+});
+
 const heroImageUrl = "/images/rest_main_banner.jpg";
 const heroTexts = ["드넓은 바다와", "함께하는", "느긋한 힐링"];
 

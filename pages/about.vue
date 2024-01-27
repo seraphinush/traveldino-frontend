@@ -168,4 +168,9 @@
 definePageMeta({
   layout: "default",
 });
+
+useSeoMeta({
+  title: "About | 트레블다이노",
+  ogTitle: "About | 트레블다이노",
+});
 </script>
