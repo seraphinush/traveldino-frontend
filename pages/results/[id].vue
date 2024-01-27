@@ -436,8 +436,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "트레블다이노",
-  ogTitle: "트레블다이노",
+  title: "당신에게 지금 딱 맞는 여행지는..! | 트레블다이노",
+  ogTitle: "당신에게 지금 딱 맞는 여행지는..! | 트레블다이노",
 });
 
 import { sleep, hasBatchim } from "@/assets/utils";
@@ -572,8 +572,8 @@ onMounted(async () => {
     await sleep(400);
 
     useSeoMeta({
-      title: () => `추천받은 여행지는 ${data.value.name}! | 트레블다이노`,
-      ogTitle: () => `추천받은 여행지는 ${data.value.name}! | 트레블다이노`,
+      title: () => `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트레블다이노`,
+      ogTitle: () => `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트레블다이노`,
     });
   } catch (err) {
     console.error(err);
