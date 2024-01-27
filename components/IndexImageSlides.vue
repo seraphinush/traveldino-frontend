@@ -166,7 +166,6 @@ const setSlideIndex = (i = 0) => {
 const clientWidth = ref(0);
 const handleResize = (e) => {
   clientWidth.value = window.innerWidth;
-  console.log(clientWidth.value)
 };
 onMounted(() => {
   startInterval();
