@@ -222,10 +222,14 @@ const currCard = ref(0);
 const interval = ref(null);
 const debounce = ref(Date.now());
 const touchStartX = ref(0);
+const touchInitX = ref(0);
+const touchInitY = ref(0);
+const touchStartTime = ref(null);
+const scrollEnabled = ref(true);
+const swipeEnabled = ref(true);
 
 const step = () => {
-  currCard.value =
-    currCard.value > cards.length - 1 ? 0 : currCard.value + 1;
+  currCard.value = currCard.value > cards.length - 1 ? 0 : currCard.value + 1;
   animateCard();
 };
 
@@ -272,20 +276,46 @@ const setCardOrder = (currCardIndex) => {
 
 const handleTouchStart = (e) => {
   touchStartX.value = e.touches[0].clientX;
+  touchInitX.value = e.touches[0].clientX;
+  touchInitY.value = e.touches[0].clientY;
+  touchStartTime.value = Date.now();
 };
 
 const handleTouchMove = (e) => {
   clearInterval(interval.value);
   if (Date.now() - debounce.value < 200) return;
-  let dx = 4;
-  let dz = 5;
+  if (e.touches.length > 1) return;
+
+  let deltaX = Math.abs(touchInitX.value - e.touches[0].clientX);
+  let deltaY = Math.abs(touchInitY.value - e.touches[0].clientY);
+  if (scrollEnabled.value) {
+    if (Date.now() - touchStartTime.value < 700 && deltaX * 2 > deltaY) {
+      scrollEnabled.value = false;
+    }
+  } else {
+    if (e.cancelable) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }
+
+  if (swipeEnabled.value) {
+    if (Date.now() - touchStartTime.value < 700 && deltaY * 2 > deltaX) {
+      swipeEnabled.value = false;
+    }
+  } else {
+    return;
+  }
+
+  let incrementX = 4;
+  let incrementZ = 5;
   const val = touchStartX.value - e.touches[0].clientX;
   if (val > 0) {
     // left
-    dx *= -1;
+    incrementX *= -1;
   } else if (val < 0) {
     // right
-    dx *= 1;
+    incrementX *= 1;
   } else if (val == 0) {
     return;
   }
@@ -298,19 +328,19 @@ const handleTouchMove = (e) => {
     const currentX = Number(card.dataset.dx);
     const currentZ = Number(card.dataset.dz);
 
-    x = currentX + dx;
+    x = currentX + incrementX;
 
     if (val > 0) {
       if (x >= 0) {
-        z = currentZ + dz;
+        z = currentZ + incrementZ;
       } else if (x < 0) {
-        z = currentZ - dz;
+        z = currentZ - incrementZ;
       }
     } else if (val < 0) {
       if (x >= 0) {
-        z = currentZ - dz;
+        z = currentZ - incrementZ;
       } else if (x < 0) {
-        z = currentZ + dz;
+        z = currentZ + incrementZ;
       }
     }
 
@@ -324,6 +354,9 @@ const handleTouchMove = (e) => {
 };
 
 const handleTouchEnd = () => {
+  scrollEnabled.value = true;
+  swipeEnabled.value = true;
+
   let cardIndex = 0;
   let val = 9999;
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
