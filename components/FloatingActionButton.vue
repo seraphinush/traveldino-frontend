@@ -1,7 +1,7 @@
 <template>
   <div class="container" ref="fab">
     <img src="/images/dinohand.png" alt="" />
-    <a href="https://www.traveldino.app/" target="_blank" class="fw-700">
+    <a href="link" target="_blank" class="fw-700">
       {{ text }}
     </a>
   </div>
@@ -52,6 +52,7 @@ a {
 </style>
 <script setup>
 const text = "내 취향 여행지 찾기";
+const link = "/test";
 const pathIndexes = {
   "/home": 0,
   "/about": 1,
