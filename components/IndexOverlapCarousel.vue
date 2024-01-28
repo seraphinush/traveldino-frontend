@@ -170,194 +170,191 @@
   }
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      cards: [
-        {
-          city: "체스키크룸로프",
-          country: "체코",
-          description: ["마을 전체가 세계문화유산인", "보헤미안의 고향"],
-          tags: ["동유럽", "세계문화유산", "중세시대", "보헤미안"],
-          image: "/images/main_sec4_img1.jpg",
-        },
-        {
-          city: "보르도",
-          country: "프랑스",
-          description: [
-            "전세계에서 가장 큰 문화유적이자",
-            "프랑스 와인의 수도",
-          ],
-          tags: ["서유럽", "세계문화유산", "프랑스와인"],
-          image: "/images/main_sec4_img2.jpg",
-        },
-        {
-          city: "과나후아토",
-          country: "멕시코",
-          description: [
-            "알록달록한 색의 향연을 볼 수 있는",
-            "영화 코코의 배경지",
-          ],
-          tags: ["중남미", "구시가지", "죽은자의날", "영화코코"],
-          image: "/images/main_sec4_img3.jpg",
-        },
-        {
-          city: "랑카위",
-          country: "말레이시아",
-          description: [
-            "유네스코 세계지질공원과",
-            "빛나는 자연을 보유한 케다주의 보석",
-          ],
-          tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-          image: "/images/main_sec4_img4.jpg",
-        },
-        {
-          city: "그단스크",
-          country: "폴란드",
-          description: ["천 년 이상의 전통을 간직한", "활력 넘치는 항구 도시"],
-          tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-          image: "/images/main_sec4_img5.jpg",
-        },
-        {
-          city: "사르데냐",
-          country: "이탈리아",
-          description: ["남쪽 지중해의 보물이자", "이탈리아인들의 여름 휴양지"],
-          tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-          image: "/images/main_sec4_img6.jpg",
-        },
-      ],
-      currCard: 0,
-      interval: null,
-      debounce: Date.now(),
-    };
+<script setup>
+const cards = [
+  {
+    city: "체스키크룸로프",
+    country: "체코",
+    description: ["마을 전체가 세계문화유산인", "보헤미안의 고향"],
+    tags: ["동유럽", "세계문화유산", "중세시대", "보헤미안"],
+    image: "/images/main_sec4_img1.jpg",
   },
-  methods: {
-    step() {
-      this.currCard =
-        this.currCard >= this.cards.length - 1 ? 0 : this.currCard + 1;
-      this.animateCard();
-    },
-    animateCard() {
-      const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-      cardsEl.forEach((card, index) => {
-        const order = index - this.currCard;
-        card.dataset.order = order;
-        card.style.zIndex = Math.abs(order) * -1;
-
-        const x = order * 80;
-        const y = 0;
-        const z = Math.abs(order * 100) * -1;
-        this.setTransformCard(card, x, y, z);
-      });
-    },
-    setTransformCard(card, x, y = 0, z) {
-      card.dataset.dx = x;
-      card.dataset.dy = y;
-      card.dataset.dz = z;
-      card.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateX(0deg) rotateY(0deg)`;
-    },
-    setCurrentCard(index) {
-      clearInterval(this.interval);
-      this.currCard = index;
-      this.animateCard();
-
-      this.interval = setInterval(() => {
-        this.step();
-      }, 5000);
-    },
-    setCardOrder(currCardIndex) {
-      this.currCard = currCardIndex;
-      const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-      cardsEl.forEach((card, index) => {
-        const order = index - this.currCard;
-        card.dataset.order = order;
-        card.style.zIndex = Math.abs(order) * -1;
-      });
-    },
-    handleTouchStart(e) {
-      this.touchStartX = e.touches[0].clientX;
-    },
-    handleTouchMove(e) {
-      clearInterval(this.interval);
-      if (Date.now() - this.debounce < 200) return;
-      let dx = 4;
-      let dz = 5;
-      const val = this.touchStartX - e.touches[0].clientX;
-      if (val > 0) {
-        // left
-        dx *= -1;
-      } else if (val < 0) {
-        // right
-        dx *= 1;
-      } else if (val == 0) {
-        return;
-      }
-
-      const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-      cardsEl.forEach((card, index) => {
-        let x = 0;
-        let y = 0;
-        let z = 0;
-        const currentX = Number(card.dataset.dx);
-        const currentZ = Number(card.dataset.dz);
-
-        x = currentX + dx;
-
-        if (val > 0) {
-          if (x >= 0) {
-            z = currentZ + dz;
-          } else if (x < 0) {
-            z = currentZ - dz;
-          }
-        } else if (val < 0) {
-          if (x >= 0) {
-            z = currentZ - dz;
-          } else if (x < 0) {
-            z = currentZ + dz;
-          }
-        }
-
-        if (Math.abs(z) < 40) {
-          this.setCardOrder(index);
-        }
-
-        this.setTransformCard(card, x, y, z);
-      });
-      this.touchStartX = e.touches[0].clientX;
-    },
-    handleTouchEnd(e) {
-      let cardIndex = 0;
-      let val = 9999;
-      const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-      cardsEl.forEach((card, index) => {
-        const x = Math.abs(Number(card.dataset.dx));
-        if (x < val) {
-          val = x;
-          cardIndex = index;
-        }
-      });
-      this.setCurrentCard(cardIndex);
-    },
+  {
+    city: "보르도",
+    country: "프랑스",
+    description: ["전세계에서 가장 큰 문화유적이자", "프랑스 와인의 수도"],
+    tags: ["서유럽", "세계문화유산", "프랑스와인"],
+    image: "/images/main_sec4_img2.jpg",
   },
-  mounted() {
-    this.step();
-    this.interval = setInterval(() => {
-      this.step();
-    }, 5000);
-    const el = document.querySelector(".overlap-carousel-container");
-    if (!el) return;
-    el.addEventListener("touchstart", this.handleTouchStart);
-    el.addEventListener("touchmove", this.handleTouchMove);
-    el.addEventListener("touchend", this.handleTouchEnd);
+  {
+    city: "과나후아토",
+    country: "멕시코",
+    description: ["알록달록한 색의 향연을 볼 수 있는", "영화 코코의 배경지"],
+    tags: ["중남미", "구시가지", "죽은자의날", "영화코코"],
+    image: "/images/main_sec4_img3.jpg",
   },
-  unmounted() {
-    clearInterval(this.interval);
-    const el = document.querySelector(".overlap-carousel-container");
-    if (!el) return;
-    el.removeEventListener("touchstart", this.handleTouchStart);
-    el.removeEventListener("touchmove", this.handleTouchMove);
-    el.removeEventListener("touchend", this.handleTouchEnd);
+  {
+    city: "랑카위",
+    country: "말레이시아",
+    description: [
+      "유네스코 세계지질공원과",
+      "빛나는 자연을 보유한 케다주의 보석",
+    ],
+    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
+    image: "/images/main_sec4_img4.jpg",
   },
+  {
+    city: "그단스크",
+    country: "폴란드",
+    description: ["천 년 이상의 전통을 간직한", "활력 넘치는 항구 도시"],
+    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
+    image: "/images/main_sec4_img5.jpg",
+  },
+  {
+    city: "사르데냐",
+    country: "이탈리아",
+    description: ["남쪽 지중해의 보물이자", "이탈리아인들의 여름 휴양지"],
+    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
+    image: "/images/main_sec4_img6.jpg",
+  },
+];
+const currCard = ref(0);
+const interval = ref(null);
+const debounce = ref(Date.now());
+const touchStartX = ref(0);
+
+const step = () => {
+  currCard.value =
+    currCard.value > cards.length - 1 ? 0 : currCard.value + 1;
+  animateCard();
 };
+
+const animateCard = () => {
+  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
+  cardsEl.forEach((card, index) => {
+    const order = index - currCard.value;
+    card.dataset.order = order;
+    card.style.zIndex = Math.abs(order) * -1;
+
+    const x = order * 80;
+    const y = 0;
+    const z = Math.abs(order * 100) * -1;
+    setTransformCard(card, x, y, z);
+  });
+};
+
+const setTransformCard = (card, x, y = 0, z) => {
+  card.dataset.dx = x;
+  card.dataset.dy = y;
+  card.dataset.dz = z;
+  card.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateX(0deg) rotateY(0deg)`;
+};
+
+const setCurrentCard = (index) => {
+  clearInterval(interval.value);
+  currCard.value = index;
+  animateCard();
+
+  interval.value = setInterval(() => {
+    step();
+  }, 5000);
+};
+
+const setCardOrder = (currCardIndex) => {
+  currCard.value = currCardIndex;
+  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
+  cardsEl.forEach((card, index) => {
+    const order = index - currCard.value;
+    card.dataset.order = order;
+    card.style.zIndex = Math.abs(order) * -1;
+  });
+};
+
+const handleTouchStart = (e) => {
+  touchStartX.value = e.touches[0].clientX;
+};
+
+const handleTouchMove = (e) => {
+  clearInterval(interval.value);
+  if (Date.now() - debounce.value < 200) return;
+  let dx = 4;
+  let dz = 5;
+  const val = touchStartX.value - e.touches[0].clientX;
+  if (val > 0) {
+    // left
+    dx *= -1;
+  } else if (val < 0) {
+    // right
+    dx *= 1;
+  } else if (val == 0) {
+    return;
+  }
+
+  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
+  cardsEl.forEach((card, index) => {
+    let x = 0;
+    let y = 0;
+    let z = 0;
+    const currentX = Number(card.dataset.dx);
+    const currentZ = Number(card.dataset.dz);
+
+    x = currentX + dx;
+
+    if (val > 0) {
+      if (x >= 0) {
+        z = currentZ + dz;
+      } else if (x < 0) {
+        z = currentZ - dz;
+      }
+    } else if (val < 0) {
+      if (x >= 0) {
+        z = currentZ - dz;
+      } else if (x < 0) {
+        z = currentZ + dz;
+      }
+    }
+
+    if (Math.abs(z) < 40) {
+      setCardOrder(index);
+    }
+
+    setTransformCard(card, x, y, z);
+  });
+  touchStartX.value = e.touches[0].clientX;
+};
+
+const handleTouchEnd = () => {
+  let cardIndex = 0;
+  let val = 9999;
+  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
+  cardsEl.forEach((card, index) => {
+    const x = Math.abs(Number(card.dataset.dx));
+    if (x < val) {
+      val = x;
+      cardIndex = index;
+    }
+  });
+  setCurrentCard(cardIndex);
+};
+
+onMounted(() => {
+  step();
+  interval.value = setInterval(() => {
+    step();
+  }, 5000);
+  const el = document.querySelector(".overlap-carousel-container");
+  if (!el) return;
+  el.addEventListener("touchstart", handleTouchStart);
+  el.addEventListener("touchmove", handleTouchMove);
+  el.addEventListener("touchend", handleTouchEnd);
+});
+
+onUnmounted(() => {
+  clearInterval(interval.value);
+  const el = document.querySelector(".overlap-carousel-container");
+  if (!el) return;
+  el.removeEventListener("touchstart", handleTouchStart);
+  el.removeEventListener("touchmove", handleTouchMove);
+  el.removeEventListener("touchend", handleTouchEnd);
+});
 </script>
