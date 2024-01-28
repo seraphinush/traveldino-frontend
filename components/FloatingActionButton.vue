@@ -1,7 +1,7 @@
 <template>
   <div class="container" ref="fab">
     <img src="/images/dinohand.png" alt="" />
-    <a href="link" target="_blank" class="fw-700">
+    <a :href="link" target="_blank" class="fw-700">
       {{ text }}
     </a>
   </div>
