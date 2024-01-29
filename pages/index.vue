@@ -102,17 +102,21 @@ onMounted(async () => {
   query.value = route.query || {};
 
   // set test in dev mode
-  // if (query.value.mode == "test") {
-  //   console.log(route.query);
-  // } else {
-  //   query.value.mode = "test";
-  //   window.history.replaceState({}, "", route.path);
-  //   await navigateTo({
-  //     replace: true,
-  //     path: "/",
-  //     query: { ...query.value },
-  //   });
-  // }
+  if (process.env.ENVIRONMENT) {
+    if (process.env.ENVIRONMENT == "dev") {
+      if (query.value.mode == "test") {
+        console.log(route.query);
+      } else {
+        query.value.mode = "test";
+        window.history.replaceState({}, "", route.path);
+        await navigateTo({
+          replace: true,
+          path: "/",
+          query: { ...query.value },
+        });
+      }
+    }
+  }
 
   try {
     const { data } = await $api.server.ping();
