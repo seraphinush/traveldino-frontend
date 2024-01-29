@@ -1,6 +1,6 @@
 <template>
   <div class="about__image-slides content">
-    <img src="/images/about_img1.jpg" alt="" />
+    <img src="/images/website/about_img1.jpg" alt="" />
     <div class="about__image-slide-text">
       <h3 class="fw-700">세계 곳곳을 돌아다닌 트래블다이노가</h3>
       <h3>여러분이 미처 상상하지 못한 목적지,</h3>
@@ -12,7 +12,7 @@
       <h3><span class="fw-700">나에게 딱 맞는 최적의 여행지</span>를</h3>
       <h3>추천받을 수 있어요.</h3>
     </div>
-    <img src="/images/about_img2.jpg" alt="" />
+    <img src="/images/website/about_img2.jpg" alt="" />
     <div class="about__image-slide-text">
       <h3>트래블다이노는</h3>
       <h3><span class="fw-700">여행하는 방법</span>을 바꾸는 사람들입니다.</h3>

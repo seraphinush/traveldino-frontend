@@ -356,7 +356,7 @@ useSeoMeta({
   ogTitle: "도시 | 트레블다이노",
 });
 
-const heroImageUrl = "/images/city_main_banner.jpg";
+const heroImageUrl = "/images/website/city_main_banner.jpg";
 const heroTexts = ["웅장한 건축물,", "맛있는 음식,", "사람들로 북적이는 도시"];
 
 const prevLink = "/content/adventure";
@@ -371,7 +371,7 @@ const cardsA = [
     country: "대만",
     description: ["먹거리, 볼거리, 즐길거리 가득한", "활기차고 현대적인 수도"],
     tags: ["야시장", "예류지질공원", "스펀"],
-    imageUrl: "/images/city_img1_taipei.jpg",
+    imageUrl: "/images/website/city_img1_taipei.jpg",
   },
   {
     city: "바르셀로나",
@@ -382,7 +382,7 @@ const cardsA = [
       "스페인에서 두 번째로 큰 도시",
     ],
     tags: ["사그라다파밀리아", "구엘공원", "타파스"],
-    imageUrl: "/images/city_img2_barcelona.jpg",
+    imageUrl: "/images/website/city_img2_barcelona.jpg",
   },
   {
     city: "신트라",
@@ -392,7 +392,7 @@ const cardsA = [
       "리스본 근교의 신비한 도시",
     ],
     tags: ["세계문화유산", "페나성", "낭만주의건축"],
-    imageUrl: "/images/city_img3_sintra.jpg",
+    imageUrl: "/images/website/city_img3_sintra.jpg",
   },
 ];
 const cardsB = [
@@ -405,7 +405,7 @@ const cardsB = [
       "푸르게 반짝이는 해변",
     ],
     tags: ["테이블마운틴", "희망봉", "볼더스비치"],
-    imageUrl: "/images/city_img4_capetown.jpg",
+    imageUrl: "/images/website/city_img4_capetown.jpg",
   },
   {
     city: "메데인",
@@ -416,7 +416,7 @@ const cardsB = [
       "콜롬비아 예술과 음식의 중심지",
     ],
     tags: ["엘뻬뇰", "케이블카", "보테로"],
-    imageUrl: "/images/city_img5_medellín.jpg",
+    imageUrl: "/images/website/city_img5_medellín.jpg",
   },
   {
     city: "시비우",
@@ -427,7 +427,7 @@ const cardsB = [
       "역사적인 유적지",
     ],
     tags: ["트란실베니아", "바로크양식", "요새"],
-    imageUrl: "/images/city_img6_sibiu.jpg",
+    imageUrl: "/images/website/city_img6_sibiu.jpg",
   },
 ];
 

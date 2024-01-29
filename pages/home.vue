@@ -14,7 +14,7 @@
           <span class="spacer"></span>
           <h2>우리 여행갈까?</h2>
           <h2>근데... <span class="fw-500">어디로 가지?</span></h2>
-          <img src="/images/dinoanimation1.png" alt="" />
+          <img src="/images/website/dinoanimation1.png" alt="" />
         </div>
       </div>
       <div class="content">
@@ -26,7 +26,7 @@
           <span class="spacer"></span>
           <h2>가보고 싶었던 곳은 많은데,</h2>
           <h2>막상 가려니 잘 모르겠어</h2>
-          <img src="/images/dinoanimation2.png" alt="" />
+          <img src="/images/website/dinoanimation2.png" alt="" />
         </div>
       </div>
       <div class="content">
@@ -37,7 +37,7 @@
           <span class="spacer"></span>
           <span class="spacer"></span>
           <h2>나한테 <span class="fw-500">딱 맞는 여행지</span> 없을까?</h2>
-          <img src="/images/dinoanimation3.png" alt="" />
+          <img src="/images/website/dinoanimation3.png" alt="" />
         </div>
       </div>
       <button v-if="currSlide < 4" class="arrow" @click="nextSlide">

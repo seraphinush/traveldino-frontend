@@ -356,7 +356,7 @@ useSeoMeta({
   ogTitle: "휴양 | 트레블다이노",
 });
 
-const heroImageUrl = "/images/rest_main_banner.jpg";
+const heroImageUrl = "/images/website/rest_main_banner.jpg";
 const heroTexts = ["드넓은 바다와", "함께하는", "느긋한 힐링"];
 
 const prevLink = "/content/city";
@@ -375,7 +375,7 @@ const cardsA = [
       "관광객이 끊이지 않는 곳",
     ],
     tags: ["서유럽", "지중해", "프로방스"],
-    imageUrl: "/images/rest_img1_nice.jpg",
+    imageUrl: "/images/website/rest_img1_nice.jpg",
   },
   {
     city: "세부",
@@ -386,7 +386,7 @@ const cardsA = [
       "모든 것이 다 갖춰진 호화로운 리조트",
     ],
     tags: ["막탄", "화이트비치", "스노쿨링"],
-    imageUrl: "/images/rest_img2_cebu.jpg",
+    imageUrl: "/images/website/rest_img2_cebu.jpg",
   },
   {
     city: "몰디브",
@@ -397,7 +397,7 @@ const cardsA = [
       "다양한 문화를 간직한 나라",
     ],
     tags: ["신혼여행지", "지상낙원", "오버워터빌라"],
-    imageUrl: "/images/rest_img3_maldives.jpg",
+    imageUrl: "/images/website/rest_img3_maldives.jpg",
   },
 ];
 const cardsB = [
@@ -410,7 +410,7 @@ const cardsB = [
       "700여 개의 열대 섬",
     ],
     tags: ["청록빛바다", "나소", "캐리비안해적"],
-    imageUrl: "/images/rest_img4_bahama.jpg",
+    imageUrl: "/images/website/rest_img4_bahama.jpg",
   },
   {
     city: "몰타",
@@ -421,7 +421,7 @@ const cardsB = [
       "매력적인 지중해 휴양지",
     ],
     tags: ["지중해", "라임스톤", "발레타"],
-    imageUrl: "/images/rest_img5_malta.jpg",
+    imageUrl: "/images/website/rest_img5_malta.jpg",
   },
   {
     city: "바라데로",
@@ -432,7 +432,7 @@ const cardsB = [
       "쿠바 최고의 휴양지",
     ],
     tags: ["카리브해", "이까꼬스", "올인클루시브"],
-    imageUrl: "/images/rest_img6_varadero.jpg",
+    imageUrl: "/images/website/rest_img6_varadero.jpg",
   },
 ];
 

@@ -356,7 +356,7 @@ useSeoMeta({
   ogTitle: "모험 | 트레블다이노",
 });
 
-const heroImageUrl = "/images/adventure_main_banner.jpg";
+const heroImageUrl = "/images/website/adventure_main_banner.jpg";
 const heroTexts = ["평범한 여행보단", "새로운 모험"];
 
 const prevLink = "/content/resort";
@@ -375,7 +375,7 @@ const cardsA = [
       "신비로운 지형",
     ],
     tags: ["요정의굴뚝", "지하도시", "세계복합유산"],
-    imageUrl: "/images/adventure_img1_cappadocia.jpg",
+    imageUrl: "/images/website/adventure_img1_cappadocia.jpg",
   },
   {
     city: "융프라우",
@@ -386,7 +386,7 @@ const cardsA = [
       "산악 열차 투어와 트레킹",
     ],
     tags: ["인터라켄", "알프스", "만년설"],
-    imageUrl: "/images/adventure_img2_jungfrau.jpg",
+    imageUrl: "/images/website/adventure_img2_jungfrau.jpg",
   },
   {
     city: "테를지",
@@ -397,7 +397,7 @@ const cardsA = [
       "대자연의 집합체",
     ],
     tags: ["게르", "고비사막", "오프로드"],
-    imageUrl: "/images/adventure_img3_terelj.jpg",
+    imageUrl: "/images/website/adventure_img3_terelj.jpg",
   },
 ];
 const cardsB = [
@@ -410,7 +410,7 @@ const cardsB = [
       "조지아 북서부의 고지대 마을",
     ],
     tags: ["트레킹", "코룰디호수", "우쉬굴리"],
-    imageUrl: "/images/adventure_img4_mestia.jpg",
+    imageUrl: "/images/website/adventure_img4_mestia.jpg",
   },
   {
     city: "몬테베르데",
@@ -421,7 +421,7 @@ const cardsB = [
       "자연주의자들의 고향",
     ],
     tags: ["열대우림", "생태관광명소", "에코투어리즘"],
-    imageUrl: "/images/adventure_img5_monteverde.jpg",
+    imageUrl: "/images/website/adventure_img5_monteverde.jpg",
   },
   {
     city: "이스라엘",
@@ -432,7 +432,7 @@ const cardsB = [
       "자연과 역사적 명소가 융합된 곳",
     ],
     tags: ["예루살렘", "텔아비브", "성지순례"],
-    imageUrl: "/images/adventure_img6_israel.jpg",
+    imageUrl: "/images/website/adventure_img6_israel.jpg",
   },
 ];
 

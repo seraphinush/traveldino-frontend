@@ -39,7 +39,7 @@
 <style scoped>
 .contact__container {
   height: 100vh;
-  background-image: url("/images/contact_bg.jpg");
+  background-image: url("/images/website/contact_bg.jpg");
   background-size: cover;
   word-break: keep-all;
   overflow: auto;

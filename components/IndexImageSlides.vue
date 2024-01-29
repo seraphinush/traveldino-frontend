@@ -135,16 +135,16 @@ const captions = [
   "아름다운 불교 유적 도시, 바간",
 ];
 const moSources = [
-  "/images/main_sec3_bg1_patagonia_mo.jpg",
-  "/images/main_sec3_bg2_plitvice_mo.jpg",
-  "/images/main_sec3_bg3_acatenango_mo.jpg",
-  "/images/main_sec3_bg4_bagan_mo.jpg",
+  "/images/website/main_sec3_bg1_patagonia_mo.jpg",
+  "/images/website/main_sec3_bg2_plitvice_mo.jpg",
+  "/images/website/main_sec3_bg3_acatenango_mo.jpg",
+  "/images/website/main_sec3_bg4_bagan_mo.jpg",
 ];
 const pcSources = [
-  "/images/main_sec3_bg1_patagonia.jpg",
-  "/images/main_sec3_bg2_plitvice.jpg",
-  "/images/main_sec3_bg3_acatenango.jpg",
-  "/images/main_sec3_bg4_bagan.jpg",
+  "/images/website/main_sec3_bg1_patagonia.jpg",
+  "/images/website/main_sec3_bg2_plitvice.jpg",
+  "/images/website/main_sec3_bg3_acatenango.jpg",
+  "/images/website/main_sec3_bg4_bagan.jpg",
 ];
 
 const currSlideIndex = ref(0);

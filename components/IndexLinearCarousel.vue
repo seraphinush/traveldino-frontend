@@ -130,17 +130,17 @@
 const cards = [
   {
     label: "느긋한 힐링",
-    imgSrc: "/images/main_sec2_bg1.jpg",
+    imgSrc: "/images/website/main_sec2_bg1.jpg",
     link: "/content/resort",
   },
   {
     label: "새로운 모험",
-    imgSrc: "/images/main_sec2_bg2.jpg",
+    imgSrc: "/images/website/main_sec2_bg2.jpg",
     link: "/content/adventure",
   },
   {
     label: "북적이는 도시",
-    imgSrc: "/images/main_sec2_bg3.jpg",
+    imgSrc: "/images/website/main_sec2_bg3.jpg",
     link: "/content/city",
   },
 ];
