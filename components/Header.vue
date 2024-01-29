@@ -63,7 +63,7 @@ ul * {
   color: var(--clr-white);
 }
 
-.active {
+.active:not(.emphasis) {
   font-weight: 500;
 }
 
