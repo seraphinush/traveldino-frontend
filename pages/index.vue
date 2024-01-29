@@ -102,8 +102,11 @@ onMounted(async () => {
   query.value = route.query || {};
 
   // set test in dev mode
-  if (process.env.ENVIRONMENT) {
-    if (process.env.ENVIRONMENT == "dev") {
+  const config = useRuntimeConfig();
+  const { ENVIRONMENT } = config.public;
+
+  if (!!ENVIRONMENT) {
+    if (ENVIRONMENT == "dev") {
       if (query.value.mode == "test") {
         console.log(route.query);
       } else {
