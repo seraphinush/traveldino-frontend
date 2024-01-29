@@ -171,53 +171,8 @@
 }
 </style>
 <script setup>
-const cards = [
-  {
-    city: "체스키크룸로프",
-    country: "체코",
-    description: ["마을 전체가 세계문화유산인", "보헤미안의 고향"],
-    tags: ["동유럽", "세계문화유산", "중세시대", "보헤미안"],
-    image: "/images/main_sec4_img1.jpg",
-  },
-  {
-    city: "보르도",
-    country: "프랑스",
-    description: ["전세계에서 가장 큰 문화유적이자", "프랑스 와인의 수도"],
-    tags: ["서유럽", "세계문화유산", "프랑스와인"],
-    image: "/images/main_sec4_img2.jpg",
-  },
-  {
-    city: "과나후아토",
-    country: "멕시코",
-    description: ["알록달록한 색의 향연을 볼 수 있는", "영화 코코의 배경지"],
-    tags: ["중남미", "구시가지", "죽은자의날", "영화코코"],
-    image: "/images/main_sec4_img3.jpg",
-  },
-  {
-    city: "랑카위",
-    country: "말레이시아",
-    description: [
-      "유네스코 세계지질공원과",
-      "빛나는 자연을 보유한 케다주의 보석",
-    ],
-    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-    image: "/images/main_sec4_img4.jpg",
-  },
-  {
-    city: "그단스크",
-    country: "폴란드",
-    description: ["천 년 이상의 전통을 간직한", "활력 넘치는 항구 도시"],
-    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-    image: "/images/main_sec4_img5.jpg",
-  },
-  {
-    city: "사르데냐",
-    country: "이탈리아",
-    description: ["남쪽 지중해의 보물이자", "이탈리아인들의 여름 휴양지"],
-    tags: ["동남아", "세계지질공원", "군도", "야생동물"],
-    image: "/images/main_sec4_img6.jpg",
-  },
-];
+import data from "~/assets/data/index-overlap-carousel.json";
+const cards = data;
 const currCard = ref(0);
 const interval = ref(null);
 const debounce = ref(Date.now());
