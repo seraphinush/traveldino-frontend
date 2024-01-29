@@ -440,7 +440,7 @@ useSeoMeta({
   ogTitle: "당신에게 지금 딱 맞는 여행지는..! | 트레블다이노",
 });
 
-import { sleep, hasBatchim } from "@/assets/utils";
+import { sleep, hasBatchim } from "~/utils";
 const testLoadingEnabled = useState("testLoadingEnabled");
 const { $api } = useNuxtApp();
 const query = ref({});

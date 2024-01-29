@@ -7,7 +7,7 @@
         :question="question"
         @on-answer="handleAnswer"
       />
-      <span style="flex: 1;" class="spacer"></span>
+      <span style="flex: 1" class="spacer"></span>
       <div class="question-actions">
         <button @click="handleNavClick('goto-prev')" :disabled="answered == 0">
           뒤로
@@ -65,7 +65,7 @@ useSeoMeta({
   ogTitle: "여행지 추천받기 | 트레블다이노",
 });
 
-import { sleep, getQuestionType } from "@/assets/utils";
+import { sleep, getQuestionType } from "~/utils";
 const testLoadingEnabled = useState("testLoadingEnabled");
 const { $api } = useNuxtApp();
 
