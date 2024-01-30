@@ -171,7 +171,7 @@
 }
 </style>
 <script setup>
-import data from "~/assets/data/index-overlap-carousel.json";
+import data from "~/assets/data/indexOverlapCarousel.json";
 const cards = data;
 const currCard = ref(0);
 const interval = ref(null);
