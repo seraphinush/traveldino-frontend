@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  target: "static",
+  target: "server",
   ssr: true,
   app: {
     head: {
