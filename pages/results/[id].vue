@@ -539,6 +539,15 @@ try {
   }
   statsData.value = _statsData.value;
 
+  useHead({
+    title: `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
+    meta: [
+      {
+        name: "og:title",
+        content: `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
+      },
+    ],
+  });
   useSeoMeta({
     title: () =>
       `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
