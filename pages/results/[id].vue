@@ -537,7 +537,7 @@ try {
   if (!!_statsError.value) {
     throw _statsError.value;
   }
-  stats.value = _statsData.value - 1;
+  statsData.value = _statsData.value;
 
   useSeoMeta({
     title: () =>
@@ -576,16 +576,19 @@ onMounted(async () => {
   }
 
   if (statsData.value < STAT_MIN_VALUE) {
+    const rand = STAT_MIN_VALUE + Math.round(Math.random() * STAT_MIN_VALUE);
     if (sessionStorage.getItem(`traveldino-stats-${data.value.code}`)) {
-      stats.value = Number(
+      const num = Number(
         sessionStorage.getItem(`traveldino-stats-${data.value.code}`)
       );
+      stats.value = isNaN(num) ? rand : num;
+
       stats.value++;
     } else {
-      stats.value = STAT_MIN_VALUE + Math.round(Math.random() * STAT_MIN_VALUE);
+      stats.value = rand;
     }
   } else {
-    stats.value = statsData.value - 1;
+    stats.value = statsData.value;
   }
   sessionStorage.setItem(`traveldino-stats-${data.value.code}`, stats.value);
   await sleep(400);
