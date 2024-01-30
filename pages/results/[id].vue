@@ -4,9 +4,9 @@
       <h3 class="">
         {{ "당신에게 지금 딱 맞는 여행지는..." }}
       </h3>
-      <h2 class="fw-700">
+      <h1 class="fw-700">
         {{ data.name }}
-      </h2>
+      </h1>
 
       <!--  -->
       <div class="results-img">
@@ -196,7 +196,7 @@ section {
   margin-bottom: 2rem;
 }
 
-section > h2 {
+section > h1 {
   font-family: var(--font-face-emphasis);
   color: var(--clr-test-secondary-500);
   transform: translateY(-1.25rem);
@@ -447,6 +447,7 @@ const { $api } = useNuxtApp();
 const query = ref({});
 const route = useRoute();
 const data = ref({});
+const statsData = ref({});
 
 const stats = ref(0);
 const liked = ref(false);
@@ -514,11 +515,50 @@ const handleClick = async (action) => {
   }
 };
 
+try {
+  const params = route.params || {};
+  query.value.countryId = params.id;
+
+  const { data: _data, error: _error } = await $api.results.get(query.value);
+  if (!!_error.value) {
+    throw _error.value;
+  }
+  if (_data.value.type_id_a == "A") _data.value.type_id_a_text = "모험";
+  else if (_data.value.type_id_a == "C")
+  _data.value.type_id_a_text = "도시문화";
+  else if (_data.value.type_id_a == "R")
+  _data.value.type_id_a_text = "휴양";
+  data.value = _data.value;
+
+  const { data: _statsData, error: _statsError } = await $api.stats.get(
+    data.value.code
+  );
+  if (!!_statsError.value) {
+    throw _statsError.value;
+  }
+  stats.value = _statsData.value - 1;
+
+  useSeoMeta({
+    title: () =>
+      `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
+    ogTitle: () =>
+      `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
+  });
+} catch (err) {
+  console.error(err);
+  throw createError({
+    statusCode: err.statusCode,
+    statusMessage: err.statusMessage,
+    fatal: true,
+  });
+} finally {
+  testLoadingEnabled.value = false;
+}
+
 onMounted(async () => {
   await sleep(1);
   testLoadingEnabled.value = true;
   query.value = route.query || {};
-  const params = route.params || {};
 
   if (!!query.value.sessionId) {
     query.value.sid = query.value.sessionId;
@@ -534,59 +574,21 @@ onMounted(async () => {
     window.history.replaceState({}, "", `${route.path}${queries}`);
   }
 
-  try {
-    query.value.countryId = params.id;
-
-    const { data: resData, error: resError } = await $api.results.get(
-      query.value
-    );
-    if (!!resError.value) {
-      throw resError.value;
-    }
-    if (resData.value.type_id_a == "A") resData.value.type_id_a_text = "모험";
-    else if (resData.value.type_id_a == "C")
-      resData.value.type_id_a_text = "도시문화";
-    else if (resData.value.type_id_a == "R")
-      resData.value.type_id_a_text = "휴양";
-    data.value = resData.value;
-
-    const { data: statsData, error: statsError } = await $api.stats.get(
-      data.value.code
-    );
-    if (!!statsError.value) {
-      throw statsError.value;
-    }
-    if (statsData.value < STAT_MIN_VALUE) {
-      if (sessionStorage.getItem(`traveldino-stats-${data.value.code}`)) {
-        stats.value = Number(
-          sessionStorage.getItem(`traveldino-stats-${data.value.code}`)
-        );
-        stats.value++;
-      } else {
-        stats.value =
-          STAT_MIN_VALUE + Math.round(Math.random() * STAT_MIN_VALUE);
-      }
+  if (statsData.value < STAT_MIN_VALUE) {
+    if (sessionStorage.getItem(`traveldino-stats-${data.value.code}`)) {
+      stats.value = Number(
+        sessionStorage.getItem(`traveldino-stats-${data.value.code}`)
+      );
+      stats.value++;
     } else {
-      stats.value = statsData.value - 1;
+      stats.value = STAT_MIN_VALUE + Math.round(Math.random() * STAT_MIN_VALUE);
     }
-    sessionStorage.setItem(`traveldino-stats-${data.value.code}`, stats.value);
-    await sleep(400);
-
-    useSeoMeta({
-      title: () =>
-        `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
-      ogTitle: () =>
-        `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
-    });
-  } catch (err) {
-    console.error(err);
-    throw createError({
-      statusCode: err.statusCode,
-      statusMessage: err.statusMessage,
-      fatal: true,
-    });
-  } finally {
-    testLoadingEnabled.value = false;
+  } else {
+    stats.value = statsData.value - 1;
   }
+  sessionStorage.setItem(`traveldino-stats-${data.value.code}`, stats.value);
+  await sleep(400);
+
+  testLoadingEnabled.value = false;
 });
 </script>
