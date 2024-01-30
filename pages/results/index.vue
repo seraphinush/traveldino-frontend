@@ -30,7 +30,10 @@ onMounted(() => {
       query: query.value,
     });
   } else {
-    //
+    navigateTo({
+      path: `/`,
+      query: query.value,
+    });
   }
 });
 </script>
