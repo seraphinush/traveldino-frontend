@@ -1,6 +1,12 @@
 <template></template>
 <style></style>
 <script setup>
+const title = "당신에게 지금 딱 맞는 여행지는..! | 트래블다이노";
+useSeoMeta({
+  title: title,
+  ogTitle: title,
+});
+
 const testLoadingEnabled = useState("testLoadingEnabled");
 const route = useRoute();
 const query = ref({});

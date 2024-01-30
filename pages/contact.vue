@@ -1,5 +1,6 @@
 <template>
   <div class="container contact__container">
+    <!-- <h1 style="position: fixed; opacity: none">{{ h1 }}</h1> -->
     <section class="contact__main">
       <div class="content">
         <span class="spacer"></span>
@@ -122,9 +123,11 @@ h2 {
 }
 </style>
 <script setup>
+const title = "Contact | 트래블다이노";
+const h1 = "트래블다이노의 다음 프로젝트가 궁금하다면 언제든지 연락 주세요";
 useSeoMeta({
-  title: "Contact | 트레블다이노",
-  ogTitle: "Contact | 트레블다이노",
+  title: title,
+  ogTitle: title,
 });
 
 const contactCards = [

@@ -4,6 +4,7 @@
     :class="currSlide < 4 && 'no-scroll'"
     :style="currSlide < 4 && 'height: 100vh; overscroll-behavior: none;'"
   >
+    <!-- <h1 style="position: fixed; opacity: none">{{ h1 }}</h1> -->
     <section class="index__scroll-slide-container bg-secondary">
       <div class="content">
         <div
@@ -363,9 +364,11 @@
 </style>
 
 <script setup>
+const title = "Home | 트래블다이노";
+const h1 = "나도 몰랐던 나의 취향, 트래블다이노는 알고 있어요!";
 useSeoMeta({
-  title: "Home | 트레블다이노",
-  ogTitle: "Home | 트레블다이노",
+  title: title,
+  ogTitle: title,
 });
 
 const currSlide = ref(1);

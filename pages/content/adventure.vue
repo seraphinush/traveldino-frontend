@@ -352,8 +352,8 @@
 </style>
 <script setup>
 useSeoMeta({
-  title: "모험 | 트레블다이노",
-  ogTitle: "모험 | 트레블다이노",
+  title: "모험 | 트래블다이노",
+  ogTitle: "모험 | 트래블다이노",
 });
 
 const heroImageUrl = "/images/website/adventure_main_banner.jpg";

@@ -61,8 +61,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "여행지 추천받기 | 트레블다이노",
-  ogTitle: "여행지 추천받기 | 트레블다이노",
+  title: "여행지 추천받기 | 트래블다이노",
+  ogTitle: "여행지 추천받기 | 트래블다이노",
 });
 
 import { sleep, getQuestionType } from "~/utils";

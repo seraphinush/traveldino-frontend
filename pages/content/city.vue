@@ -352,8 +352,8 @@
 </style>
 <script setup>
 useSeoMeta({
-  title: "도시 | 트레블다이노",
-  ogTitle: "도시 | 트레블다이노",
+  title: "도시 | 트래블다이노",
+  ogTitle: "도시 | 트래블다이노",
 });
 
 const heroImageUrl = "/images/website/city_main_banner.jpg";

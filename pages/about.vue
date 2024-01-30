@@ -170,7 +170,7 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "About | 트레블다이노",
-  ogTitle: "About | 트레블다이노",
+  title: "About | 트래블다이노",
+  ogTitle: "About | 트래블다이노",
 });
 </script>

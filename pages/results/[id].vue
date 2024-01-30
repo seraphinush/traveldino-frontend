@@ -435,9 +435,10 @@ definePageMeta({
   layout: "test",
 });
 
+const title = "당신에게 지금 딱 맞는 여행지는..! | 트래블다이노";
 useSeoMeta({
-  title: "당신에게 지금 딱 맞는 여행지는..! | 트레블다이노",
-  ogTitle: "당신에게 지금 딱 맞는 여행지는..! | 트레블다이노",
+  title: title,
+  ogTitle: title,
 });
 
 import { sleep, hasBatchim } from "~/utils";
@@ -572,8 +573,10 @@ onMounted(async () => {
     await sleep(400);
 
     useSeoMeta({
-      title: () => `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트레블다이노`,
-      ogTitle: () => `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트레블다이노`,
+      title: () =>
+        `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
+      ogTitle: () =>
+        `당신에게 지금 딱 맞는 여행지는 ${data.value.name}! | 트래블다이노`,
     });
   } catch (err) {
     console.error(err);

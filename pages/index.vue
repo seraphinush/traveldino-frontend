@@ -58,8 +58,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "나에게 지금 딱 맞는 여행지 알려주는 트레블다이노",
-  ogTitle: "나에게 지금 딱 맞는 여행지 알려주는 트레블다이노",
+  title: "나에게 지금 딱 맞는 여행지 알려주는 트래블다이노",
+  ogTitle: "나에게 지금 딱 맞는 여행지 알려주는 트래블다이노",
 });
 
 const testLoadingEnabled = useState("testLoadingEnabled");

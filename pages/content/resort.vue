@@ -352,8 +352,8 @@
 </style>
 <script setup>
 useSeoMeta({
-  title: "휴양 | 트레블다이노",
-  ogTitle: "휴양 | 트레블다이노",
+  title: "휴양 | 트래블다이노",
+  ogTitle: "휴양 | 트래블다이노",
 });
 
 const heroImageUrl = "/images/website/rest_main_banner.jpg";
