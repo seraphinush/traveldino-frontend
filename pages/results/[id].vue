@@ -197,6 +197,8 @@ section {
 }
 
 section > h1 {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
   font-family: var(--font-face-emphasis);
   color: var(--clr-test-secondary-500);
   transform: translateY(-1.25rem);
@@ -525,9 +527,8 @@ try {
   }
   if (_data.value.type_id_a == "A") _data.value.type_id_a_text = "모험";
   else if (_data.value.type_id_a == "C")
-  _data.value.type_id_a_text = "도시문화";
-  else if (_data.value.type_id_a == "R")
-  _data.value.type_id_a_text = "휴양";
+    _data.value.type_id_a_text = "도시문화";
+  else if (_data.value.type_id_a == "R") _data.value.type_id_a_text = "휴양";
   data.value = _data.value;
 
   const { data: _statsData, error: _statsError } = await $api.stats.get(
