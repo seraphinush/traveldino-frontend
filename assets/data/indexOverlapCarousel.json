@@ -34,14 +34,14 @@
     "city": "그단스크",
     "country": "폴란드",
     "description": ["천 년 이상의 전통을 간직한", "활력 넘치는 항구 도시"],
-    "tags": ["동남아", "세계지질공원", "군도", "야생동물"],
+    "tags": ["동유럽", "발트해", "자유도시"],
     "image": "/images/website/main_sec4_img5.jpg"
   },
   {
     "city": "사르데냐",
     "country": "이탈리아",
     "description": ["남쪽 지중해의 보물이자", "이탈리아인들의 여름 휴양지"],
-    "tags": ["동남아", "세계지질공원", "군도", "야생동물"],
+    "tags": ["지중해", "휴양지", "선사시대유적"],
     "image": "/images/website/main_sec4_img6.jpg"
   }
 ]
