@@ -52,7 +52,7 @@ a {
 </style>
 <script setup>
 const text = "내 취향 여행지 찾기";
-const link = "/test";
+const link = "/";
 const pathIndexes = {
   "/home": 0,
   "/about": 1,
