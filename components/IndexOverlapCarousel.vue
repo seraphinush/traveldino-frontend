@@ -175,7 +175,6 @@ import data from "~/assets/data/indexOverlapCarousel.json";
 const cards = data;
 const currCard = ref(0);
 const interval = ref(null);
-const debounce = ref(Date.now());
 const touchStartX = ref(0);
 const touchInitX = ref(0);
 const touchInitY = ref(0);
@@ -184,29 +183,27 @@ const scrollEnabled = ref(true);
 const swipeEnabled = ref(true);
 
 const step = () => {
-  currCard.value = currCard.value > cards.length - 1 ? 0 : currCard.value + 1;
+  currCard.value = currCard.value >= cards.length - 1 ? 0 : currCard.value + 1;
   animateCard();
 };
 
 const animateCard = () => {
+  const dx = Math.min(window.innerWidth / 2, 500);
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
   cardsEl.forEach((card, index) => {
     const order = index - currCard.value;
-    card.dataset.order = order;
     card.style.zIndex = Math.abs(order) * -1;
 
-    const x = order * 80;
-    const y = 0;
-    const z = Math.abs(order * 100) * -1;
-    setTransformCard(card, x, y, z);
+    const x = order * dx;
+    const z = Math.abs(x) * -1;
+    card.dataset.ix = x;
+    setCardTransform(card, x, 0, z);
   });
 };
 
-const setTransformCard = (card, x, y = 0, z) => {
+const setCardTransform = (card, x, y = 0, z) => {
   card.dataset.dx = x;
-  card.dataset.dy = y;
-  card.dataset.dz = z;
-  card.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateX(0deg) rotateY(0deg)`;
+  card.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
 };
 
 const setCurrentCard = (index) => {
@@ -219,12 +216,11 @@ const setCurrentCard = (index) => {
   }, 5000);
 };
 
-const setCardOrder = (currCardIndex) => {
-  currCard.value = currCardIndex;
+const setCardZIndex = (i) => {
+  currCard.value = i;
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
   cardsEl.forEach((card, index) => {
     const order = index - currCard.value;
-    card.dataset.order = order;
     card.style.zIndex = Math.abs(order) * -1;
   });
 };
@@ -238,7 +234,6 @@ const handleTouchStart = (e) => {
 
 const handleTouchMove = (e) => {
   clearInterval(interval.value);
-  if (Date.now() - debounce.value < 200) return;
   if (e.touches.length > 1) return;
 
   let deltaX = Math.abs(touchInitX.value - e.touches[0].clientX);
@@ -262,53 +257,27 @@ const handleTouchMove = (e) => {
     return;
   }
 
-  let incrementX = 4;
-  let incrementZ = 5;
-  const val = touchStartX.value - e.touches[0].clientX;
-  if (val > 0) {
-    // left
-    incrementX *= -1;
-  } else if (val < 0) {
-    // right
-    incrementX *= 1;
-  } else if (val == 0) {
-    return;
-  }
+  let cardIndex = 0;
+  let vali = 9999;
+  const valx = e.touches[0].clientX - touchStartX.value;
 
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
   cardsEl.forEach((card, index) => {
-    let x = 0;
-    let y = 0;
-    let z = 0;
-    const currentX = Number(card.dataset.dx);
-    const currentZ = Number(card.dataset.dz);
+    const ix = Number(card.dataset.ix);
+    const x = ix + valx;
+    const z = Math.abs(x) * -1;
 
-    x = currentX + incrementX;
-
-    if (val > 0) {
-      if (x >= 0) {
-        z = currentZ + incrementZ;
-      } else if (x < 0) {
-        z = currentZ - incrementZ;
-      }
-    } else if (val < 0) {
-      if (x >= 0) {
-        z = currentZ - incrementZ;
-      } else if (x < 0) {
-        z = currentZ + incrementZ;
-      }
+    if (Math.abs(x) < vali) {
+      vali = Math.abs(x);
+      cardIndex = index;
     }
-
-    if (Math.abs(z) < 40) {
-      setCardOrder(index);
-    }
-
-    setTransformCard(card, x, y, z);
+    setCardTransform(card, x, 0, z);
   });
-  touchStartX.value = e.touches[0].clientX;
+
+  setCardZIndex(cardIndex);
 };
 
-const handleTouchEnd = () => {
+const handleTouchEnd = (e) => {
   scrollEnabled.value = true;
   swipeEnabled.value = true;
 
@@ -316,13 +285,18 @@ const handleTouchEnd = () => {
   let val = 9999;
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
   cardsEl.forEach((card, index) => {
-    const x = Math.abs(Number(card.dataset.dx));
-    if (x < val) {
-      val = x;
+    const dx = Number(card.dataset.dx);
+    if (Math.abs(dx) < val) {
+      val = Math.abs(dx);
       cardIndex = index;
     }
   });
+
   setCurrentCard(cardIndex);
+};
+
+const handleResize = (e) => {
+  animateCard();
 };
 
 onMounted(() => {
@@ -335,6 +309,8 @@ onMounted(() => {
   el.addEventListener("touchstart", handleTouchStart);
   el.addEventListener("touchmove", handleTouchMove);
   el.addEventListener("touchend", handleTouchEnd);
+
+  window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
@@ -344,5 +320,7 @@ onUnmounted(() => {
   el.removeEventListener("touchstart", handleTouchStart);
   el.removeEventListener("touchmove", handleTouchMove);
   el.removeEventListener("touchend", handleTouchEnd);
+
+  window.removeEventListener("resize", handleResize);
 });
 </script>
