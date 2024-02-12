@@ -81,10 +81,13 @@
   box-shadow: 0 4px 10px hsla(0, 0%, 60%, 0.5);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: all 1000ms ease;
 
-  /* pointer-events: none; */
-  /* touch-action: none; */
+  transition-property: all;
+  transition-duration: 1000ms;
+  transition-timing-function: ease;
+
+  pointer-events: none;
+  touch-action: none;
 }
 
 .overlap-carousel-card > img {
@@ -188,6 +191,7 @@
 import data from "~/assets/data/indexOverlapCarousel.json";
 const cards = data;
 const currCard = ref(0);
+const initCardIndex = ref(0);
 const interval = ref(null);
 const touchInitX = ref(0);
 const touchInitY = ref(0);
@@ -215,8 +219,10 @@ const animateCard = () => {
   }
 };
 
-const setCardTransform = (card, x, y = 0, z) => {
+const setCardTransform = (card, x, y = 0, z, ms = 1000) => {
   card.dataset.dx = x;
+  card.style.transitionDuration = `${ms}ms`;
+  card.style.transitionTImingFunction = ms == 1000 ? "ease" : "linear";
   card.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
 };
 
@@ -243,6 +249,7 @@ const setCardZIndex = (index) => {
 const handleTouchStart = (e) => {
   touchInitX.value = e.touches[0].clientX;
   touchInitY.value = e.touches[0].clientY;
+  initCardIndex.value = currCard.value;
   touchStartTime.value = Date.now();
 };
 
@@ -285,7 +292,7 @@ const handleTouchMove = (e) => {
       vali = Math.abs(x);
       cardIndex = i;
     }
-    setCardTransform(card, x, 0, z);
+    setCardTransform(card, x, 0, z, 0);
   }
 
   setCardZIndex(cardIndex);
@@ -295,9 +302,25 @@ const handleTouchEnd = (e) => {
   scrollEnabled.value = true;
   swipeEnabled.value = true;
 
+  const di = Math.abs(initCardIndex.value - currCard.value);
+  if (di == 1) {
+    return setCurrentCard(currCard.value);
+  }
+
   const dt = Date.now() - touchStartTime.value;
-  if (swipeEnabled.value && dt < 300) {
-    return setCurrentCard(currCard.value++);
+  if (swipeEnabled.value && dt < 200) {
+    const cardsEl = document.querySelectorAll(".overlap-carousel-card");
+    const card = cardsEl[currCard.value];
+    if (!card) return;
+    const val = Number(card.dataset.ix) + Number(card.dataset.dx);
+    if (val < 0) {
+      currCard.value =
+        currCard.value >= cards.length - 1 ? 0 : currCard.value + 1;
+    } else {
+      currCard.value =
+        currCard.value > 0 ? currCard.value - 1 : cards.length - 1;
+    }
+    return setCurrentCard(currCard.value);
   }
 
   let cardIndex = 0;
