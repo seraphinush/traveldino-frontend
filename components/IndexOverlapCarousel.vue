@@ -46,6 +46,17 @@
 .overlap-carousel-container {
   display: flex;
   flex-direction: column;
+  overscroll-behavior-x: none;
+}
+
+.overlap-carousel-container > * {
+  /* prevent ios popup menu on elements upon longpress */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .overlap-carousel-container > *:not(:first-child) {
@@ -71,6 +82,9 @@
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   transition: all 1000ms ease;
+
+  /* pointer-events: none; */
+  /* touch-action: none; */
 }
 
 .overlap-carousel-card > img {
@@ -175,7 +189,6 @@ import data from "~/assets/data/indexOverlapCarousel.json";
 const cards = data;
 const currCard = ref(0);
 const interval = ref(null);
-const touchStartX = ref(0);
 const touchInitX = ref(0);
 const touchInitY = ref(0);
 const touchStartTime = ref(null);
@@ -190,15 +203,16 @@ const step = () => {
 const animateCard = () => {
   const dx = Math.min(window.innerWidth / 2, 500);
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  cardsEl.forEach((card, index) => {
-    const order = index - currCard.value;
+  for (let i = 0; i < cardsEl.length; i++) {
+    const card = cardsEl[i];
+    const order = i - currCard.value;
     card.style.zIndex = Math.abs(order) * -1;
 
     const x = order * dx;
     const z = Math.abs(x) * -1;
     card.dataset.ix = x;
     setCardTransform(card, x, 0, z);
-  });
+  }
 };
 
 const setCardTransform = (card, x, y = 0, z) => {
@@ -216,17 +230,17 @@ const setCurrentCard = (index) => {
   }, 5000);
 };
 
-const setCardZIndex = (i) => {
-  currCard.value = i;
+const setCardZIndex = (index) => {
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  cardsEl.forEach((card, index) => {
-    const order = index - currCard.value;
+  for (let i = 0; i < cardsEl.length; i++) {
+    const card = cardsEl[i];
+    const order = i - index;
     card.style.zIndex = Math.abs(order) * -1;
-  });
+  }
+  currCard.value = index;
 };
 
 const handleTouchStart = (e) => {
-  touchStartX.value = e.touches[0].clientX;
   touchInitX.value = e.touches[0].clientX;
   touchInitY.value = e.touches[0].clientY;
   touchStartTime.value = Date.now();
@@ -236,10 +250,11 @@ const handleTouchMove = (e) => {
   clearInterval(interval.value);
   if (e.touches.length > 1) return;
 
-  let deltaX = Math.abs(touchInitX.value - e.touches[0].clientX);
-  let deltaY = Math.abs(touchInitY.value - e.touches[0].clientY);
+  const dx = Math.abs(touchInitX.value - e.touches[0].clientX);
+  const dy = Math.abs(touchInitY.value - e.touches[0].clientY);
+  const dt = Date.now() - touchStartTime.value;
   if (scrollEnabled.value) {
-    if (Date.now() - touchStartTime.value < 700 && deltaX * 2 > deltaY) {
+    if (dt < 700 && (dx * 3) / 2 > dy) {
       scrollEnabled.value = false;
     }
   } else {
@@ -250,7 +265,7 @@ const handleTouchMove = (e) => {
   }
 
   if (swipeEnabled.value) {
-    if (Date.now() - touchStartTime.value < 700 && deltaY * 2 > deltaX) {
+    if (dt < 700 && (dy * 3) / 2 > dx) {
       swipeEnabled.value = false;
     }
   } else {
@@ -259,20 +274,19 @@ const handleTouchMove = (e) => {
 
   let cardIndex = 0;
   let vali = 9999;
-  const valx = e.touches[0].clientX - touchStartX.value;
+  const valx = e.touches[0].clientX - touchInitX.value;
 
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  cardsEl.forEach((card, index) => {
-    const ix = Number(card.dataset.ix);
-    const x = ix + valx;
+  for (let i = 0; i < cardsEl.length; i++) {
+    const card = cardsEl[i];
+    const x = Number(card.dataset.ix) + valx;
     const z = Math.abs(x) * -1;
-
     if (Math.abs(x) < vali) {
       vali = Math.abs(x);
-      cardIndex = index;
+      cardIndex = i;
     }
     setCardTransform(card, x, 0, z);
-  });
+  }
 
   setCardZIndex(cardIndex);
 };
@@ -281,16 +295,22 @@ const handleTouchEnd = (e) => {
   scrollEnabled.value = true;
   swipeEnabled.value = true;
 
+  const dt = Date.now() - touchStartTime.value;
+  if (swipeEnabled.value && dt < 300) {
+    return setCurrentCard(currCard.value++);
+  }
+
   let cardIndex = 0;
   let val = 9999;
   const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  cardsEl.forEach((card, index) => {
+  for (let i = 0; i < cardsEl.length; i++) {
+    const card = cardsEl[i];
     const dx = Number(card.dataset.dx);
     if (Math.abs(dx) < val) {
       val = Math.abs(dx);
-      cardIndex = index;
+      cardIndex = i;
     }
-  });
+  }
 
   setCurrentCard(cardIndex);
 };
