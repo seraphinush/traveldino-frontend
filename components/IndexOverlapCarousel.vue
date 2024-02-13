@@ -190,6 +190,7 @@
 <script setup>
 import data from "~/assets/data/indexOverlapCarousel.json";
 const cards = data;
+const cardsEl = ref([]);
 const currCard = ref(0);
 const initCardIndex = ref(0);
 const interval = ref(null);
@@ -199,16 +200,27 @@ const touchStartTime = ref(null);
 const scrollEnabled = ref(true);
 const swipeEnabled = ref(true);
 
+const getNextCardIndex = (val = 0, length = 0) => {
+  if (!length) return 0;
+  const ret = val >= length - 1 ? 0 : val + 1;
+  return ret;
+};
+
+const getPrevCardIndex = (val = 0, length = 0) => {
+  if (!length) return 0;
+  const ret = val > 0 ? val - 1 : length - 1;
+  return ret;
+};
+
 const step = () => {
-  currCard.value = currCard.value >= cards.length - 1 ? 0 : currCard.value + 1;
+  currCard.value = getNextCardIndex(currCard.value, cards.length);
   animateCard();
 };
 
 const animateCard = () => {
   const dx = Math.min(window.innerWidth / 2, 500);
-  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  for (let i = 0; i < cardsEl.length; i++) {
-    const card = cardsEl[i];
+  for (let i = 0; i < cardsEl.value.length; i++) {
+    const card = cardsEl.value[i];
     const order = i - currCard.value;
     card.style.zIndex = Math.abs(order) * -1;
 
@@ -237,9 +249,8 @@ const setCurrentCard = (index) => {
 };
 
 const setCardZIndex = (index) => {
-  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  for (let i = 0; i < cardsEl.length; i++) {
-    const card = cardsEl[i];
+  for (let i = 0; i < cardsEl.value.length; i++) {
+    const card = cardsEl.value[i];
     const order = i - index;
     card.style.zIndex = Math.abs(order) * -1;
   }
@@ -247,6 +258,7 @@ const setCardZIndex = (index) => {
 };
 
 const handleTouchStart = (e) => {
+  clearInterval(interval.value);
   touchInitX.value = e.touches[0].clientX;
   touchInitY.value = e.touches[0].clientY;
   initCardIndex.value = currCard.value;
@@ -254,14 +266,13 @@ const handleTouchStart = (e) => {
 };
 
 const handleTouchMove = (e) => {
-  clearInterval(interval.value);
   if (e.touches.length > 1) return;
 
-  const dx = Math.abs(touchInitX.value - e.touches[0].clientX);
-  const dy = Math.abs(touchInitY.value - e.touches[0].clientY);
+  const absdx = Math.abs(touchInitX.value - e.touches[0].clientX);
+  const absdy = Math.abs(touchInitY.value - e.touches[0].clientY);
   const dt = Date.now() - touchStartTime.value;
   if (scrollEnabled.value) {
-    if (dt < 700 && (dx * 3) / 2 > dy) {
+    if (dt < 700 && (absdx * 3) / 2 > absdy) {
       scrollEnabled.value = false;
     }
   } else {
@@ -272,70 +283,64 @@ const handleTouchMove = (e) => {
   }
 
   if (swipeEnabled.value) {
-    if (dt < 700 && (dy * 3) / 2 > dx) {
+    if (dt < 700 && (absdy * 3) / 2 > absdx) {
       swipeEnabled.value = false;
     }
   } else {
     return;
   }
 
-  let cardIndex = 0;
-  let vali = 9999;
-  const valx = e.touches[0].clientX - touchInitX.value;
-
-  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  for (let i = 0; i < cardsEl.length; i++) {
-    const card = cardsEl[i];
-    const x = Number(card.dataset.ix) + valx;
+  let index = 0;
+  let val = 9999;
+  const dx = (touchInitX.value - e.touches[0].clientX) * -1;
+  for (let i = 0; i < cardsEl.value.length; i++) {
+    const card = cardsEl.value[i];
+    const x = Number(card.dataset.ix) + dx;
     const z = Math.abs(x) * -1;
-    if (Math.abs(x) < vali) {
-      vali = Math.abs(x);
-      cardIndex = i;
+    if (Math.abs(x) < val) {
+      val = Math.abs(x);
+      index = i;
     }
     setCardTransform(card, x, 0, z, 0);
   }
 
-  setCardZIndex(cardIndex);
+  setCardZIndex(index);
 };
 
 const handleTouchEnd = (e) => {
   scrollEnabled.value = true;
   swipeEnabled.value = true;
 
-  const di = Math.abs(initCardIndex.value - currCard.value);
-  if (di == 1) {
+  const absdi = Math.abs(initCardIndex.value - currCard.value);
+  if (absdi == 1) {
     return setCurrentCard(currCard.value);
   }
 
   const dt = Date.now() - touchStartTime.value;
   if (swipeEnabled.value && dt < 200) {
-    const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-    const card = cardsEl[currCard.value];
+    const card = cardsEl.value[currCard.value];
     if (!card) return;
     const val = Number(card.dataset.ix) + Number(card.dataset.dx);
     if (val < 0) {
-      currCard.value =
-        currCard.value >= cards.length - 1 ? 0 : currCard.value + 1;
+      currCard.value = getNextCardIndex(currCard.value, cards.length);
     } else {
-      currCard.value =
-        currCard.value > 0 ? currCard.value - 1 : cards.length - 1;
+      currCard.value = getPrevCardIndex(currCard.value, cards.length);
     }
     return setCurrentCard(currCard.value);
   }
 
-  let cardIndex = 0;
+  let index = 0;
   let val = 9999;
-  const cardsEl = document.querySelectorAll(".overlap-carousel-card");
-  for (let i = 0; i < cardsEl.length; i++) {
-    const card = cardsEl[i];
+  for (let i = 0; i < cardsEl.value.length; i++) {
+    const card = cardsEl.value[i];
     const dx = Number(card.dataset.dx);
     if (Math.abs(dx) < val) {
       val = Math.abs(dx);
-      cardIndex = i;
+      index = i;
     }
   }
 
-  setCurrentCard(cardIndex);
+  setCurrentCard(index);
 };
 
 const handleResize = (e) => {
@@ -343,6 +348,7 @@ const handleResize = (e) => {
 };
 
 onMounted(() => {
+  cardsEl.value = document.querySelectorAll(".overlap-carousel-card");
   step();
   interval.value = setInterval(() => {
     step();
