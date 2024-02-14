@@ -377,29 +377,12 @@ const sectionFive = ref(null);
 
 const currSlide = ref(1);
 const totalSlides = 4;
-const scrollCooldown = 1000;
+const scrollCooldown = 400;
 const scrollTimestamp = ref(Date.now());
 const touchStartY = ref(0);
 
-const handleSlides = (e) => {
-  if (window.scrollY > 0 && currSlide.value == totalSlides) return;
-  const now = Date.now();
-  if (
-    currSlide.value < totalSlides &&
-    now - scrollTimestamp.value < scrollCooldown
-  )
-    return;
-
-  if (e.wheelDelta > 0) {
-    if (currSlide.value > 1) {
-      currSlide.value--;
-    }
-  } else if (e.wheelDelta < 0) {
-    if (currSlide.value < totalSlides) {
-      currSlide.value++;
-    }
-  }
-  scrollTimestamp.value = Date.now();
+const handleWheel = (e) => {
+  handleSlides(e.wheelDelta);
 };
 
 const handleTouchStart = (e) => {
@@ -407,20 +390,25 @@ const handleTouchStart = (e) => {
 };
 
 const handleTouchMove = (e) => {
+  const val = e.touches[0].clientY - touchStartY.value;
+  handleSlides(val);
+};
+
+const handleSlides = (val = 0) => {
   if (window.scrollY > 0 && currSlide.value == totalSlides) return;
   const now = Date.now();
+
   if (
     currSlide.value < totalSlides &&
     now - scrollTimestamp.value < scrollCooldown
   )
     return;
 
-  const currentY = e.touches[0].clientY;
-  if (currentY > touchStartY.value) {
+  if (val > 0) {
     if (currSlide.value > 1) {
       currSlide.value--;
     }
-  } else if (currentY < touchStartY.value) {
+  } else if (val < 0) {
     if (currSlide.value < totalSlides) {
       currSlide.value++;
     }
@@ -448,8 +436,8 @@ const handleScroll = () => {
 
 onMounted(() => {
   currSlide.value = 1;
-  window.document.addEventListener("wheel", handleSlides);
-  window.document.addEventListener("mousewheel", handleSlides);
+  window.document.addEventListener("wheel", handleWheel);
+  window.document.addEventListener("mousewheel", handleWheel);
   window.document.addEventListener("touchstart", handleTouchStart);
   window.document.addEventListener("touchmove", handleTouchMove);
 
@@ -457,8 +445,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.document.removeEventListener("wheel", handleSlides);
-  window.document.removeEventListener("mousewheel", handleSlides);
+  window.document.removeEventListener("wheel", handleWheel);
+  window.document.removeEventListener("mousewheel", handleWheel);
   window.document.removeEventListener("touchstart", handleTouchStart);
   window.document.removeEventListener("touchmove", handleTouchMove);
 
