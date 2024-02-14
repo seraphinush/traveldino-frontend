@@ -48,7 +48,7 @@
       </button>
     </section>
     <section>
-      <div class="index__section-two content">
+      <div class="index__section-two content" ref="sectionTwo">
         <span class="spacer"></span>
         <h2>나도 몰랐던 나의 취향,</h2>
         <h2><span class="fw-500">트래블다이노</span>는 알고 있어요!</h2>
@@ -83,7 +83,7 @@
         <span class="spacer"></span>
       </div>
     </section>
-    <section class="">
+    <section class="" ref="sectionFive">
       <div class="index__section-five content">
         <span class="spacer"></span>
         <div class="index__section-five-grid">
@@ -371,13 +371,17 @@ useSeoMeta({
   ogTitle: title,
 });
 
+const fabEnabled = useState("fabEnabled");
+const sectionTwo = ref(null);
+const sectionFive = ref(null);
+
 const currSlide = ref(1);
 const totalSlides = 4;
 const scrollCooldown = 1000;
 const scrollTimestamp = ref(Date.now());
 const touchStartY = ref(0);
 
-const handleScroll = (e) => {
+const handleSlides = (e) => {
   if (window.scrollY > 0 && currSlide.value == totalSlides) return;
   const now = Date.now();
   if (
@@ -431,18 +435,33 @@ const nextSlide = () => {
   }
 };
 
+const handleScroll = () => {
+  if (!sectionTwo.value) return;
+  if (!sectionFive.value) return;
+
+  const limit = Math.floor(window.innerHeight * 0.9);
+  const topBound = sectionTwo.value.getBoundingClientRect().y;
+  const botBound = sectionFive.value.getBoundingClientRect().y;
+
+  fabEnabled.value = topBound < limit && botBound > limit;
+};
+
 onMounted(() => {
   currSlide.value = 1;
-  window.document.addEventListener("wheel", handleScroll);
-  window.document.addEventListener("mousewheel", handleScroll);
+  window.document.addEventListener("wheel", handleSlides);
+  window.document.addEventListener("mousewheel", handleSlides);
   window.document.addEventListener("touchstart", handleTouchStart);
   window.document.addEventListener("touchmove", handleTouchMove);
+
+  window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  window.document.removeEventListener("wheel", handleScroll);
-  window.document.removeEventListener("mousewheel", handleScroll);
+  window.document.removeEventListener("wheel", handleSlides);
+  window.document.removeEventListener("mousewheel", handleSlides);
   window.document.removeEventListener("touchstart", handleTouchStart);
   window.document.removeEventListener("touchmove", handleTouchMove);
+
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>

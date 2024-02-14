@@ -1,5 +1,5 @@
 <template>
-  <div class="container" ref="fab">
+  <div ref="fab" class="fab-container" :class="enabled && 'active'">
     <img src="/images/dinohand.png" alt="" />
     <a :href="link" target="_blank" class="fw-700">
       {{ text }}
@@ -7,13 +7,19 @@
   </div>
 </template>
 <style scoped>
-.container {
+.fab-container {
   position: fixed;
   right: 1rem;
   bottom: 10vh;
-  transition: opacity 600ms;
-  opacity: 0;
   z-index: 0;
+
+  transition-property: opacity, transform;
+  transition-timing-function: ease-out;
+  transition-duration: 300ms;
+  opacity: 0;
+  transform: translateX(calc(100% + 2rem));
+
+  pointer-events: none;
 }
 img {
   position: relative;
@@ -33,24 +39,35 @@ a {
 }
 
 @media screen and (min-width: 720px) {
-  .container {
+  .fab-container {
     right: calc((100vw - 720px) / 2);
   }
 }
 
 @media screen and (min-width: 1080px) {
-  .container {
+  .fab-container {
     right: calc((100vw - 1080px) / 2);
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .container {
+  .fab-container {
     right: calc((100vw - 1080px) / 2);
   }
 }
+
+.fab-container.active {
+  transition-duration: 600ms;
+  opacity: 1;
+  transform: translateX(0);
+
+  pointer-events: auto;
+}
+
 </style>
 <script setup>
+const enabled = useState("fabEnabled");
+
 const text = "내 취향 여행지 찾기";
 const link = "/";
 const pathIndexes = {
@@ -60,27 +77,8 @@ const pathIndexes = {
   "/test": 3,
 };
 
-const fab = ref(null);
 onMounted(() => {
   const path = window.location.pathname;
   const index = pathIndexes[path];
-
-  const el = fab.value;
-  if (!el) return;
-  el.style.opacity = "1";
-
-  window.addEventListener("scroll", () => {
-    const screenHeight = window.innerHeight;
-    const limitY = document.body.scrollHeight - screenHeight * 2;
-    const currentY = window.scrollY;
-
-    if (index === 0) {
-      if (currentY > Math.floor(screenHeight / 10) && currentY < limitY) {
-        el.style.opacity = "1";
-      } else {
-        el.style.opacity = "0";
-      }
-    }
-  });
 });
 </script>

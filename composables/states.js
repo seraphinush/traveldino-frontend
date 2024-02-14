@@ -6,3 +6,5 @@ export const headerActiveMenuIndex = () =>
 
 export const testLoadingEnabled = () =>
   useState("testLoadingEnabled", () => false);
+
+export const fabEnabled = () => useState("fabEnabled", () => false);
