@@ -434,6 +434,18 @@ const handleScroll = () => {
   fabEnabled.value = topBound < limit && botBound > limit;
 };
 
+const handleKeyUp = (e) => {
+  const ARROW_UP = "ArrowUp";
+  const ARROW_DOWN = "ArrowDown";
+  const PAGE_DOWN = "PageDown";
+  const PAGE_UP = "PageUp";
+  if (e.code == ARROW_UP || e.code == PAGE_UP) {
+    handleSlides(1);
+  } else if (e.code == ARROW_DOWN || e.code == PAGE_DOWN) {
+    handleSlides(-1);
+  }
+};
+
 onMounted(() => {
   currSlide.value = 1;
   window.document.addEventListener("wheel", handleWheel);
@@ -442,6 +454,7 @@ onMounted(() => {
   window.document.addEventListener("touchmove", handleTouchMove);
 
   window.addEventListener("scroll", handleScroll);
+  window.addEventListener("keyup", handleKeyUp);
 });
 
 onUnmounted(() => {
@@ -451,5 +464,6 @@ onUnmounted(() => {
   window.document.removeEventListener("touchmove", handleTouchMove);
 
   window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("keyup", handleKeyUp);
 });
 </script>
