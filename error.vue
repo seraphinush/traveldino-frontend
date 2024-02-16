@@ -1,13 +1,15 @@
 <template>
-  <NuxtLayout name="default">
-    <div class="container content">
-      <span class="error-code fw-700">{{ error.statusCode }}</span>
-      <span class="">{{ message }}</span>
-      <span class="error-message">{{ error.statusMessage }}</span>
-      <span class="spacer"></span>
-      <button @click="handleError">메인으로</button>
-    </div>
-  </NuxtLayout>
+  <div>
+    <NuxtLayout name="default">
+      <div class="container content">
+        <span class="error-code fw-700">{{ error.statusCode }}</span>
+        <span class="">{{ message }}</span>
+        <span class="error-message">{{ error.statusMessage }}</span>
+        <span class="spacer"></span>
+        <button @click="handleError">메인으로</button>
+      </div>
+    </NuxtLayout>
+  </div>
 </template>
 <style scoped>
 .container {
@@ -33,14 +35,13 @@
 <script setup>
 const props = defineProps({
   error: Object,
-  required: true,
 });
 
 const message =
   "죄송합니다. 현재 서버에서 오류가 발생했습니다. 나중에 다시 시도해 주세요.";
 
+// https://github.com/nuxt/nuxt/issues/22683
 const handleError = () => clearError({ redirect: "/" });
 
-onMounted(() => {
-});
+onMounted(() => {});
 </script>
