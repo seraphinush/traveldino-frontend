@@ -545,12 +545,15 @@ const handleClick = async (action) => {
           if (sid) $api.stats.set("share", sid);
         }
       } else if (action == "general-info") {
+        if (!data.value.link_general_info) return;
         if (sid) $api.stats.set("general-info", sid);
         window.open(data.value.link_general_info, "_blank");
       } else if (action == "travel-info") {
+        if (!data.value.link_travel_info) return;
         if (sid) $api.stats.set("travel-info", sid);
         window.open(data.value.link_travel_info, "_blank");
       } else if (action == "ticket-info") {
+        if (!data.value.link_ticket_info) return;
         if (sid) $api.stats.set("ticket-info", sid);
         window.open(data.value.link_ticket_info, "_blank");
       }
