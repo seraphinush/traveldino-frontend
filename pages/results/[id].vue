@@ -153,7 +153,7 @@
       </div>
 
       <!-- more -->
-      <div class="results-more">
+      <!-- <div class="results-more">
         <p>이 여행지가 더 궁금하다면?</p>
         <div class="results-more-items">
           <button
@@ -175,6 +175,16 @@
             <span>보러가기</span>
           </button>
         </div>
+      </div> -->
+
+      <!-- beta service -->
+      <div class="results-beta">
+        <span>Beta Service</span>
+        <div>
+          <p>새로운 여행지가 나와서 어떻게 여행을 시작하실지 막막하신가요?</p>
+          <p>트래블다이노가 도와드릴게요!</p>
+        </div>
+        <a class="results-btn-beta" :href="BETA_LINK">여행 상담 신청하기</a>
       </div>
     </section>
     <Footer></Footer>
@@ -192,7 +202,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -398,7 +408,8 @@ section > h1 {
 }
 
 .results-more {
-  display: flex;
+  display: none;
+  /* display: flex; */
   flex-direction: column;
   gap: 1rem;
   width: 100%;
@@ -431,6 +442,36 @@ section > h1 {
 .results-more-item > img {
   width: 4rem;
 }
+
+.results-beta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: var(--clr-test-secondary-50);
+}
+
+.results-beta p {
+  text-align: center;
+  font-weight: 700;
+}
+
+.results-beta span {
+  font-weight: 700;
+}
+
+.results-btn-beta {
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  background-color: var(--clr-test-secondary-500);
+  box-shadow: 0 0 0 2px var(--clr-test-secondary-500);
+  color: var(--clr-white);
+}
 </style>
 <script setup>
 definePageMeta({
@@ -459,6 +500,8 @@ const sharedActive = ref(false);
 
 const STAT_MIN_VALUE = 100;
 const SHARE_LINK = "링크 복사!";
+
+const BETA_LINK = "/";
 
 const handleClick = async (action) => {
   const { mode } = query.value;
