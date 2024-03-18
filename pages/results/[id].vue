@@ -532,7 +532,7 @@ const sharedActive = ref(false);
 const STAT_MIN_VALUE = 100;
 const SHARE_LINK = "링크 복사!";
 
-const BETA_LINK = "/";
+const BETA_LINK = "https://forms.gle/khAq3EWbKKb7ybEo8";
 
 const handleClick = async (action) => {
   const { mode } = query.value;
