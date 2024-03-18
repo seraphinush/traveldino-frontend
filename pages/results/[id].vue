@@ -18,16 +18,11 @@
           class="results-img-location"
         />
 
-        <!-- checklist -->
-        <div class="results-checklist">
+        <!-- tags -->
+        <div class="results-tags">
+          <!-- <span v-for="" :key="index"></span> -->
+          <!-- deprecated -->
           <span v-if="data.type"></span>
-          <span v-if="data.type_id_b == 'F'">잘알려진</span>
-          <span v-if="data.type_id_b == 'H'">나만알고픈</span>
-          <span v-if="data.type_id_c == 'D'">선진화된</span>
-          <span v-if="data.type_id_c == 'U'">정겨운</span>
-          <span v-if="data.type_id_a == 'A'">어드벤처</span>
-          <span v-if="data.type_id_a == 'C'">도시문화</span>
-          <span v-if="data.type_id_a == 'R'">휴양지</span>
           <span v-if="data.is_cost_effective">혜자물가</span>
           <span v-if="data.is_walk">대중교통편리</span>
           <span v-if="data.is_soloable">혼자서도굿</span>
@@ -122,7 +117,8 @@
 
       <!-- like button -->
       <button
-        class="results-btn-like"
+        id="btn-results-like"
+        class="btn-results-like"
         :data-active="likedActive"
         @click="handleClick('like')"
       >
@@ -132,7 +128,8 @@
 
       <!-- share button -->
       <button
-        class="results-btn-share fw-700"
+        id="btn-results-share"
+        class="btn-results-share fw-700"
         :data-active="sharedActive"
         :data-text="SHARE_LINK"
         @click="handleClick('share')"
@@ -180,11 +177,29 @@
       <!-- beta service -->
       <div class="results-beta">
         <span>Beta Service</span>
-        <div>
-          <p>새로운 여행지가 나와서 어떻게 여행을 시작하실지 막막하신가요?</p>
-          <p>트래블다이노가 도와드릴게요!</p>
+        <div class="results-beta-info">
+          <span>
+            어떻게 여행을 시작할지 막막하신가요?<br />
+            트래블다이노가 도와드릴게요!
+          </span>
+          <span
+            >버킷리스트를 가기엔 예산이 부족한데 내 상황에 찰떡같은 여행지
+            없나?<br />
+            어렵게 시간 내서 가는 여행인데 좀 더 색다르게 즐기고 싶어<br />
+            이런 고민 다들 한 번씩 해보셨죠?</span
+          >
+          <span
+            >여행 고민러들을 위한 트래블다이노만의 특별 서비스<br />
+            세계여행가 Sky가 여러분의 고민을 해결해드립니다 :)</span
+          >
+          <span
+            >베타 서비스 기간에만 무료로 진행되니 서둘러 신청해보세요!
+            <br />(추첨을 통해 총 10분을 선정하여 연락드릴 예정입니다.)</span
+          >
         </div>
-        <a class="results-btn-beta" :href="BETA_LINK">여행 상담 신청하기</a>
+        <a id="btn-results-beta" class="btn-results-beta" :href="BETA_LINK"
+          >여행 상담 신청하기</a
+        >
       </div>
     </section>
     <Footer></Footer>
@@ -238,19 +253,19 @@ section > h1 {
   z-index: 6;
 }
 
-.results-checklist {
+.results-tags {
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
   color: var(--clr-test-secondary-500);
 }
 
-.results-checklist > span::before {
+.results-tags > span::before {
   content: "#";
   font-weight: 700;
 }
 
-.results-checklist > span {
+.results-tags > span {
   font-weight: 700;
 }
 
@@ -270,7 +285,7 @@ section > h1 {
   color: var(--clr-test-primary-500);
 }
 
-.results-btn-like {
+.btn-results-like {
   padding: 1rem 2rem;
   border-radius: 50px;
   box-shadow: 0 0 0 2px var(--clr-test-secondary-500);
@@ -279,7 +294,7 @@ section > h1 {
   gap: 0.5rem;
 }
 
-.results-btn-like img {
+.btn-results-like img {
   width: 1rem;
   height: 1rem;
   filter: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg)
@@ -288,13 +303,13 @@ section > h1 {
   opacity: 0.5;
 }
 
-.results-btn-like img.liked {
+.btn-results-like img.liked {
   filter: invert(19%) sepia(84%) saturate(4137%) hue-rotate(351deg)
     brightness(100%) contrast(100%) grayscale(0);
   opacity: 1;
 }
 
-.results-btn-like[data-active="true"] img {
+.btn-results-like[data-active="true"] img {
   animation: animate 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -322,7 +337,7 @@ section > h1 {
   }
 }
 
-.results-btn-share {
+.btn-results-share {
   position: relative;
   width: fit-content;
   box-shadow: 0 0 0 2px var(--clr-test-secondary-500);
@@ -331,7 +346,7 @@ section > h1 {
   overflow: hidden;
 }
 
-.results-btn-share div {
+.btn-results-share div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -353,13 +368,13 @@ section > h1 {
   z-index: -1;
 }
 
-.results-btn-share img {
+.btn-results-share img {
   width: 1rem;
   height: 1rem;
   transform: rotate(-45deg);
 }
 
-.results-btn-share::before {
+.btn-results-share::before {
   content: attr(data-text);
   width: calc(100% + 0.2rem);
   height: calc(100% + 0.2rem);
@@ -378,7 +393,7 @@ section > h1 {
   z-index: 1;
 }
 
-.results-btn-share[data-active="true"]::before {
+.btn-results-share[data-active="true"]::before {
   animation: popup 3000ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -453,18 +468,34 @@ section > h1 {
   padding: 2rem;
   border-radius: 1rem;
   background-color: var(--clr-test-secondary-50);
+
+  & mark {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  & span {
+    font-weight: bold;
+  }
+
+  & > span:nth-of-type(1) {
+    text-decoration: underline;
+  }
+
+  .results-beta-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+
+    & span:nth-of-type(1) {
+      font-size: 1.5rem;
+    }
+  }
 }
 
-.results-beta p {
-  text-align: center;
-  font-weight: 700;
-}
-
-.results-beta span {
-  font-weight: 700;
-}
-
-.results-btn-beta {
+.btn-results-beta {
   text-align: center;
   padding: 1rem 2rem;
   border-radius: 50px;
