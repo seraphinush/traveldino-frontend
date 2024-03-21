@@ -18,8 +18,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   useHead({
     script: [
       {
-        src: `https://www.googletagmanager.com/gtag/js?id=${GGL_GTAG_ID}`,
         async: true,
+        src: `https://www.googletagmanager.com/gtag/js?id=${GGL_GTAG_ID}`,
       },
     ],
   });

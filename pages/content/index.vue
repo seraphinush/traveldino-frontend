@@ -5,5 +5,6 @@
 <script setup>
 await navigateTo({
   path: "/content/resort",
+  options: { replace: true },
 });
 </script>
