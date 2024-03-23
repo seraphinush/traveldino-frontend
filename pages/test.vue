@@ -9,10 +9,16 @@
       />
       <span style="flex: 1" class="spacer"></span>
       <div class="question-actions">
-        <button @click="handleNavClick('goto-prev')" :disabled="answered == 0">
+        <button
+          id="btn-test-gotoprev"
+          @click="handleNavClick('goto-prev')"
+          :disabled="answered == 0"
+        >
           뒤로
         </button>
-        <button @click="handleNavClick('goto-main')">메인으로</button>
+        <button id="btn-test-gotomain" @click="handleNavClick('goto-main')">
+          메인으로
+        </button>
       </div>
       <TestProgress :current="answered" :total="questionsTotal" />
     </section>

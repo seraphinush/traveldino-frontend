@@ -8,7 +8,9 @@
         <h2>나에게 지금 <span class="fw-500">딱 맞는 여행지</span></h2>
       </div>
       <img src="/images/dino1.png" alt="" />
-      <button @click="start" class="fw-500">지금 알아보기</button>
+      <button id="btn-index-takequiz" @click="start" class="fw-500">
+        지금 알아보기
+      </button>
       <span class="spacer"></span>
     </section>
   </div>

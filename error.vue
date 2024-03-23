@@ -6,7 +6,7 @@
         <span class="">{{ message }}</span>
         <span class="error-message">{{ error.statusMessage }}</span>
         <span class="spacer"></span>
-        <button @click="handleError">메인으로</button>
+        <button id="btn-error-gotomain" @click="handleError">메인으로</button>
       </div>
     </NuxtLayout>
   </div>
