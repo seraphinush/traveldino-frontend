@@ -197,7 +197,11 @@
             <br />(추첨을 통해 총 10분을 선정하여 연락드릴 예정입니다.)</span
           >
         </div>
-        <a id="btn-results-beta" class="btn-results-beta" :href="BETA_LINK"
+        <a
+          id="btn-results-beta"
+          class="btn-results-beta"
+          :href="BETA_LINK"
+          target="_blank"
           >여행 상담 신청하기</a
         >
       </div>
