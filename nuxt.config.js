@@ -6,6 +6,8 @@ export default defineNuxtConfig({
       meta: [
         {
           charset: "utf-8",
+        },
+        {
           viewport: "width=device-width, initial-scale=1, maximum-scale=1",
         },
         {
@@ -28,7 +30,6 @@ export default defineNuxtConfig({
     public: {
       ENVIRONMENT: process.env.ENVIRONMENT || undefined,
       API_BASE_URL: process.env.API_BASE_URL || "http://localhost:4000/",
-      GGL_GTAG_ID: process.env.GGL_GTAG_ID || undefined,
     },
   },
   site: {
