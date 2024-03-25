@@ -176,12 +176,12 @@
 
       <!-- beta service -->
       <div class="results-beta">
-        <span>Beta Service</span>
+        <b>Beta Service</b>
         <div class="results-beta-info">
-          <span>
+          <b>
             어떻게 여행을 시작할지 막막하신가요?<br />
             트래블다이노가 도와드릴게요!
-          </span>
+          </b>
           <span
             >버킷리스트를 가기엔 예산이 부족한데 내 상황에 찰떡같은 여행지
             없나?<br />
@@ -478,11 +478,12 @@ section > h1 {
     font-weight: bold;
   }
 
-  & span {
+  /* TODO */
+  & b {
     font-weight: bold;
   }
 
-  & > span:nth-of-type(1) {
+  & > b:nth-of-type(1) {
     text-decoration: underline;
   }
 
@@ -493,7 +494,7 @@ section > h1 {
     gap: 1rem;
     text-align: center;
 
-    & span:nth-of-type(1) {
+    & b:nth-of-type(1) {
       font-size: 1.5rem;
     }
   }
